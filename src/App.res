@@ -5,7 +5,21 @@
 module App = {
   @react.component
   let make = () => {
-    <div> <p> {React.string("Hello, world!")} </p> </div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+      }}>
+      <p
+        style={{
+          color: "var(--text-default-info)",
+        }}>
+        {React.string("Hello, world!")}
+      </p>
+    </div>
   }
 }
 
