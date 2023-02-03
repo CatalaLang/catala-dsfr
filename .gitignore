@@ -7,3 +7,7 @@ dist/
 !.gitignore
 
 yarn-error.log
+
+/public/dsfr/
+
+*.bs.js

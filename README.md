@@ -8,9 +8,16 @@ A tool to assist in explaining the result of a simulation from a Catala program
 # Install dependencies
 yarn
 
-# Compiles in watch mode the ReScript source code
-yarn re:watch
+# Start a local dev server
+yarn dev
+```
 
-# Use parcel to serve on http://localhost:1234
+## Build for production
+
+```
+# Locally preview the production build
 yarn serve
+
+# Build for production
+yarn build
 ```
