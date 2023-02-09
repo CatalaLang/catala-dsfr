@@ -1,4 +1,5 @@
-%%raw("import { startReactDsfr } from '@codegouvfr/react-dsfr/spa';")
+%%raw(`import "./css/index.css";`)
+%%raw(`import { startReactDsfr } from '@codegouvfr/react-dsfr/spa';`)
 
 %%raw(`startReactDsfr({ defaultColorScheme: "system"});`)
 
@@ -13,11 +14,8 @@ module App = {
         justifyContent: "center",
         height: "100vh",
       }}>
-      <p
-        style={{
-          color: "var(--text-default-info)",
-        }}>
-        {React.string("Hello, world!")}
+      <p className="text-3xl text-[color:var(--text-default-info)]">
+        {`Catala explorer`->React.string}
       </p>
     </div>
   }

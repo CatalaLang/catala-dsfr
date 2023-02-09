@@ -2,13 +2,29 @@
   "name": "catala-explorer",
   "sources": {
     "dir": "src",
-    "subdirs": true
+    "subdirs": true,
+    "generators": [
+      {
+        "name": "gen-tailwind",
+        "edge": ["css/tailwind.css", ":", "css/index.css"]
+      }
+    ]
   },
+    "generators": [
+      {
+        "name": "gen-tailwind",
+        "command": "tailwindcss build -i $in -o $out -c ../../tailwind.config.js"
+      }
+    ],
   "package-specs": {
     "module": "es6",
     "in-source": true
   },
   "suffix": ".bs.js",
   "jsx": { "version": 4, "mode": "classic" },
-  "bs-dependencies": [ "@rescript/react" ]
+  "bs-dependencies": [ "@rescript/react" ],
+  "gentypeconfig": {
+    "language": "typescript",
+    "module": "es6"
+  }
 }
