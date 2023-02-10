@@ -22,9 +22,6 @@
   },
   "suffix": ".bs.js",
   "jsx": { "version": 4, "mode": "classic" },
-  "bs-dependencies": [ "@rescript/react" ],
-  "gentypeconfig": {
-    "language": "typescript",
-    "module": "es6"
-  }
+  "bs-dependencies": [ "@rescript/react", "decco" ],
+  "ppx-flags": [ "decco/ppx" ]
 }

@@ -7,15 +7,15 @@ module.exports = {
       screens: {
         sm: "740px",
       },
-      fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        mono: ["Fira Code", "Roboto Mono", "mono"],
-        serif: ["Georgia", "serif"],
-      },
+      // fontFamily: {
+      //   sans: ["Inter", "sans-serif"],
+      //   mono: ["Fira Code", "Roboto Mono", "mono"],
+      //   serif: ["Georgia", "serif"],
+      // },
       colors: {
-        primary_light: "#FBCC80",
+        primary_light: "var(--artwork-major-blue-france)",
         primary_dark: "#376c2e",
-        text_light: "#FFFDFA",
+        text_light: "var(--text-default-grey)",
         text_dark: "#2F2F2F",
         purple_bg: "#c6a8ec",
         purple_bg_hover: "#c6a8ec",

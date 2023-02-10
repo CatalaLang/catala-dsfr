@@ -6,17 +6,9 @@
 module App = {
   @react.component
   let make = () => {
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-      }}>
-      <p className="text-3xl text-[color:var(--text-default-info)]">
-        {`Catala explorer`->React.string}
-      </p>
+    <div>
+      <Header />
+      <div className="flex flex-col items-center justify-center h-screen"> <Router /> </div>
     </div>
   }
 }
