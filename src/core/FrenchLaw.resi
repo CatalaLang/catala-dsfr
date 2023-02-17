@@ -19,7 +19,7 @@ type french_law<'a> = {
 }
 
 /* Root of the JS library. */
-/* let frenchLaw: french_law<'a> */
+let frenchLawLib: french_law<Js.Json.t>
 
 /* Resets logs before calling [french_law.computeAllocationsFamiliales]. */
 let computeAllocationsFamiliales: Js.Json.t => float
