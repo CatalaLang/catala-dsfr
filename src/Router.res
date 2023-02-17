@@ -5,10 +5,7 @@ let make = () => {
   Js.log(url)
 
   switch url.path {
-  | list{"french-family-benefits"} => {
-      Js.log("DEBUG")
-      <FrenchFamilyBenefitsExample.Visualizer />
-    }
+  | list{"french-family-benefits"} => <FrenchFamilyBenefitsExample.Visualizer />
   | list{} => <Home />
   | _ => <Home />
   }

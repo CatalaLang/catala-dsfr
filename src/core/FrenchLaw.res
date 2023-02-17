@@ -5,13 +5,11 @@ type french_law<'a> = {
 }
 
 %%raw(`import * as frenchLaw from "../../assets/french_law.cjs"`)
-%%raw(`console.log('frenchLaw 2:', frenchLaw.default)`)
 
 let frenchLawLib: french_law<Js.Json.t> = %raw(`frenchLaw.default`)
 
 let resetLog: unit => unit = %raw(`
   function() {
-    console.log("resetLog:", frenchLawLib)
     return frenchLawLib.eventsManager.resetLog(0);
   }
 `)

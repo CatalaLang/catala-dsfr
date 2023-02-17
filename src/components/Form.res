@@ -11,7 +11,6 @@ module FromJSONSchema = {
     ~onSubmit: Js.Dict.t<Js.Json.t> => unit=?,
     ~onError: _ => unit=?,
     ~schema: Js.Json.t,
-    ~validator: 'a=?,
     ~uiSchema: Js.Json.t=?,
     ~formData: Js.Json.t=?,
   ) => React.element = "default"
@@ -92,6 +91,7 @@ module Make = (
       })
       None
     }, (formData, setEventsOpt))
+
     let (uploadedFile, setUploadedFile) = React.useState(_ => {
       Js.Json.object_(Js.Dict.empty())
     })
@@ -156,9 +156,7 @@ module Make = (
           schema={FormInfos.frenchSchema}
           uiSchema={FormInfos.frenchUiSchema}
           formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
-          // TODO: find a better way to validate the form
-          validator={_ => true}
-          onSubmit={t =>
+          onSubmit={t => {
             setFormData(_ => {
               let formData = t->Js.Dict.get("formData")
               switch (FormInfos.formDataPostProcessing, formData) {
@@ -169,7 +167,8 @@ module Make = (
 
               | _ => formData
               }
-            })}
+            })
+          }}
         />
         <div
           className="w-full inline-flex flex-col flex-wrap justify-center place-items-center \
