@@ -1,7 +1,7 @@
-%%raw(`import "./css/index.css";`)
-%%raw(`import { startReactDsfr } from '@codegouvfr/react-dsfr/spa';`)
-
-%%raw(`startReactDsfr({ defaultColorScheme: "system"});`)
+%%raw(`require("./css/tailwind.css");`)
+/* %%raw(`const { startReactDsfr } = require('@codegouvfr/react-dsfr/spa');`) */
+/*  */
+/* %%raw(`startReactDsfr({ defaultColorScheme: "system"});`) */
 
 module App = {
   @react.component

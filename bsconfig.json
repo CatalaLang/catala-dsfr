@@ -17,10 +17,11 @@
       }
     ],
   "package-specs": {
-    "module": "es6",
+    "module": "commonjs",
     "in-source": true
   },
   "suffix": ".bs.js",
+  "namespace": true,
   "jsx": { "version": 4, "mode": "classic" },
   "bs-dependencies": [ "@rescript/react", "decco" ],
   "ppx-flags": [ "decco/ppx" ]

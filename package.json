@@ -4,8 +4,8 @@
   "repository": "https://github.com/CatalaLang/catala-explorer",
   "scripts": {
     "clean": "rescript clean -with-deps",
-    "build": "vite build",
-    "serve": "vite preview",
+    "build": "webpack build",
+    "serve": "webpack serve",
     "dev": "vite",
     "re:build": "rescript",
     "re:watch": "rescript build -w -with-deps",
@@ -14,7 +14,11 @@
     "prebuild": "only-include-used-icons"
   },
   "keywords": [
-    "rescript"
+    "rescript",
+    "catala",
+    "french law",
+    "rules as code",
+    "APL"
   ],
   "author": "Emile Rolley <emile.rolley@tuta.io>",
   "license": "Apache-2.0",
@@ -29,14 +33,27 @@
     "rescript": "^10.1.2"
   },
   "devDependencies": {
-    "@jihchi/vite-plugin-rescript": "^5.1.0",
-    "@vitejs/plugin-react": "^3.1.0",
+    "@dylanirlbeck/tailwind-ppx": "^0.8.4",
+    "@fullhuman/postcss-purgecss": "^5.0.0",
     "autoprefixer": "^10.4.13",
-    "gentype": "^4.5.0",
+    "browser-builtins": "^3.3.1",
+    "browserfs": "^1.4.3",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
+    "favicons": "^7.1.0",
+    "favicons-webpack-plugin": "^6.0.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^4.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "jsdom": "^21.1.0",
+    "postcss": "^8.4.21",
+    "postcss-loader": "^7.0.2",
+    "raw-loader": "^4.0.2",
+    "reason-react": "^0.10.0",
+    "style-loader": "^3.3.1",
     "tailwindcss": "^3.2.6",
-    "vite": "^4.1.1",
-    "vite-plugin-commonjs-externals": "^0.1.1",
-    "vite-plugin-require-transform": "^1.0.9"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
   }
 }
