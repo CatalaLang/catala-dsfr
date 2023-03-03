@@ -501,37 +501,26 @@ module Make = (
       None
     })
 
-    <>
-      <Title>
-        Form.pageTitle
-        <p
-          className="text-2xl font-semibold italic font-sans rounded bg-purple_bg text-purple_text \
-             px-2 ml-2 shadow-sm ">
-          {"Viz"->React.string}
-        </p>
-      </Title>
-      <Section title={<Lang.String english="Form" french={`Formulaire`} />}>
-        <Form setEventsOpt collapsible=false />
-      </Section>
-      <div className="w-full h-full">
-        <Section title={<Lang.String english="Log events" french={`Évènements de log`} />}>
-          <Flex.Column.Center
-            style="border-solid max-h-full border border-gray rounded p-4 bg-gray_light">
-            {switch eventsOpt {
-            | Some(logEvents) =>
-              <EventNavigator
-                events={logEvents} eventToComponent={event => <LogEventComponent event />}
+    <div className="fr-container">
+      <Title> Form.pageTitle </Title>
+      <Form setEventsOpt collapsible=false />
+      <Section title={`Évènements de log`->React.string}>
+        <Flex.Column.Center
+          style="border-solid max-h-full border border-gray rounded p-4 bg-gray_light">
+          {switch eventsOpt {
+          | Some(logEvents) =>
+            <EventNavigator
+              events={logEvents} eventToComponent={event => <LogEventComponent event />}
+            />
+          | _ =>
+            <p className="font-bold text-gray_dark">
+              <Lang.String
+                english="No events to explore..." french={`Pas d'évènements à explorer...`}
               />
-            | _ =>
-              <p className="font-bold text-gray_dark">
-                <Lang.String
-                  english="No events to explore..." french={`Pas d'évènements à explorer...`}
-                />
-              </p>
-            }}
-          </Flex.Column.Center>
-        </Section>
-      </div>
-    </>
+            </p>
+          }}
+        </Flex.Column.Center>
+      </Section>
+    </div>
   }
 }

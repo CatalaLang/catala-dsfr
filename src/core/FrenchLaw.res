@@ -35,7 +35,7 @@ let computeAllocationsFamiliales: Js.Json.t => float = %raw(`
 
 let computeAidesAuLogement: Js.Json.t => float = %raw(`
   function(input) {
-    renchLaw.eventsManager.resetLog(0);
+    frenchLawLib.eventsManager.resetLog(0);
     return frenchLawLib.computeAidesAuLogement(input);
   }
 `)

@@ -1,16 +1,22 @@
-module Internal = {
+module Dsfr = {
   @react.component
-  let make = (~style, ~target, ~children) => {
-    <button className={"fr-btn " ++ style} onClick={_ => Nav.goTo(target)}> children </button>
-  }
+  @module("@codegouvfr/react-dsfr/Button")
+  external make: (
+    ~priority: string=?,
+    ~size: string=?,
+    ~iconId: string=?,
+    ~iconPosition: string=?,
+    ~onClick: JsxEvent.Mouse.t => unit,
+    ~children: React.element,
+  ) => React.element = "default";
 }
 
-module Small = {
+module Internal = {
   @react.component
-  let make = (~style="", ~onClick, ~children) => {
-    <button className={"cursor-pointer fr-btn fr-btn-sm " ++ style} onClick>
+  let make = (~target, ~priority, ~children) => {
+    <Dsfr size="medium" onClick={_ => Nav.goTo(target)} priority>
       children
-    </button>
+    </Dsfr>
   }
 }
 
@@ -32,14 +38,14 @@ module Group = {
         <li>{
         (switch (button.target) {
         | None =>
-            <Small style={isPrimary ? "fr-btn--primary" : "fr-btn--secondary"} onClick={button.onClick->Belt.Option.getExn}>
+            <Dsfr size="small" priority={isPrimary ? "primary" : "secondary"} onClick={button.onClick->Belt.Option.getExn}>
             {content}
               {button.label->React.string}
-            </Small>
+            </Dsfr>
         | Some(target) =>
             <Internal
               target
-              style={isPrimary ? "fr-btn--primary" : "fr-btn--secondary"}>
+              priority={isPrimary ? "primary" : "secondary"}>
               {content}
               {button.label->React.string}
             </Internal>
