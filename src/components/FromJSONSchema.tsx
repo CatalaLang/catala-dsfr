@@ -1,37 +1,26 @@
 import Form, { FormProps } from "@rjsf/core";
-import {
-  RegistryFieldsType,
-  SubmitButtonProps,
-  WidgetProps,
-  FieldProps,
-} from "@rjsf/utils";
+import { SubmitButtonProps, WidgetProps, FieldProps } from "@rjsf/utils";
 import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { Select } from "@codegouvfr/react-dsfr/Select";
 import { Checkbox } from "@codegouvfr/react-dsfr/Checkbox";
 import validator from "@rjsf/validator-ajv8";
-import { useState } from "react";
 
-function SelectFieldDSFR(props: FieldProps) {
+function SelectFieldDsfr(props: FieldProps) {
   return (
     <Select
-      label="Label pour liste déroulante"
+      label={props.schema.title}
       nativeSelectProps={{
         id: props.id,
         name: props.name,
         required: props.required,
         onChange: (e) => {
-          console.log("e.target.value", e.target.value);
-          const item = props.schema.properties.kind.anyOf[e.target.value];
-          props.onChange(item);
-          console.log("item.title:", item);
-          return item;
+          props.onChange({ kind: e.target.value, payload: null });
         },
       }}
-      placeholder="Sélectionnez une option"
     >
       {props.schema.properties.kind.anyOf.map((item, index) => (
-        <option key={index} value={index}>
+        <option key={index} value={item.enum[0]}>
           {item.title}
         </option>
       ))}
@@ -91,10 +80,9 @@ export default function FormRJSF(props: FormProps<any>) {
       onError={props.onError}
       validator={validator}
       fields={{
-        select: SelectFieldDSFR,
+        select: SelectFieldDsfr,
       }}
       widgets={{
-        select: SelectFieldDSFR,
       }}
       templates={{ BaseInputTemplate, ButtonTemplates: { SubmitButton } }}
     />
