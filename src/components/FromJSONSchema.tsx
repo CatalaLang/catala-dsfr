@@ -5,11 +5,13 @@ import {
   FieldProps,
   RegistryFieldsType,
   FieldTemplateProps,
+  ArrayFieldTemplateProps,
 } from "@rjsf/utils";
 import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { Select } from "@codegouvfr/react-dsfr/Select";
 import { Checkbox } from "@codegouvfr/react-dsfr/Checkbox";
+import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 import validator from "@rjsf/validator-ajv8";
 
 function SelectFieldDsfr(props: FieldProps) {
@@ -41,15 +43,17 @@ function BaseInputTemplate({
   type,
   value,
   onChange,
+  uiSchema,
   ...rest
 }: WidgetProps) {
   if (type === "date") {
-    value = new Date().toISOString().split("T")[0];
+    value = value ?? new Date().toISOString().split("T")[0];
     onChange(value);
   }
   return (
     <Input
       label={label}
+      hintText={uiSchema["ui:help"]}
       nativeInputProps={{
         type: type,
         required: required,
@@ -63,21 +67,67 @@ function BaseInputTemplate({
   );
 }
 
+function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
+  console.log("props.canAdd", props.canAdd);
+  return (
+    <div className="form-group field">
+      <div className="fr-input-group">
+        <label className="fr-label">{props.title}</label>
+        <div className="fr-input-wrap">
+          <Tabs
+            tabs={props.items
+              .map((element) => ({
+                label: `${element.uiSchema["ui:title"]} ${element.index + 1}`,
+                content: (
+                  <>
+                    <Button
+                      iconId="fr-icon-delete-fill"
+                      onClick={element.onDropIndexClick(element.index)}
+                      title="Supprimer"
+                    />
+                    {element.children}
+                  </>
+                ),
+              }))
+              .concat([
+                {
+                  label: "Ajouter",
+                  content: (
+                    <>
+                      {props.canAdd && (
+                        <Button
+                          iconId="fr-icon-add-circle-fill"
+                          onClick={props.onAddClick}
+                          title={props.title}
+                        />
+                      )}
+                    </>
+                  ),
+                },
+              ])}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CheckBoxDsfr(props: WidgetProps) {
   return (
-    <Checkbox
-      options={[
-        {
-          label: props.schema.title,
-          hintText: props.uiSchema["ui:help"],
-          nativeInputProps: {
-            name: props.schema.title,
-            checked: props.value,
-            onChange: (e) => props.onChange(e.target.checked),
+    <div style={{ marginTop: "1rem", marginBottom: "-1rem" }}>
+      <Checkbox
+        options={[
+          {
+            label: props.schema.title,
+            hintText: props.uiSchema["ui:help"],
+            nativeInputProps: {
+              checked: props.value,
+              onChange: (e) => props.onChange(e.target.checked),
+            },
           },
-        },
-      ]}
-    />
+        ]}
+      />
+    </div>
   );
 }
 
@@ -122,6 +172,7 @@ export default function FormRJSF(props: FormProps<any>) {
         CheckboxWidget: CheckBoxDsfr,
       }}
       templates={{
+        ArrayFieldTemplate,
         BaseInputTemplate,
         FieldTemplate,
         ButtonTemplates: { SubmitButton },
