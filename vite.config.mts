@@ -12,7 +12,8 @@ export default defineConfig({
   server: {
     watch: {
       include: ["./src/**/*.{js, tsx}", "./assets/**/*"],
-      ignored: ["**/dsfr/**/*"],
+      ignored: ["**/dsfr/**/*", "**/node_modules/**/*", "**/lib/**/*"],
+      usePolling: true,
     },
   },
   css: {
