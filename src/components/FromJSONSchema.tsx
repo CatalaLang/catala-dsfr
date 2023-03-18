@@ -3,7 +3,6 @@ import {
   SubmitButtonProps,
   WidgetProps,
   FieldProps,
-  RegistryFieldsType,
   FieldTemplateProps,
   ArrayFieldTemplateProps,
 } from "@rjsf/utils";
@@ -11,22 +10,28 @@ import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { Select } from "@codegouvfr/react-dsfr/Select";
 import { Checkbox } from "@codegouvfr/react-dsfr/Checkbox";
+import { Alert } from "@codegouvfr/react-dsfr/Alert";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 import validator from "@rjsf/validator-ajv8";
 
 function SelectFieldDsfr(props: FieldProps) {
   return (
     <Select
-      label={props.schema.title}
+      label={props.schema.title + (!props.required ? " (optionnel)" : "")}
       nativeSelectProps={{
         id: props.id,
         name: props.name,
         required: props.required,
+        value: props.value,
+        defaultValue: props.defaultValue,
         onChange: (e) => {
           props.onChange({ kind: e.target.value, payload: null });
         },
       }}
     >
+      <option value="" selected disabled hidden>
+        {props.uiSchema["ui:placeholder"]}
+      </option>
       {props.schema.properties.kind.anyOf.map((item, index) => (
         <option key={index} value={item.enum[0]}>
           {item.title}
@@ -47,12 +52,14 @@ function BaseInputTemplate({
   ...rest
 }: WidgetProps) {
   if (type === "date") {
-    value = value ?? new Date().toISOString().split("T")[0];
+    value = uiSchema["ui:currentDate"]
+      ? value ?? new Date().toISOString().split("T")[0]
+      : value;
     onChange(value);
   }
   return (
     <Input
-      label={label}
+      label={label + (!required ? " (optionnel)" : "")}
       hintText={uiSchema["ui:help"]}
       nativeInputProps={{
         type: type,
@@ -67,39 +74,51 @@ function BaseInputTemplate({
   );
 }
 
-function ArrayFieldTemplate(props: ArrayFieldTemplateProps) {
-  console.log("props.canAdd", props.canAdd);
+function ArrayFieldTemplate({
+  title,
+  uiSchema,
+  items,
+  canAdd,
+  onAddClick,
+}: ArrayFieldTemplateProps) {
+  const tabLabel = uiSchema["ui:tabLabel"];
   return (
     <div className="form-group field">
       <div className="fr-input-group">
-        <label className="fr-label">{props.title}</label>
+        <label className="fr-label">{title}</label>
         <div className="fr-input-wrap">
           <Tabs
-            tabs={props.items
+            tabs={items
               .map((element) => ({
-                label: `${element.uiSchema["ui:title"]} ${element.index + 1}`,
+                label: `${tabLabel} ${element.index + 1}`,
                 content: (
                   <>
                     <Button
-                      iconId="fr-icon-delete-fill"
+                      iconId={uiSchema["ui:removeIcon"]}
                       onClick={element.onDropIndexClick(element.index)}
-                      title="Supprimer"
-                    />
+                      size="small"
+                      priority="secondary"
+                    >
+                      Supprimer
+                    </Button>
                     {element.children}
                   </>
                 ),
               }))
               .concat([
                 {
-                  label: "Ajouter",
+                  label: `${tabLabel} ${items.length + 1}`,
                   content: (
                     <>
-                      {props.canAdd && (
+                      {canAdd && (
                         <Button
-                          iconId="fr-icon-add-circle-fill"
-                          onClick={props.onAddClick}
-                          title={props.title}
-                        />
+                          iconId={uiSchema["ui:addIcon"]}
+                          onClick={onAddClick}
+                          size="small"
+                          priority="secondary"
+                        >
+                          Ajouter
+                        </Button>
                       )}
                     </>
                   ),
@@ -118,7 +137,7 @@ function CheckBoxDsfr(props: WidgetProps) {
       <Checkbox
         options={[
           {
-            label: props.schema.title,
+            label: props.schema.title + (!props.required ? " (optionnel)" : ""),
             hintText: props.uiSchema["ui:help"],
             nativeInputProps: {
               checked: props.value,
@@ -150,7 +169,9 @@ function FieldTemplate({
     <div className={classNames} style={style}>
       {description}
       {children}
-      {errors}
+      {errors.props.errors != null && (
+        <Alert severity="error" description={errors} small />
+      )}
     </div>
   );
 }
@@ -158,12 +179,6 @@ function FieldTemplate({
 export default function FormRJSF(props: FormProps<any>) {
   return (
     <Form
-      schema={props.schema}
-      uiSchema={props.uiSchema}
-      formData={props.formData}
-      onChange={props.onChange}
-      onSubmit={props.onSubmit}
-      onError={props.onError}
       validator={validator}
       fields={{
         select: SelectFieldDsfr,
@@ -177,6 +192,7 @@ export default function FormRJSF(props: FormProps<any>) {
         FieldTemplate,
         ButtonTemplates: { SubmitButton },
       }}
+      {...props}
     />
   );
 }
