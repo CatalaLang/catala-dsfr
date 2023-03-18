@@ -504,23 +504,23 @@ module Make = (
     <div className="fr-container">
       <Title> Form.pageTitle </Title>
       <Form setEventsOpt collapsible=false />
-      <Section title={`Évènements de log`->React.string}>
-        <Flex.Column.Center
-          style="border-solid max-h-full border border-gray rounded p-4 bg-gray_light">
-          {switch eventsOpt {
-          | Some(logEvents) =>
-            <EventNavigator
-              events={logEvents} eventToComponent={event => <LogEventComponent event />}
-            />
-          | _ =>
-            <p className="font-bold text-gray_dark">
-              <Lang.String
-                english="No events to explore..." french={`Pas d'évènements à explorer...`}
-              />
-            </p>
-          }}
-        </Flex.Column.Center>
-      </Section>
+      /* <Section title={`Évènements de log`->React.string}> */
+      /* <Flex.Column.Center */
+      /* style="border-solid max-h-full border border-gray rounded p-4 bg-gray_light"> */
+      /* {switch eventsOpt { */
+      /* | Some(logEvents) => */
+      /* <EventNavigator */
+      /* events={logEvents} eventToComponent={event => <LogEventComponent event />} */
+      /* /> */
+      /* | _ => */
+      /* <p className="font-bold text-gray_dark"> */
+      /* <Lang.String */
+      /* english="No events to explore..." french={`Pas d'évènements à explorer...`} */
+      /* /> */
+      /* </p> */
+      /* }} */
+      /* </Flex.Column.Center> */
+      /* </Section> */
     </div>
   }
 }

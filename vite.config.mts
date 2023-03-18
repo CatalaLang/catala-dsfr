@@ -11,9 +11,8 @@ export default defineConfig({
   plugins: [react(), createReScriptPlugin(), viteCommonjs()],
   server: {
     watch: {
-      include: ["./src/**/*.{js, tsx}", "./assets/**/*"],
-      ignored: ["**/dsfr/**/*", "**/node_modules/**/*", "**/lib/**/*"],
-      usePolling: true,
+      include: ["./src/**/*.{js, tsx}", "**/assets/**/*"],
+      ignored: ["**/dsfr/**/*", "**/node_modules/**/*"],
     },
   },
   css: {

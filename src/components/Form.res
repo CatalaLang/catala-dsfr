@@ -61,7 +61,7 @@ module Make = (
     let englishUiSchema: Js.Json.t
     let frenchSchema: Js.Json.t
     let frenchUiSchema: Js.Json.t
-    let resultLabel: React.element
+    let resultLabel: string
 
     let initFormData: option<Js.Json.t>
     let formDataPostProcessing: option<Js.Json.t => Js.Json.t>
@@ -161,40 +161,29 @@ module Make = (
       />
 
     let form_result =
-      <div className="fr-container">
-        <div
-          className="fr-m-2w fr-p-4w border-solid border-2 border-[var(--border-default-grey)] \
-        bg-[var(--background-action-low-blue-france)]">
-          {switch formData {
-          | None =>
-            <div className="text-xl font-bold">
-              {`En attente de la confirmation du formulaire...`->React.string}
-            </div>
-          | Some(formData) =>
-            try {
-              <>
-                <div className="text-xl font-bold">
-                  {FormInfos.resultLabel}
-                  {": "->React.string}
-                  {FormInfos.computeAndPrintResult(formData)}
-                </div>
-              </>
-            } catch {
-            | err =>
-              Js.log(err)
-              <p className="font-bold break-all">
-                <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
-                {err
-                ->Js.Exn.asJsExn
-                ->Belt.Option.map(Js.Exn.message)
-                ->Belt.Option.getWithDefault(Some(""))
-                ->Belt.Option.getWithDefault("unknwon error, please retry the computation")
-                ->React.string}
-              </p>
-            }
-          }}
-        </div>
-      </div>
+      <Dsfr.CallOut>
+        {switch formData {
+        | None => `En attente de la confirmation du formulaire...`->React.string
+        | Some(formData) =>
+          try {
+            <>
+              {FormInfos.resultLabel->React.string}
+              {": "->React.string}
+              {FormInfos.computeAndPrintResult(formData)}
+            </>
+          } catch {
+          | err => <>
+              <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
+              {err
+              ->Js.Exn.asJsExn
+              ->Belt.Option.map(Js.Exn.message)
+              ->Belt.Option.getWithDefault(Some(""))
+              ->Belt.Option.getWithDefault("unknwon error, please retry the computation")
+              ->React.string}
+            </>
+          }
+        }}
+      </Dsfr.CallOut>
 
     <>
       <div className="fr-container--fluid">
@@ -213,7 +202,7 @@ module Make = (
           <div
             className="w-full border-2 border-solid rounded-full border-[var(--border-default-grey)]"
           />
-          form_result
+          <div className="fr-col"> form_result </div>
         </div>
       </div>
     </>
