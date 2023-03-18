@@ -11,7 +11,8 @@ export default defineConfig({
   plugins: [react(), createReScriptPlugin(), viteCommonjs()],
   server: {
     watch: {
-      ignored: ["**/dsfr/**/*"],
+      include: ["./src/**/*.{js, tsx}", "**/assets/**/*"],
+      ignored: ["**/dsfr/**/*", "**/node_modules/**/*"],
     },
   },
   css: {

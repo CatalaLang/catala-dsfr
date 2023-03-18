@@ -3,13 +3,13 @@ let pageTitle =
     english="French housing benefits computation" french={`Calcul des aides au logement`}
   />
 
-let catalaCodeHTML = %raw(`require("../../assets/aides_logement.html")`)
-let frenchUiSchema = %raw(`require("../../assets/aides_logement_ui_fr.schema.js")`)
-let englishUiSchema = %raw(`require("../../assets/aides_logement_ui_en.schema.js")`)
+let catalaCodeHTML = %raw(`require("../assets/aides_logement.html")`)
+let frenchUiSchema = %raw(`require("../assets/aides_logement_ui_fr.schema.jsx")`)
+let englishUiSchema = %raw(`require("../assets/aides_logement_ui_en.schema.jsx")`)
 
 module FormInfos = {
-  let englishSchema = %raw(`require("../../assets/aides_logement_schema_en.json")`)
-  let frenchSchema = %raw(`require("../../assets/aides_logement_schema_fr.json")`)
+  let englishSchema = %raw(`require("../assets/aides_logement_schema_en.json")`)
+  let frenchSchema = %raw(`require("../assets/aides_logement_schema_fr.json")`)
 
   let frenchUiSchema = Js.Dict.unsafeGet(frenchUiSchema, "uiSchema")
 

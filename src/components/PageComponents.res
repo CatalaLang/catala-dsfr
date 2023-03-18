@@ -1,11 +1,6 @@
 module Title = {
   @react.component
-  let make = (~children) =>
-    <h1
-      className="inline-flex flex-row flex-wrap justify-center items-center text-4xl \
-        uppercase pt-20 pb-8 text-center font-sans font-bold shadow-none text-background">
-      children
-    </h1>
+  let make = (~children) => <h1 className="text-h1 mb-h1 font-bold"> children </h1>
 }
 
 module Section = {

@@ -1,19 +1,23 @@
 @react.component
 let make = () => {
-  let buttonClassName = "fr-btn"
-
-  <ul className="fr-btns-group fr-btns-group--lg">
-    <li>
-      <button className=buttonClassName onClick={_ => `/french-family-benefits`->Nav.goTo}>
-        {`Allocations Familiales`->React.string}
-      </button>
-    </li>
-    <li>
-      <button
-        className={buttonClassName ++ " fr-btn--secondary"}
-        onClick={_ => `/french-housing-benefits`->Nav.goTo}>
-        {`Aides Logements`->React.string}
-      </button>
-    </li>
-  </ul>
+  <div className="fr-container">
+    <div className="fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-grid-row--middle">
+      <div className="fr-col fr-col-lg-8 ">
+        <Dsfr.Card
+          title="Allocations Familiales"
+          desc="Simulateur du calcul des allocations familiales"
+          linkProps={"href": "/french-family-benefits"}
+          enlargeLink=true
+          size="large"
+        />
+        <Dsfr.Card
+          title="Aides Logements"
+          desc="Simulateur du calcul des aides aux logements"
+          linkProps={"href": "/french-housing-benefits"}
+          enlargeLink=true
+          size="large"
+        />
+      </div>
+    </div>
+  </div>
 }

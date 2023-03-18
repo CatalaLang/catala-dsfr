@@ -6,10 +6,7 @@
 module App = {
   @react.component
   let make = () => {
-    <div>
-      <Header />
-      <div className="flex flex-col items-center justify-center h-screen"> <Router /> </div>
-    </div>
+    <> <Header /> <main role="main" className="fr-h-10w fr-p-2w"> <Router /> </main> <Footer /> </>
   }
 }
 

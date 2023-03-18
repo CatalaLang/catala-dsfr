@@ -120,12 +120,12 @@
             {
               "type": "string",
               "enum": ["ServicesSociauxAllocationVerseeALaFamille"],
-              "title": "Confié aux services sociaux, allocation vérsée à la famille"
+              "title": "Confié aux services sociaux, allocation versée à la famille"
             },
             {
               "type": "string",
               "enum": ["ServicesSociauxAllocationVerseeAuxServicesSociaux"],
-              "title": "Confié aux services sociaux, allocation vérsée aux services sociaux"
+              "title": "Confié aux services sociaux, allocation versée aux services sociaux"
             }
           ]
         }
