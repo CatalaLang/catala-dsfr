@@ -1,5 +1,11 @@
 import Form, { FormProps } from "@rjsf/core";
-import { SubmitButtonProps, WidgetProps, FieldProps } from "@rjsf/utils";
+import {
+  SubmitButtonProps,
+  WidgetProps,
+  FieldProps,
+  RegistryFieldsType,
+  FieldTemplateProps,
+} from "@rjsf/utils";
 import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { Select } from "@codegouvfr/react-dsfr/Select";
@@ -43,7 +49,7 @@ function BaseInputTemplate({
   }
   return (
     <Input
-      // label={label}
+      label={label}
       nativeInputProps={{
         type: type,
         required: required,
@@ -58,13 +64,43 @@ function BaseInputTemplate({
 }
 
 function CheckBoxDsfr(props: WidgetProps) {
-  return <Checkbox options={[{ label: props.label }]} />;
+  return (
+    <Checkbox
+      options={[
+        {
+          label: props.schema.title,
+          hintText: props.uiSchema["ui:help"],
+          nativeInputProps: {
+            name: props.schema.title,
+            checked: props.value,
+            onChange: (e) => props.onChange(e.target.checked),
+          },
+        },
+      ]}
+    />
+  );
 }
 
 function SubmitButton(_props: SubmitButtonProps) {
   return (
     <div className="flex w-full justify-center">
       <Button>Lancer le calcul !</Button>
+    </div>
+  );
+}
+
+function FieldTemplate({
+  classNames,
+  style,
+  description,
+  errors,
+  children,
+}: FieldTemplateProps) {
+  return (
+    <div className={classNames} style={style}>
+      {description}
+      {children}
+      {errors}
     </div>
   );
 }
@@ -83,8 +119,13 @@ export default function FormRJSF(props: FormProps<any>) {
         select: SelectFieldDsfr,
       }}
       widgets={{
+        CheckboxWidget: CheckBoxDsfr,
       }}
-      templates={{ BaseInputTemplate, ButtonTemplates: { SubmitButton } }}
+      templates={{
+        BaseInputTemplate,
+        FieldTemplate,
+        ButtonTemplates: { SubmitButton },
+      }}
     />
   );
 }
