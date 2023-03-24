@@ -14,7 +14,13 @@ module FormInfos = {
   /* let frenchUiSchema = Js.Dict.unsafeGet(frenchUISchema, "uiSchema") */
   let frenchUiSchema = %raw(`require("../assets/allocations_familiales_ui_schema_fr.json")`)
 
-  let initFormData = None
+  let initFormData = Some(
+    %raw(`{
+    "iResidenceIn": {
+      "kind": "Metropole",
+    },
+  }`),
+  )
   // This function automatically assigns numerical ID to kids so we don't
   // have to ask the question in the form
   let formDataPostProcessing = %raw(`

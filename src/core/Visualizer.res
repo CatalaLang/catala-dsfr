@@ -471,10 +471,10 @@ module MakeLogEventComponent = (
     })
   }
 
-  @react.component
-  let make = (~event: event) => {
-    <LogEventComponent event />
-  }
+  /* @react.component */
+  /* let make = (~event: event) => { */
+  /* <LogEventComponent event /> */
+  /* } */
 }
 
 module Make = (
@@ -493,7 +493,7 @@ module Make = (
   @react.component
   let make = () => {
     module LogEventComponent = MakeLogEventComponent(Form)
-    let (eventsOpt: option<array<event>>, setEventsOpt) = React.useState(_ => None)
+    let (_eventsOpt: option<array<event>>, setEventsOpt) = React.useState(_ => None)
 
     React.useEffect0(() => {
       // Reset the log when the page is loaded.
