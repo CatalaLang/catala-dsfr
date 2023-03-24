@@ -15,11 +15,7 @@ module FormInfos = {
 
   let englishUiSchema = Js.Dict.unsafeGet(englishUiSchema, "uiSchema")
 
-  let resultLabel =
-    <Lang.String
-      english="Housing benefits gross monthly amount:"
-      french={`Montant mensuel brut des aides au logement :`}
-    />
+  let resultLabel = `Montant mensuel brut des aides au logement`
 
   let initFormData = Some(
     %raw(`
@@ -138,8 +134,8 @@ function (data) {
 }`)
 
   let computeAndPrintResult = (input: Js.Json.t): React.element => <>
-    <span className="text-mb font-mono">
-      {input->FrenchLaw.computeAidesAuLogement->React.float}
+    <span className="font-mono font-bold text-[var(--text-active-blue-france)]">
+      {input->FrenchLaw.computeAidesAuLogement->Belt.Float.toString->React.string}
     </span>
     {React.string(` €`)}
   </>

@@ -14,16 +14,25 @@ import { Alert } from "@codegouvfr/react-dsfr/Alert";
 import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 import validator from "@rjsf/validator-ajv8";
 
+const defaultAddIcon = "fr-icon-add-circle-line";
+const defaultRemoveIcon = "fr-icon-delete-line";
+
+// TODO
+// - [ ] Select doesn't manage payload -> switch to widget ?
+// - [ ] Titre de section
+
 function SelectFieldDsfr(props: FieldProps) {
+  console.log("DEBUG");
+  console.log(props.schema);
   return (
     <Select
-      label={props.schema.title + (!props.required ? " (optionnel)" : "")}
+      label={props.schema.title + (props.required ? "*" : "")}
+      hint={props.uiSchema["ui:help"]}
       nativeSelectProps={{
         id: props.id,
         name: props.name,
         required: props.required,
-        value: props.value,
-        defaultValue: props.defaultValue,
+        value: props.formData.kind,
         onChange: (e) => {
           props.onChange({ kind: e.target.value, payload: null });
         },
@@ -32,9 +41,9 @@ function SelectFieldDsfr(props: FieldProps) {
       <option value="" selected disabled hidden>
         {props.uiSchema["ui:placeholder"]}
       </option>
-      {props.schema.properties.kind.anyOf.map((item, index) => (
+      {props.schema?.properties.kind.anyOf.map((item, index) => (
         <option key={index} value={item.enum[0]}>
-          {item.title}
+          {item.title ?? item.enum[0]}
         </option>
       ))}
     </Select>
@@ -59,7 +68,7 @@ function BaseInputTemplate({
   }
   return (
     <Input
-      label={label + (!required ? " (optionnel)" : "")}
+      label={label + (required ? "*" : "")}
       hintText={uiSchema["ui:help"]}
       nativeInputProps={{
         type: type,
@@ -94,7 +103,7 @@ function ArrayFieldTemplate({
                 content: (
                   <>
                     <Button
-                      iconId={uiSchema["ui:removeIcon"]}
+                      iconId={uiSchema["ui:removeIcon"] ?? defaultRemoveIcon}
                       onClick={element.onDropIndexClick(element.index)}
                       size="small"
                       priority="secondary"
@@ -112,7 +121,7 @@ function ArrayFieldTemplate({
                     <>
                       {canAdd && (
                         <Button
-                          iconId={uiSchema["ui:addIcon"]}
+                          iconId={uiSchema["ui:addIcon"] ?? defaultAddIcon}
                           onClick={onAddClick}
                           size="small"
                           priority="secondary"
@@ -137,7 +146,7 @@ function CheckBoxDsfr(props: WidgetProps) {
       <Checkbox
         options={[
           {
-            label: props.schema.title + (!props.required ? " (optionnel)" : ""),
+            label: props.schema.title + (props.required ? "*" : ""),
             hintText: props.uiSchema["ui:help"],
             nativeInputProps: {
               checked: props.value,
@@ -153,7 +162,7 @@ function CheckBoxDsfr(props: WidgetProps) {
 function SubmitButton(_props: SubmitButtonProps) {
   return (
     <div className="flex w-full justify-center">
-      <Button>Lancer le calcul !</Button>
+      <Button>Lancer le calcul</Button>
     </div>
   );
 }

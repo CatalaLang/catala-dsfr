@@ -9,6 +9,7 @@ export const uiSchema = {
                     <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042684324/" target="_blank">article L313-12 du code de l'action sociale et des familles</a>.</span>
             },
             "modeOccupation": {
+                // "ui:field": "select",
                 "payload": {
                     "bailleur": {
                         "payload": {
@@ -111,14 +112,17 @@ export const uiSchema = {
                 }
             },
             "proprietaire": {
-                "kind": {
-                    "ui:help": <span>La propriété du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts de propriétés, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>
-                }
+                "ui:field": "select",
+                "ui:placeholder": "Sélectionnez une option",
+                "ui:help": <span>La propriété du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts de propriétés, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>,
+            },
+            "loueOuSousLoueADesTiers": {
+                "ui:field": "select",
+                "ui:title": "", 
             },
             "usufruit": {
-                "kind": {
-                    "ui:help": <span>L'usufruit du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts d'usufruit, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>
-                }
+                "ui:field": "select",
+                "ui:help": <span>L'usufruit du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts d'usufruit, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>
             },
             "logementDecentL89462": {
                 "ui:help": <span>Selon l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814926/" target="_blank">article L822-9 du code de la construction et de l'habitation</a>, le logement doit répondre à des exigences de décence définies en application des deux premiers alinéas de l'<a href="https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037670751/" target="_blank">article 6 de la loi n° 89-462 du 6 juillet 1989 tendant à améliorer les rapports locatifs et portant modification de la loi n° 86-1290 du 23 décembre 1986</a>.</span>
@@ -128,7 +132,11 @@ export const uiSchema = {
             }
         },
         "personnesACharge": {
+            "ui:tabLabel": "Personne",
             "items": {
+                "kind": {
+                    "ui:help": "TEST",
+                },
                 "payload": {
                     "obligationScolaire": {
                         "ui:help": <span>L'obligation scolaire d'un enfant est régie par les articles <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071191/LEGISCTA000006166564/" target="_blank">L131-1 à L131-13 du code de l'éducation</a>.</span>
@@ -164,6 +172,10 @@ export const uiSchema = {
         },
         "enfantANaitreApresQuatriemeMoisGrossesse": {
             "ui:help": <span>Cette question est nécessaire pour l'éligibilité à l'allocation de logement familiale (ALF) prévue au 6° de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814864" target="_blank">article L841-1 du code de la construction et de l'habitation</a>.</span>
+        },
+        "prestationsRecues": {
+            "ui:tabLabel": "Prestation"
+
         }
     },
     "demandeurIn": {
@@ -179,6 +191,7 @@ export const uiSchema = {
             "ui:help": <span>Ces unités ou centres de soins sont mentionnées mentionnés au 3° de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000031688064" target="_blank">article L162-22 du code de la sécurité sociale</a>.</span>
         },
         "nationalite": {
+            "ui:field": "select",
             "payload": {
                 "satisfaitConditionsL5122CodeSecuriteSociale": {
                     "ui:help": <span>Le demandeur satisfait les conditions des deux premiers alinéas de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042920150" target="_blank">article L512-2 du code de la sécurité sociale</a>.</span>
@@ -188,5 +201,5 @@ export const uiSchema = {
     },
     "ressourcesMenagePrisesEnCompteIn": {
         "ui:help": <span>Les ressources du ménages prises en compte pour le calcul des aides au logement doivent être appréciées selon la <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074096/LEGISCTA000038814508/" target="_blank">section 2 du chapitre II du titre II du livre VIII du code de la construction et de l'habitation</a>.</span>
-    }
+    },
 }
