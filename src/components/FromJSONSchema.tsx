@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import Form, { FormProps } from "@rjsf/core";
 import {
   SubmitButtonProps,
@@ -5,6 +6,10 @@ import {
   FieldProps,
   FieldTemplateProps,
   ArrayFieldTemplateProps,
+  enumOptionsValueForIndex,
+  enumOptionsIndexForValue,
+  RJSFSchema,
+  TitleFieldProps,
 } from "@rjsf/utils";
 import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Button } from "@codegouvfr/react-dsfr/Button";
@@ -22,11 +27,11 @@ const defaultRemoveIcon = "fr-icon-delete-line";
 // - [ ] Titre de section
 
 function SelectFieldDsfr(props: FieldProps) {
-  console.log("DEBUG");
-  console.log(props.schema);
+  // console.log("DEBUG");
+  // console.log(props.schema);
   return (
     <Select
-      label={props.schema.title + (props.required ? "*" : "")}
+      // label={props.schema.title + (props.required ? "*" : "")}
       hint={props.uiSchema["ui:help"]}
       nativeSelectProps={{
         id: props.id,
@@ -44,6 +49,66 @@ function SelectFieldDsfr(props: FieldProps) {
       {props.schema?.properties.kind.anyOf.map((item, index) => (
         <option key={index} value={item.enum[0]}>
           {item.title ?? item.enum[0]}
+        </option>
+      ))}
+    </Select>
+  );
+}
+
+function getValue(event: SyntheticEvent<HTMLSelectElement>, multiple: boolean) {
+  if (multiple) {
+    return Array.from((event.target as HTMLSelectElement).options)
+      .slice()
+      .filter((o) => o.selected)
+      .map((o) => o.value);
+  }
+  return (event.target as HTMLSelectElement).value;
+}
+
+function SelectWidgetDsfr(props: WidgetProps) {
+  console.log("DEBUG");
+  console.log(props.uiSchema);
+  const emptyValue = props.multiple ? [] : "";
+
+  const { enumOptions, enumDisabled, emptyValue: optEmptyVal } = props.options;
+
+  const handleChange = useCallback(
+    (event) => {
+      const newValue = getValue(event, props.multiple);
+      return props.onChange(
+        enumOptionsValueForIndex<RJSFSchema>(newValue, enumOptions, optEmptyVal)
+      );
+    },
+    [props.onChange, props.schema, props.multiple, props.options]
+  );
+
+  const selectedIndexes = enumOptionsIndexForValue<RJSFSchema>(
+    props.value,
+    props.options.enumOptions,
+    props.multiple
+  );
+
+  const value =
+    typeof selectedIndexes === "undefined" ? emptyValue : selectedIndexes;
+
+  return (
+    <Select
+      // label={props.schema.title + (props.required ? "*" : "")}
+      hint={props.uiSchema["ui:help"]}
+      nativeSelectProps={{
+        id: props.id,
+        name: props.name,
+        required: props.required,
+        value,
+        onChange: handleChange,
+      }}
+    >
+      <option value="" selected disabled hidden>
+        {props.uiSchema["ui:placeholder"]}
+      </option>
+      {props.options.enumOptions.map((item, index) => (
+        <option key={index} value={String(index)}>
+          {item.label}
         </option>
       ))}
     </Select>
@@ -68,7 +133,7 @@ function BaseInputTemplate({
   }
   return (
     <Input
-      label={label + (required ? "*" : "")}
+      // label={label + (required ? "*" : "")}
       hintText={uiSchema["ui:help"]}
       nativeInputProps={{
         type: type,
@@ -167,15 +232,29 @@ function SubmitButton(_props: SubmitButtonProps) {
   );
 }
 
+const schemaTypesToNotRenderTitles = ["boolean", "array"];
+
 function FieldTemplate({
   classNames,
   style,
   description,
   errors,
   children,
+  id,
+  required,
+  label,
+  schema,
 }: FieldTemplateProps) {
+  const title = !schemaTypesToNotRenderTitles.includes(schema.type) &&
+    typeof schema.required != "object" && (
+      <label className="fr-label" htmlFor={id}>
+        {label}
+        {required ? "*" : null}
+      </label>
+    );
   return (
     <div className={classNames} style={style}>
+      {title}
       {description}
       {children}
       {errors.props.errors != null && (
@@ -185,21 +264,38 @@ function FieldTemplate({
   );
 }
 
+function TitleField({ title, required, id, schema }: TitleFieldProps) {
+  if (schema.required != undefined) {
+    console.log(title, ":", schema);
+    return null;
+  }
+
+  return null;
+  // <legend className="fr-label" id={id}>
+  //   {title}
+  //   {required && <span className="required">{"*"}</span>}
+  // </legend>
+}
+
 export default function FormRJSF(props: FormProps<any>) {
   return (
     <Form
       validator={validator}
-      fields={{
-        select: SelectFieldDsfr,
-      }}
+      fields={
+        {
+          // select: SelectFieldDsfr,
+        }
+      }
       widgets={{
         CheckboxWidget: CheckBoxDsfr,
+        SelectWidget: SelectWidgetDsfr,
       }}
       templates={{
         ArrayFieldTemplate,
         BaseInputTemplate,
         FieldTemplate,
         ButtonTemplates: { SubmitButton },
+        TitleFieldTemplate: TitleField,
       }}
       {...props}
     />

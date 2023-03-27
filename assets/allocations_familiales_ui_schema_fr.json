@@ -3,7 +3,6 @@
     "ui:currentDate": true
   },
   "iResidenceIn": {
-    "ui:field": "select",
     "ui:placeholder": "Sélectionnez votre résidence"
   },
   "iPersonneChargeEffectivePermanenteRemplitTitreIIn": {
@@ -16,7 +15,6 @@
     "items": {
       "ui:title": "Enfant",
       "dPriseEnCharge": {
-        "ui:field": "select",
         "ui:placeholder": "Sélectionnez le type de prise en charge"
       },
       "dRemunerationMensuelle": {
