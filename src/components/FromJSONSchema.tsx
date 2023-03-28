@@ -22,34 +22,15 @@ import validator from "@rjsf/validator-ajv8";
 const defaultAddIcon = "fr-icon-add-circle-line";
 const defaultRemoveIcon = "fr-icon-delete-line";
 
-// function SelectFieldDsfr(props: FieldProps) {
-//   // console.log("DEBUG");
-//   // console.log(props.schema);
-//   return (
-//     <Select
-//       // label={props.schema.title + (props.required ? "*" : "")}
-//       hint={props.uiSchema["ui:help"]}
-//       nativeSelectProps={{
-//         id: props.id,
-//         name: props.name,
-//         required: props.required,
-//         value: props.formData.kind,
-//         onChange: (e) => {
-//           props.onChange({ kind: e.target.value, payload: null });
-//         },
-//       }}
-//     >
-//       <option value="" selected disabled hidden>
-//         {props.uiSchema["ui:placeholder"]}
-//       </option>
-//       {props.schema?.properties.kind.anyOf.map((item, index) => (
-//         <option key={index} value={item.enum[0]}>
-//           {item.title ?? item.enum[0]}
-//         </option>
-//       ))}
-//     </Select>
-//   );
-// }
+function DetailedHint(props) {
+  if (props.children == undefined) return null;
+  return (
+    <details className="fr-details">
+      <summary>{props.summary ?? "Voir l'explication"}</summary>
+      {props.children}
+    </details>
+  );
+}
 
 function getValue(event: SyntheticEvent<HTMLSelectElement>, multiple: boolean) {
   if (multiple) {
@@ -103,7 +84,7 @@ function SelectWidgetDsfr(props: WidgetProps) {
 
   return (
     <Select
-      hint={props.uiSchema["ui:help"]}
+      hint={<DetailedHint>{props.uiSchema["ui:help"]}</DetailedHint>}
       nativeSelectProps={{
         id: props.id,
         name: props.name,
@@ -142,7 +123,7 @@ function BaseInputTemplate({
   }
   return (
     <Input
-      hintText={uiSchema["ui:help"]}
+      hintText={<DetailedHint>{uiSchema["ui:help"]}</DetailedHint>}
       nativeInputProps={{
         type: type,
         required: required,
@@ -220,7 +201,7 @@ function CheckBoxDsfr(props: WidgetProps) {
         options={[
           {
             label: props.schema.title + (props.required ? "*" : ""),
-            hintText: props.uiSchema["ui:help"],
+            hintText: <DetailedHint>{props.uiSchema["ui:help"]}</DetailedHint>,
             nativeInputProps: {
               checked: props.value,
               onChange: (e) => props.onChange(e.target.checked),
