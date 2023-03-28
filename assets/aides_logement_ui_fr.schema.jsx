@@ -111,8 +111,9 @@ export const uiSchema = {
                 }
             },
             "proprietaire": {
+                "ui:placeholder": "Sélectionnez une option",
                 "kind": {
-                    "ui:help": <span>La propriété du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts de propriétés, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>
+                    "ui:help": <span>La propriété du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts de propriétés, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>,
                 }
             },
             "usufruit": {
@@ -128,6 +129,7 @@ export const uiSchema = {
             }
         },
         "personnesACharge": {
+            "ui:tabLabel": "Personne",
             "items": {
                 "payload": {
                     "obligationScolaire": {
@@ -164,6 +166,10 @@ export const uiSchema = {
         },
         "enfantANaitreApresQuatriemeMoisGrossesse": {
             "ui:help": <span>Cette question est nécessaire pour l'éligibilité à l'allocation de logement familiale (ALF) prévue au 6° de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814864" target="_blank">article L841-1 du code de la construction et de l'habitation</a>.</span>
+        },
+        "prestationsRecues": {
+            "ui:tabLabel": "Prestation"
+
         }
     },
     "demandeurIn": {
@@ -188,5 +194,5 @@ export const uiSchema = {
     },
     "ressourcesMenagePrisesEnCompteIn": {
         "ui:help": <span>Les ressources du ménages prises en compte pour le calcul des aides au logement doivent être appréciées selon la <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074096/LEGISCTA000038814508/" target="_blank">section 2 du chapitre II du titre II du livre VIII du code de la construction et de l'habitation</a>.</span>
-    }
+    },
 }

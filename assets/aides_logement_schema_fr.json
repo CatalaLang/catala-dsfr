@@ -369,7 +369,7 @@
           "$ref": "#/definitions/parent_ou_autre"
         },
         "loueOuSousLoueADesTiers": {
-          "title": " ",
+          "title": "Logement loué ou sous-loué à des tiers",
           "$ref": "#/definitions/loue_ou_sous_loue_a_des_tiers"
         },
         "usufruit": {
@@ -438,7 +438,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "title": "Logement loué ou sous-loué à des tiers",
+          "title": " ",
           "type": "string",
           "default": "Non",
           "anyOf": [

@@ -3,7 +3,6 @@
     "ui:currentDate": true
   },
   "iResidenceIn": {
-    "ui:field": "select",
     "ui:placeholder": "Sélectionnez votre résidence"
   },
   "iPersonneChargeEffectivePermanenteRemplitTitreIIn": {
@@ -16,7 +15,6 @@
     "items": {
       "ui:title": "Enfant",
       "dPriseEnCharge": {
-        "ui:field": "select",
         "ui:placeholder": "Sélectionnez le type de prise en charge"
       },
       "dRemunerationMensuelle": {
@@ -40,6 +38,6 @@
     "ui:help": "Valeur purement déclarative. En cas de contrôle prévu par l'article L553-5 du code de la sécurité sociale, l'administration évalue le train de vie définie à l'article R553-3-1 du même code. En effet, pour la PAJE en vertu des articles R532-1 et R531-1, et le complément familial en vertu de R522-2, c'est le revenu catégoriel de l'année N-2 qui est retenu, comme ce que pratique la CNAF. Mais les textes législatifs ne prévoient aucunement qu'il faille tenir compte de ce revenu catégoriel pour les allocations familiales."
   },
   "ui:submitButtonOptions": {
-    "submitText": "Lancer le calcul ! "
+    "submitText": "Lancer le calcul"
   }
 }
