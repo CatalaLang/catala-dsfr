@@ -438,7 +438,7 @@
       "type": "object",
       "properties": {
         "kind": {
-          "title": "Logement loué ou sous-loué à des tiers",
+          "title": " ",
           "type": "string",
           "default": "Non",
           "anyOf": [

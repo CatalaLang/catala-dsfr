@@ -22,38 +22,34 @@ import validator from "@rjsf/validator-ajv8";
 const defaultAddIcon = "fr-icon-add-circle-line";
 const defaultRemoveIcon = "fr-icon-delete-line";
 
-// TODO
-// - [ ] Select doesn't manage payload -> switch to widget ?
-// - [ ] Titre de section
-
-function SelectFieldDsfr(props: FieldProps) {
-  // console.log("DEBUG");
-  // console.log(props.schema);
-  return (
-    <Select
-      // label={props.schema.title + (props.required ? "*" : "")}
-      hint={props.uiSchema["ui:help"]}
-      nativeSelectProps={{
-        id: props.id,
-        name: props.name,
-        required: props.required,
-        value: props.formData.kind,
-        onChange: (e) => {
-          props.onChange({ kind: e.target.value, payload: null });
-        },
-      }}
-    >
-      <option value="" selected disabled hidden>
-        {props.uiSchema["ui:placeholder"]}
-      </option>
-      {props.schema?.properties.kind.anyOf.map((item, index) => (
-        <option key={index} value={item.enum[0]}>
-          {item.title ?? item.enum[0]}
-        </option>
-      ))}
-    </Select>
-  );
-}
+// function SelectFieldDsfr(props: FieldProps) {
+//   // console.log("DEBUG");
+//   // console.log(props.schema);
+//   return (
+//     <Select
+//       // label={props.schema.title + (props.required ? "*" : "")}
+//       hint={props.uiSchema["ui:help"]}
+//       nativeSelectProps={{
+//         id: props.id,
+//         name: props.name,
+//         required: props.required,
+//         value: props.formData.kind,
+//         onChange: (e) => {
+//           props.onChange({ kind: e.target.value, payload: null });
+//         },
+//       }}
+//     >
+//       <option value="" selected disabled hidden>
+//         {props.uiSchema["ui:placeholder"]}
+//       </option>
+//       {props.schema?.properties.kind.anyOf.map((item, index) => (
+//         <option key={index} value={item.enum[0]}>
+//           {item.title ?? item.enum[0]}
+//         </option>
+//       ))}
+//     </Select>
+//   );
+// }
 
 function getValue(event: SyntheticEvent<HTMLSelectElement>, multiple: boolean) {
   if (multiple) {
@@ -66,8 +62,6 @@ function getValue(event: SyntheticEvent<HTMLSelectElement>, multiple: boolean) {
 }
 
 function SelectWidgetDsfr(props: WidgetProps) {
-  console.log("DEBUG");
-  console.log(props.uiSchema);
   const emptyValue = props.multiple ? [] : "";
 
   const { enumOptions, enumDisabled, emptyValue: optEmptyVal } = props.options;
@@ -88,12 +82,27 @@ function SelectWidgetDsfr(props: WidgetProps) {
     props.multiple
   );
 
+  const defaultIndex = enumOptionsIndexForValue<RJSFSchema>(
+    props.schema.default,
+    props.options.enumOptions,
+    props.multiple
+  );
+
   const value =
-    typeof selectedIndexes === "undefined" ? emptyValue : selectedIndexes;
+    typeof selectedIndexes === "undefined" ? defaultIndex : selectedIndexes;
+
+  console.log(
+    props.label,
+    ":",
+    props.schema.default,
+    ":",
+    defaultIndex,
+    "v",
+    value
+  );
 
   return (
     <Select
-      // label={props.schema.title + (props.required ? "*" : "")}
       hint={props.uiSchema["ui:help"]}
       nativeSelectProps={{
         id: props.id,
@@ -103,9 +112,9 @@ function SelectWidgetDsfr(props: WidgetProps) {
         onChange: handleChange,
       }}
     >
-      <option value="" selected disabled hidden>
-        {props.uiSchema["ui:placeholder"]}
-      </option>
+      {!props.multiple && props.schema.default === undefined && (
+        <option value="">{props.placeholder}</option>
+      )}
       {props.options.enumOptions.map((item, index) => (
         <option key={index} value={String(index)}>
           {item.label}
@@ -133,7 +142,6 @@ function BaseInputTemplate({
   }
   return (
     <Input
-      // label={label + (required ? "*" : "")}
       hintText={uiSchema["ui:help"]}
       nativeInputProps={{
         type: type,
@@ -252,6 +260,7 @@ function FieldTemplate({
         {required ? "*" : null}
       </label>
     );
+
   return (
     <div className={classNames} style={style}>
       {title}
@@ -265,27 +274,14 @@ function FieldTemplate({
 }
 
 function TitleField({ title, required, id, schema }: TitleFieldProps) {
-  if (schema.required != undefined) {
-    console.log(title, ":", schema);
-    return null;
-  }
-
+  // Lengends and labels are managed directly by the widgets.
   return null;
-  // <legend className="fr-label" id={id}>
-  //   {title}
-  //   {required && <span className="required">{"*"}</span>}
-  // </legend>
 }
 
 export default function FormRJSF(props: FormProps<any>) {
   return (
     <Form
       validator={validator}
-      fields={
-        {
-          // select: SelectFieldDsfr,
-        }
-      }
       widgets={{
         CheckboxWidget: CheckBoxDsfr,
         SelectWidget: SelectWidgetDsfr,

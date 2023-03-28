@@ -116,9 +116,6 @@ export const uiSchema = {
                     "ui:help": <span>La propriété du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts de propriétés, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>,
                 }
             },
-            "loueOuSousLoueADesTiers": {
-                "ui:title": "", 
-            },
             "usufruit": {
                 "kind": {
                     "ui:help": <span>L'usufruit du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts d'usufruit, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>
@@ -134,9 +131,6 @@ export const uiSchema = {
         "personnesACharge": {
             "ui:tabLabel": "Personne",
             "items": {
-                "kind": {
-                    "ui:help": "TEST",
-                },
                 "payload": {
                     "obligationScolaire": {
                         "ui:help": <span>L'obligation scolaire d'un enfant est régie par les articles <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071191/LEGISCTA000006166564/" target="_blank">L131-1 à L131-13 du code de l'éducation</a>.</span>
