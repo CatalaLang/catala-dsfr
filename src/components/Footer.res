@@ -1,17 +1,6 @@
-module FooterDSFR = {
-  @react.component @module("@codegouvfr/react-dsfr/Footer")
-  external make: (
-    ~accessibility: string,
-    ~brandTop: React.element=?,
-    ~contentDescription: React.element=?,
-    ~homeLinkProps: {"href": string, "title": string}=?,
-    ~license: React.element=?,
-  ) => React.element = "default"
-}
-
 @react.component
 let make = () => {
-  <FooterDSFR
+  <Dsfr.Footer
     accessibility="partially compliant"
     brandTop={<> {`République`->React.string} <br /> {`Française`->React.string} </>}
     contentDescription={<>

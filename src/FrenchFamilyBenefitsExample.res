@@ -39,10 +39,14 @@ function (data) {
 
 module Form = Form.Make(FormInfos)
 
-module Visualizer = Visualizer.Make({
-  let pageTitle = pageTitle
-  let catalaCodeHTML = catalaCodeHTML
-  let resetLog = FrenchLaw.resetLog
-
-  include Form
-})
+@react.component
+let make = () => {
+  React.useEffect0(() => {
+    // Reset the log when the page is loaded.
+    FrenchLaw.resetLog()
+    None
+  })
+  <div className="fr-container">
+    <PageComponents.Title> pageTitle </PageComponents.Title> <Form setEventsOpt={_ => ()} />
+  </div>
+}
