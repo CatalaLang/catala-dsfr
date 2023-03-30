@@ -1,12 +1,19 @@
-module Header = {
-  @react.component @module("@codegouvfr/react-dsfr/Header")
+module Button = {
+  @react.component @module("@codegouvfr/react-dsfr/Button")
   external make: (
-    ~brandTop: React.element=?,
-    ~homeLinkProps: {"href": string, "title": string},
-    ~serviceTagline: string,
-    ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": string}=?,
-    ~serviceTitle: string,
+    ~priority: string=?,
+    ~size: string=?,
+    ~iconId: string=?,
+    ~iconPosition: string=?,
+    ~onClick: JsxEvent.Mouse.t => unit,
+    ~children: React.element,
   ) => React.element = "default"
+}
+
+module CallOut = {
+  @react.component @module("@codegouvfr/react-dsfr/CallOut")
+  external make: (~title: string=?, ~children: React.element, ~iconId: string=?) => React.element =
+    "default"
 }
 
 module Card = {
@@ -20,8 +27,29 @@ module Card = {
   ) => React.element = "default"
 }
 
-module CallOut = {
-  @react.component @module("@codegouvfr/react-dsfr/CallOut")
-  external make: (~title: string=?, ~children: React.element, ~iconId: string=?) => React.element =
-    "default"
+module Header = {
+  @react.component @module("@codegouvfr/react-dsfr/Header")
+  external make: (
+    ~brandTop: React.element=?,
+    ~homeLinkProps: {"href": string, "title": string},
+    ~serviceTagline: string,
+    ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": string}=?,
+    ~serviceTitle: string,
+  ) => React.element = "default"
+}
+
+module Footer = {
+  @react.component @module("@codegouvfr/react-dsfr/Footer")
+  external make: (
+    ~accessibility: string,
+    ~brandTop: React.element=?,
+    ~contentDescription: React.element=?,
+    ~homeLinkProps: {"href": string, "title": string}=?,
+    ~license: React.element=?,
+  ) => React.element = "default"
+}
+
+module Notice = {
+  @react.component @module("@codegouvfr/react-dsfr/Notice")
+  external make: (~title: string, ~isClosable: bool=?) => React.element = "default"
 }

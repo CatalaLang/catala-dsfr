@@ -190,7 +190,7 @@ module Make = (
     <>
       <div className="fr-container--fluid">
         <div className="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
-          <Notice.Dsfr
+          <Dsfr.Notice
             title=`Les données collectées par ce formulaire ne sont envoyées nulle part, et sont gérées uniquement par votre navigateur internet. \
             Les données sont traitées localement par un programme Javascript qui a été transmis avec le reste du site de Catala. \
             Ainsi, le site de Catala ne collecte aucune donnée de ses utilisateurs.`
