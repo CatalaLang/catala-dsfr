@@ -4,8 +4,8 @@
 
   The component is capable of building HTML forms out of a JSON schema.
 */
-module JSONSchemaForm = {
-  @react.component @module("./FromJSONSchema.tsx")
+module RjsfFormDsfr = {
+  @react.component @module("./RjsfFormDsfr.tsx")
   external make: (
     ~onChange: Js.Dict.t<Js.Json.t> => unit=?,
     ~onSubmit: Js.Dict.t<Js.Json.t> => unit=?,
@@ -71,7 +71,6 @@ module Make = (
   @react.component
   let make = (
     ~setEventsOpt: (option<array<LogEvent.event>> => option<array<LogEvent.event>>) => unit,
-    ~collapsible: bool,
   ) => {
     let (formData, setFormData) = React.useState(_ => {
       FormInfos.initFormData
@@ -141,7 +140,7 @@ module Make = (
       </div>
 
     let form =
-      <JSONSchemaForm
+      <RjsfFormDsfr
         schema={FormInfos.frenchSchema}
         uiSchema={FormInfos.frenchUiSchema}
         formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
