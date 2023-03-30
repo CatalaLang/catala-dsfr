@@ -3,7 +3,7 @@ let pageTitle =
     english="French family benefits computation" french={`Calcul des allocations familiales`}
   />
 
-let catalaCodeHTML = %raw(`require("../assets/allocations_familiales.html")`)
+/* let catalaCodeHTML = %raw(`require("../assets/allocations_familiales.html")`) */
 /* let frenchUISchema = %raw(`require("../assets/allocations_familiales_ui_schema_fr.tsx")`) */
 
 module FormInfos = {

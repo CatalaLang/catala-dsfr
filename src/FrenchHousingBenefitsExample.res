@@ -3,7 +3,7 @@ let pageTitle =
     english="French housing benefits computation" french={`Calcul des aides au logement`}
   />
 
-let catalaCodeHTML = %raw(`require("../assets/aides_logement.html")`)
+/* let catalaCodeHTML = %raw(`require("../assets/aides_logement.html")`) */
 let frenchUiSchema = %raw(`require("../assets/aides_logement_ui_fr.schema.jsx")`)
 let englishUiSchema = %raw(`require("../assets/aides_logement_ui_en.schema.jsx")`)
 
