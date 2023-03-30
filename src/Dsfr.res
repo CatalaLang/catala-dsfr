@@ -1,12 +1,13 @@
 module Button = {
   @react.component @module("@codegouvfr/react-dsfr/Button")
   external make: (
-    ~priority: string=?,
-    ~size: string=?,
+    ~children: React.element,
+    ~disabled: bool=?,
     ~iconId: string=?,
     ~iconPosition: string=?,
     ~onClick: JsxEvent.Mouse.t => unit,
-    ~children: React.element,
+    ~priority: string=?,
+    ~size: string=?,
   ) => React.element = "default"
 }
 

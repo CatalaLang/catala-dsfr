@@ -165,11 +165,20 @@ module Make = (
         | None => `En attente de la confirmation du formulaire...`->React.string
         | Some(formData) =>
           try {
-            <>
-              {FormInfos.resultLabel->React.string}
-              {": "->React.string}
-              {FormInfos.computeAndPrintResult(formData)}
-            </>
+            <div className="flex flex-col">
+              <div>
+                {FormInfos.resultLabel->React.string}
+                {": "->React.string}
+                {FormInfos.computeAndPrintResult(formData)}
+              </div>
+              <Dsfr.Button
+                onClick={_ => ()}
+                disabled=true
+                iconPosition="right"
+                iconId="fr-icon-newspaper-line">
+                {`Générer une explication de la décision`->React.string}
+              </Dsfr.Button>
+            </div>
           } catch {
           | err => {
               %raw(`console.log('ERROR:', err)`)
