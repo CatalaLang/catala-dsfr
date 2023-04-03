@@ -43,9 +43,7 @@ function getValue(event: SyntheticEvent<HTMLSelectElement>, multiple: boolean) {
 }
 
 function SelectWidgetDsfr(props: WidgetProps) {
-  const emptyValue = props.multiple ? [] : "";
-
-  const { enumOptions, enumDisabled, emptyValue: optEmptyVal } = props.options;
+  const { enumOptions, emptyValue: optEmptyVal } = props.options;
 
   const handleChange = useCallback(
     (event) => {
@@ -71,16 +69,6 @@ function SelectWidgetDsfr(props: WidgetProps) {
 
   const value =
     typeof selectedIndexes === "undefined" ? defaultIndex : selectedIndexes;
-
-  console.log(
-    props.label,
-    ":",
-    props.schema.default,
-    ":",
-    defaultIndex,
-    "v",
-    value
-  );
 
   return (
     <Select
