@@ -1284,24 +1284,6 @@
           "if": {
             "properties": {
               "kind": {
-                "const": "PasDeGardeAlternee"
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "payload": {
-                "title": " ",
-                "type": "null",
-                "default": null
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "kind": {
                 "const": "GardeAlterneeCoefficientPriseEnCharge"
               }
             }
