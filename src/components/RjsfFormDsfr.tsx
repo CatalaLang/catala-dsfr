@@ -1,15 +1,15 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import Form, { FormProps } from "@rjsf/core";
 import {
   SubmitButtonProps,
   WidgetProps,
-  FieldProps,
   FieldTemplateProps,
   ArrayFieldTemplateProps,
   enumOptionsValueForIndex,
   enumOptionsIndexForValue,
   RJSFSchema,
   TitleFieldProps,
+  ArrayFieldTemplateItemType,
 } from "@rjsf/utils";
 import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Button } from "@codegouvfr/react-dsfr/Button";
@@ -221,9 +221,10 @@ function FieldTemplate({
   required,
   label,
   schema,
+  uiSchema,
 }: FieldTemplateProps) {
   const title = !schemaTypesToNotRenderTitles.includes(schema.type) &&
-    typeof schema.required != "object" && (
+    (!uiSchema || !uiSchema["ui:hideTitle"]) && (
       <label className="fr-label" htmlFor={id}>
         {label}
         {required ? "*" : null}
@@ -242,7 +243,7 @@ function FieldTemplate({
   );
 }
 
-function TitleField({ title, required, id, schema }: TitleFieldProps) {
+function TitleFieldTemplate({}: TitleFieldProps) {
   // Lengends and labels are managed directly by the widgets.
   return null;
 }
@@ -260,7 +261,7 @@ export default function FormRJSF(props: FormProps<any>) {
         BaseInputTemplate,
         FieldTemplate,
         ButtonTemplates: { SubmitButton },
-        TitleFieldTemplate: TitleField,
+        TitleFieldTemplate,
       }}
       {...props}
     />

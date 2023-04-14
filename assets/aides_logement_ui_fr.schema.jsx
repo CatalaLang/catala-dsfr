@@ -131,6 +131,7 @@ export const uiSchema = {
         "personnesACharge": {
             "ui:tabLabel": "Personne",
             "items": {
+                "ui:hideTitle": true,
                 "payload": {
                     "obligationScolaire": {
                         "ui:help": <span>L'obligation scolaire d'un enfant est régie par les articles <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071191/LEGISCTA000006166564/" target="_blank">L131-1 à L131-13 du code de l'éducation</a>.</span>
@@ -168,8 +169,10 @@ export const uiSchema = {
             "ui:help": <span>Cette question est nécessaire pour l'éligibilité à l'allocation de logement familiale (ALF) prévue au 6° de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814864" target="_blank">article L841-1 du code de la construction et de l'habitation</a>.</span>
         },
         "prestationsRecues": {
-            "ui:tabLabel": "Prestation"
-
+            "ui:tabLabel": "Prestation",
+            "items": {
+                "ui:hideTitle": true,
+            },
         }
     },
     "demandeurIn": {
