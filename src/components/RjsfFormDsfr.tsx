@@ -202,7 +202,7 @@ function CheckBoxDsfr(props: WidgetProps) {
 
 function SubmitButton(_props: SubmitButtonProps) {
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full fr-mt-2w">
       <Button>Lancer le calcul</Button>
     </div>
   );
@@ -231,7 +231,7 @@ function FieldTemplate({
     );
 
   return (
-    <div className={classNames} style={style}>
+    <div className={classNames + " fr-mt-1w"} style={style}>
       {title}
       {description}
       {children}

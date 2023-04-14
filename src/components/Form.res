@@ -211,7 +211,7 @@ module Make = (
           />
           <div className="fr-col"> form </div>
           <div
-            className="w-full border-2 border-solid rounded-full border-[var(--border-default-grey)]"
+            className="w-full fr-m-1w border-2 border-solid rounded-full border-[var(--border-default-grey)]"
           />
           <div className="fr-col"> form_result </div>
         </div>
