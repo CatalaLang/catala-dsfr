@@ -9,7 +9,6 @@ import {
   enumOptionsIndexForValue,
   RJSFSchema,
   TitleFieldProps,
-  ArrayFieldTemplateItemType,
 } from "@rjsf/utils";
 import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Button } from "@codegouvfr/react-dsfr/Button";
@@ -158,7 +157,7 @@ function ArrayFieldTemplate({
               }))
               .concat([
                 {
-                  label: `${tabLabel} ${items.length + 1}`,
+                  label: `Ajouter`,
                   content: (
                     <>
                       {canAdd && (
