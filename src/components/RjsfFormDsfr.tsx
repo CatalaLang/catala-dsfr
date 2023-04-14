@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, ReactElement } from "react";
 import Form, { FormProps } from "@rjsf/core";
 import {
   SubmitButtonProps,
@@ -71,7 +71,6 @@ function SelectWidgetDsfr(props: WidgetProps) {
 
   return (
     <Select
-      hint={<DetailedHint>{props.uiSchema["ui:help"]}</DetailedHint>}
       nativeSelectProps={{
         id: props.id,
         name: props.name,
@@ -110,7 +109,6 @@ function BaseInputTemplate({
   }
   return (
     <Input
-      hintText={<DetailedHint>{uiSchema["ui:help"]}</DetailedHint>}
       nativeInputProps={{
         type: type,
         required: required,
@@ -181,14 +179,52 @@ function ArrayFieldTemplate({
   );
 }
 
+type ElementWithHintProps = {
+  hintText: string | undefined;
+  children: ReactElement;
+};
+
+function LabelWithHint({ hintText, children }: ElementWithHintProps) {
+  const [showHint, setShowHint] = useState(false);
+  if (children == undefined) return null;
+  return (
+    <div className="flex flex-col ">
+      <div className="flex" style={{ alignItems: "center" }}>
+        {children}
+        {hintText && (
+          <Button
+            iconId={
+              !showHint
+                ? "fr-icon-information-line"
+                : "fr-icon-information-fill"
+            }
+            size="small"
+            priority="tertiary no outline"
+            onClick={() => setShowHint(!showHint)}
+            nativeButtonProps={
+              {
+                // className: "fr-mb-3v",
+              }
+            }
+          />
+        )}
+      </div>
+      {showHint && <p className="fr-hint-text">{hintText}</p>}
+    </div>
+  );
+}
+
 function CheckBoxDsfr(props: WidgetProps) {
   return (
     <div style={{ marginTop: "1rem", marginBottom: "-1rem" }}>
       <Checkbox
         options={[
           {
-            label: props.schema.title + (props.required ? "*" : ""),
-            hintText: <DetailedHint>{props.uiSchema["ui:help"]}</DetailedHint>,
+            label: (
+              <LabelWithHint hintText={props.uiSchema["ui:help"]}>
+                {props.schema.title + (props.required ? "*" : "")}
+              </LabelWithHint>
+            ),
             nativeInputProps: {
               checked: props.value,
               onChange: (e) => props.onChange(e.target.checked),
@@ -222,18 +258,24 @@ function FieldTemplate({
   schema,
   uiSchema,
 }: FieldTemplateProps) {
+  // const hintText = uiSchema ? uiSchema["ui:help"] : undefined;
+  if (label.startsWith("Usufruitier du logement")) {
+    console.log("label", label);
+    console.log("uiSchema", uiSchema);
+    console.log("description", description);
+  }
   const title = !schemaTypesToNotRenderTitles.includes(schema.type) &&
     (!uiSchema || !uiSchema["ui:hideTitle"]) && (
-      <label className="fr-label" htmlFor={id}>
-        {label}
-        {required ? "*" : null}
-      </label>
+      <LabelWithHint hintText={uiSchema ? uiSchema["ui:help"] : undefined}>
+        <label htmlFor={id} className="fr-label">
+          {label + (required ? "*" : "")}
+        </label>
+      </LabelWithHint>
     );
 
   return (
     <div className={classNames + " fr-mt-1w"} style={style}>
       {title}
-      {description}
       {children}
       {errors.props.errors != null && (
         <Alert severity="error" description={errors} small />

@@ -112,20 +112,18 @@ export const uiSchema = {
             },
             "proprietaire": {
                 "ui:placeholder": "Sélectionnez une option",
-                "kind": {
-                    "ui:help": <span>La propriété du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts de propriétés, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>,
-                }
+                "ui:help": <span>La propriété du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts de propriétés, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>,
             },
             "usufruit": {
-                "kind": {
-                    "ui:help": <span>L'usufruit du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts d'usufruit, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>
-                }
+                "ui:help": <span>L'usufruit du logement pour cette question est à entendre selon le sens de l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814942" target="_blank">article L822-3 du code de la construction et de l'habitation</a>. La fraction du logement revenant au demandeur ou à sa famille est un nombre entre 0 et 1 correspondant aux parts d'usufruit, personnelles ou au travers de sociétés, détenues par le demandeur, son conjoint, ascendants et descendants.</span>
             },
             "logementDecentL89462": {
                 "ui:help": <span>Selon l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038814926/" target="_blank">article L822-9 du code de la construction et de l'habitation</a>, le logement doit répondre à des exigences de décence définies en application des deux premiers alinéas de l'<a href="https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037670751/" target="_blank">article 6 de la loi n° 89-462 du 6 juillet 1989 tendant à améliorer les rapports locatifs et portant modification de la loi n° 86-1290 du 23 décembre 1986</a>.</span>
             },
             "zone": {
-                "ui:help": <span>La répartition des communes par zones est donnée par l'<a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000838189/" target="_blank">arrêté du 17 mars 1978 relatif au classement des communes par zones géographiques</a>.</span>
+                "kind": {
+                    "ui:help": <span>La répartition des communes par zones est donnée par l'<a href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000838189/" target="_blank">arrêté du 17 mars 1978 relatif au classement des communes par zones géographiques</a>.</span>
+                }
             }
         },
         "personnesACharge": {
@@ -134,7 +132,9 @@ export const uiSchema = {
                 "ui:hideTitle": true,
                 "payload": {
                     "obligationScolaire": {
-                        "ui:help": <span>L'obligation scolaire d'un enfant est régie par les articles <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071191/LEGISCTA000006166564/" target="_blank">L131-1 à L131-13 du code de l'éducation</a>.</span>
+                        "kind": {
+                            "ui:help": <span>L'obligation scolaire d'un enfant est régie par les articles <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071191/LEGISCTA000006166564/" target="_blank">L131-1 à L131-13 du code de l'éducation</a>.</span>
+                        }
                     },
                     "remunerationMensuelle": {
                         "ui:help": <span>La rémunération mensuelle de l'enfant est nécessaire pour évaluer l'ouverture des droits aux prestations familiales selon l'<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000041979743" target="_blank">article L512-3 du code de la sécurité sociale</a>.</span>
