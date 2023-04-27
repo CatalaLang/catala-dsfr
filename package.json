@@ -9,7 +9,7 @@
     "dev": "vite",
     "re:build": "rescript",
     "re:watch": "rescript build -w -with-deps",
-    "assets": "cp -rfu ./node_modules/catala-web-assets/assets/* -t assets",
+    "assets": "rsync -r ./node_modules/catala-web-assets/assets/* assets",
     "postinstall": "copy-dsfr-to-public",
     "pre": "only-include-used-icons && yarn run assets",
     "predev": "yarn run pre",

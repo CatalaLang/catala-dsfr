@@ -12,6 +12,9 @@ yarn
 yarn dev
 ```
 
+> Note: you need to have `rsync` installed to copy web assets from the
+> `catala-web-assets` node package.
+
 ## Build for production
 
 ```
