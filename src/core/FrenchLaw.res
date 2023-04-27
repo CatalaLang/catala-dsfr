@@ -4,7 +4,7 @@ type french_law<'a> = {
   computeAidesAuLogement: 'a,
 }
 
-%%raw(`import * as frenchLaw from "../../assets/french_law.cjs"`)
+%%raw(`import * as frenchLaw from "../../assets/french_law.js"`)
 
 let frenchLawLib: french_law<Js.Json.t> = %raw(`frenchLaw.default`)
 

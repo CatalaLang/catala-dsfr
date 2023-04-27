@@ -9,9 +9,13 @@
     "dev": "vite",
     "re:build": "rescript",
     "re:watch": "rescript build -w -with-deps",
+    "assets": "cp -rfu ./node_modules/catala-web-assets/assets/* -t assets",
     "postinstall": "copy-dsfr-to-public",
-    "prestart": "only-include-used-icons",
-    "prebuild": "only-include-used-icons"
+    "pre": "only-include-used-icons && yarn run assets",
+    "predev": "yarn run pre",
+    "prebuild": "yarn run pre",
+    "prere:build": "yarn run pre",
+    "prere:watch": "yarn run pre"
   },
   "keywords": [
     "rescript"
@@ -24,6 +28,7 @@
     "@rjsf/core": "^5.1.0",
     "@rjsf/utils": "^5.1.0",
     "@rjsf/validator-ajv8": "^5.1.0",
+    "catala-web-assets": "^0.1.0-a.1",
     "decco": "^1.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
