@@ -28,7 +28,7 @@
     "@rjsf/core": "^5.1.0",
     "@rjsf/utils": "^5.1.0",
     "@rjsf/validator-ajv8": "^5.1.0",
-    "catala-web-assets": "^0.1.0-a.1",
+    "catala-web-assets": "^0.1.0-b.1",
     "decco": "^1.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
