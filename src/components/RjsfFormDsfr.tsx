@@ -82,7 +82,7 @@ function SelectWidgetDsfr(props: WidgetProps) {
       {!props.multiple && props.schema.default === undefined && (
         <option value="">{props.placeholder}</option>
       )}
-      {props.options.enumOptions.map((item, index) => (
+      {props.options.enumOptions?.map((item, index) => (
         <option key={index} value={String(index)}>
           {item.label}
         </option>
