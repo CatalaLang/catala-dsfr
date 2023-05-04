@@ -149,8 +149,8 @@ module Make = (
                 {FormInfos.computeAndPrintResult(formData)}
               </div>
               <Dsfr.Button
-                onClick={_ => ()}
-                disabled=true
+                onClick={_ => FrenchLaw.retrieveEventsSerialized()->CatalaExplain.generate}
+                disabled=false
                 iconPosition="right"
                 iconId="fr-icon-newspaper-line">
                 {`Générer une explication de la décision`->React.string}
