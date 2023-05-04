@@ -3,15 +3,19 @@
   "version": "0.0.1",
   "repository": "https://github.com/CatalaLang/catala-explorer",
   "scripts": {
-    "clean": "rescript clean -with-deps",
+    "clean": "rescript clean -with-deps && rm -r public/**",
     "build": "vite build",
     "serve": "vite preview",
     "dev": "vite",
     "re:build": "rescript",
     "re:watch": "rescript build -w -with-deps",
+    "assets": "rsync -r ./node_modules/catala-web-assets/assets/* assets",
     "postinstall": "copy-dsfr-to-public",
-    "prestart": "only-include-used-icons",
-    "prebuild": "only-include-used-icons"
+    "pre": "only-include-used-icons && yarn run assets",
+    "predev": "yarn run pre",
+    "prebuild": "yarn run pre",
+    "prere:build": "yarn run pre",
+    "prere:watch": "yarn run pre"
   },
   "keywords": [
     "rescript"
@@ -19,7 +23,7 @@
   "author": "Emile Rolley <emile.rolley@tuta.io>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@codegouvfr/react-dsfr": "^0.46.4",
+    "@codegouvfr/react-dsfr": "^0.52.1",
     "@rescript/react": "^0.11.0",
     "@rjsf/core": "^5.1.0",
     "@rjsf/utils": "^5.1.0",
@@ -30,6 +34,7 @@
     "rescript": "^10.1.2"
   },
   "devDependencies": {
+    "@catala-lang/catala-web-assets": "^0.1.0-b.2",
     "@jihchi/vite-plugin-rescript": "^5.1.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@vitejs/plugin-react": "^3.1.0",

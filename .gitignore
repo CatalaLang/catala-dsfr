@@ -13,3 +13,5 @@ yarn-error.log
 *.bs.js
 
 src/css/tailwind.css
+
+assets/
