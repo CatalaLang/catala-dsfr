@@ -1,6 +1,7 @@
-# catala-explorer
+# catala-dsfr
 
-A tool to assist in explaining the result of a simulation from a Catala program
+A Dsfr front-end for the
+[catala-web-assets](https://github.com/CatalaLang/catala-web-assets).
 
 ## Local dev
 
