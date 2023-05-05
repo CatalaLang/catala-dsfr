@@ -70,7 +70,9 @@ module Make = (
 ) => {
   @react.component
   let make = (
-    ~setEventsOpt: (option<array<LogEvent.event>> => option<array<LogEvent.event>>) => unit,
+    ~setEventsOpt: (
+      option<array<CatalaRuntime.event>> => option<array<CatalaRuntime.event>>
+    ) => unit,
   ) => {
     let (formData, setFormData) = React.useState(_ => {
       FormInfos.initFormData
@@ -78,7 +80,7 @@ module Make = (
     React.useEffect2(() => {
       setEventsOpt(_ => {
         let logs = {
-          try {FrenchLaw.retrieveEventsSerialized()->LogEvent.deserializedEvents} catch {
+          try {CatalaFrenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
           | _ => []
           }
         }

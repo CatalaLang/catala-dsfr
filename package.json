@@ -1,7 +1,7 @@
 {
-  "name": "catala-explorer",
+  "name": "catala-dsfr",
   "version": "0.0.1",
-  "repository": "https://github.com/CatalaLang/catala-explorer",
+  "repository": "https://github.com/CatalaLang/catala-dsfr",
   "scripts": {
     "clean": "rescript clean -with-deps",
     "build": "vite build",
@@ -23,6 +23,8 @@
   "author": "Emile Rolley <emile.rolley@tuta.io>",
   "license": "Apache-2.0",
   "dependencies": {
+    "@catala-lang/french-law": "^0.5.2",
+    "@catala-lang/rescript-catala": "^0.1.1",
     "@codegouvfr/react-dsfr": "^0.52.1",
     "@rescript/react": "^0.11.0",
     "@rjsf/core": "^5.1.0",
