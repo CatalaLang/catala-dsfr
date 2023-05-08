@@ -30,7 +30,6 @@
     "@rjsf/core": "^5.1.0",
     "@rjsf/utils": "^5.1.0",
     "@rjsf/validator-ajv8": "^5.1.0",
-    "decco": "^1.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rescript": "^10.1.2"

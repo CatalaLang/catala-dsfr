@@ -25,8 +25,7 @@
   "bs-dependencies": [
     "@rescript/react",
     "@catala-lang/french-law",
-    "@catala-lang/rescript-catala",
-    "decco"
+    "@catala-lang/rescript-catala"
   ],
-  "ppx-flags": [ "decco/ppx" ]
+  "ppx-flags": []
 }
