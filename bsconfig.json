@@ -1,5 +1,5 @@
 {
-  "name": "catala-explorer",
+  "name": "catala-dsfr",
   "sources": {
     "dir": "src",
     "subdirs": true,
@@ -22,6 +22,11 @@
   },
   "suffix": ".bs.js",
   "jsx": { "version": 4, "mode": "classic" },
-  "bs-dependencies": [ "@rescript/react", "decco" ],
+  "bs-dependencies": [
+    "@rescript/react",
+    "@catala-lang/french-law",
+    "@catala-lang/rescript-catala",
+    "decco"
+  ],
   "ppx-flags": [ "decco/ppx" ]
 }

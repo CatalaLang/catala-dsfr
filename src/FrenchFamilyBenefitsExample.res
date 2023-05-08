@@ -31,7 +31,7 @@ function (data) {
 
   let computeAndPrintResult = (input: Js.Json.t): React.element => <>
     <span className="font-mono font-bold text-[var(--text-active-blue-france)]">
-      {input->FrenchLaw.computeAllocationsFamiliales->Belt.Float.toString->React.string}
+      {input->CatalaFrenchLaw.computeAllocationsFamiliales->Belt.Float.toString->React.string}
     </span>
     {React.string(` €`)}
   </>
@@ -43,10 +43,11 @@ module Form = Form.Make(FormInfos)
 let make = () => {
   React.useEffect0(() => {
     // Reset the log when the page is loaded.
-    FrenchLaw.resetLog()
+    CatalaFrenchLaw.resetLog()
     None
   })
   <div className="fr-container">
-    <PageComponents.Title> pageTitle </PageComponents.Title> <Form setEventsOpt={_ => ()} />
+    <PageComponents.Title> pageTitle </PageComponents.Title>
+    <Form setEventsOpt={_ => ()} />
   </div>
 }
