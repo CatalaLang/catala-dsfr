@@ -24,26 +24,27 @@
   "author": "Emile Rolley <emile.rolley@tuta.io>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@catala-lang/french-law": "^0.8.1",
-    "@catala-lang/rescript-catala": "^0.8.0",
     "@codegouvfr/react-dsfr": "^0.52.1",
-    "@rescript/react": "^0.11.0",
     "@rjsf/core": "^5.1.0",
     "@rjsf/utils": "^5.1.0",
     "@rjsf/validator-ajv8": "^5.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "rescript": "^10.1.2"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@catala-lang/catala-web-assets": "^0.8.0-b",
+    "@catala-lang/catala-web-assets": "^0.1.0-b.2",
+    "@catala-lang/french-law": "^0.8.0",
+    "@catala-lang/rescript-catala": "^0.8.0",
     "@jihchi/vite-plugin-rescript": "^5.1.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@rescript/core": "^0.3.1",
+    "@rescript/react": "^0.11.0",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
+    "docx": "^8.0.4",
     "gentype": "^4.5.0",
     "jsdom": "^21.1.0",
+    "rescript": "^10.1.4",
     "tailwindcss": "^3.2.6",
     "vite": "^4.1.1"
   }
