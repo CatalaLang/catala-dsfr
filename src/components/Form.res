@@ -150,9 +150,18 @@ module Make = (
               </div>
               <Dsfr.Button
                 onClick={_ =>
-                  CatalaFrenchLaw.retrieveEventsSerialized()
-                  ->CatalaRuntime.deserializedEvents
-                  ->CatalaExplain.generate}
+                  CatalaExplain.generate(
+                    ~opts={
+                      title: `Explication de la décision pour le calcul de ${FormInfos.name}`,
+                      // Contains an explicatory text about the computation and the catala program etc...
+                      description: `Détails de la décision pour le calcul de ${FormInfos.name} générés automatiquement à partir du programme Catala est des entrées du formulaire`,
+                      creator: `catala-dsfr`,
+                      filename: `explication-decision-${FormInfos.name}`,
+                      jsonSchema: FormInfos.frenchSchema,
+                    },
+                    ~userInputs=formData,
+                    ~events=CatalaFrenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents,
+                  )}
                 iconPosition="right"
                 iconId="fr-icon-newspaper-line">
                 {`Générer une explication de la décision`->React.string}
