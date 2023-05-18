@@ -57,13 +57,8 @@ const readFileAsJSON = (file, callback) => {
 */
 module Make = (
   FormInfos: {
-    let englishSchema: Js.Json.t
-    let englishUiSchema: Js.Json.t
-    let frenchSchema: Js.Json.t
-    let frenchUiSchema: Js.Json.t
+    let webAssets: WebAssets.t
     let resultLabel: string
-
-    let initFormData: option<Js.Json.t>
     let formDataPostProcessing: option<Js.Json.t => Js.Json.t>
     let computeAndPrintResult: Js.Json.t => React.element
   },
@@ -75,7 +70,7 @@ module Make = (
     ) => unit,
   ) => {
     let (formData, setFormData) = React.useState(_ => {
-      FormInfos.initFormData
+      FormInfos.webAssets.initialData
     })
     React.useEffect2(() => {
       setEventsOpt(_ => {
@@ -143,8 +138,8 @@ module Make = (
 
     let form =
       <RjsfFormDsfr
-        schema={FormInfos.frenchSchema}
-        uiSchema={FormInfos.frenchUiSchema}
+        schema={FormInfos.webAssets.schema}
+        uiSchema={FormInfos.webAssets.uiSchema}
         formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
         onSubmit={t => {
           setFormData(_ => {

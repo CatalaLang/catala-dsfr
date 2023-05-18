@@ -3,18 +3,8 @@ let pageTitle =
     english="French family benefits computation" french={`Calcul des allocations familiales`}
   />
 
-/* let catalaCodeHTML = %raw(`require("../assets/allocations_familiales.html")`) */
-/* let frenchUISchema = %raw(`require("../assets/allocations_familiales_ui_schema_fr.tsx")`) */
-
 module FormInfos = {
-  let englishSchema = %raw(`require("../assets/allocations_familiales_schema_en.json")`)
-  let frenchSchema = %raw(`require("../assets/allocations_familiales_schema_fr.json")`)
-
-  let englishUiSchema = %raw(`require("../assets/allocations_familiales_ui_schema_en.json")`)
-  /* let frenchUiSchema = Js.Dict.unsafeGet(frenchUISchema, "uiSchema") */
-  let frenchUiSchema = %raw(`require("../assets/allocations_familiales_ui_schema_fr.json")`)
-
-  let initFormData = None
+  let webAssets = WebAssets.frenchFamilyAssets
 
   // This function automatically assigns numerical ID to kids so we don't
   // have to ask the question in the form
