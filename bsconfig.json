@@ -24,8 +24,10 @@
   "jsx": { "version": 4, "mode": "classic" },
   "bs-dependencies": [
     "@rescript/react",
+	"@rescript/core",
     "@catala-lang/french-law",
     "@catala-lang/rescript-catala"
   ],
+"bsc-flags": ["-open RescriptCore"],
   "ppx-flags": []
 }

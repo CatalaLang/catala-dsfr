@@ -38,6 +38,7 @@
     "@catala-lang/catala-web-assets": "^0.1.0-b.2",
     "@jihchi/vite-plugin-rescript": "^5.1.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@rescript/core": "^0.3.1",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
     "gentype": "^4.5.0",
