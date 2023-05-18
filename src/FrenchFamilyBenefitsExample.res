@@ -17,7 +17,8 @@ function (data) {
    }
    return data;
 }`)
-  let resultLabel = `Montant mensuel des allocations familiales`
+  let name = `allocations familiales`
+  let resultLabel = `Montant mensuel des ${name}`
 
   let computeAndPrintResult = (input: Js.Json.t): React.element => <>
     <span className="font-mono font-bold text-[var(--text-active-blue-france)]">
