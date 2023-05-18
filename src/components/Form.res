@@ -4,8 +4,8 @@
 
   The component is capable of building HTML forms out of a JSON schema.
 */
-module RjsfFormDsfr = {
-  @react.component @module("./RjsfFormDsfr.tsx")
+module RjsfFormDsfrLazy = {
+  @react.component @module("./RjsfFormDsfrLazy.tsx")
   external make: (
     ~onChange: Js.Dict.t<Js.Json.t> => unit=?,
     ~onSubmit: Js.Dict.t<Js.Json.t> => unit=?,
@@ -136,25 +136,7 @@ module Make = (
         </div>
       </div>
 
-    let form =
-      <RjsfFormDsfr
-        schema={FormInfos.webAssets.schema}
-        uiSchema={FormInfos.webAssets.uiSchema}
-        formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
-        onSubmit={t => {
-          setFormData(_ => {
-            let formData = t->Js.Dict.get("formData")
-            switch (FormInfos.formDataPostProcessing, formData) {
-            | (Some(f), Some(formData)) => {
-                let newFormData = f(formData)
-                Some(newFormData)
-              }
-
-            | _ => formData
-            }
-          })
-        }}
-      />
+    // let form =
 
     let form_result =
       <Dsfr.CallOut>
@@ -206,7 +188,28 @@ module Make = (
           <div
             className="w-full border-2 border-solid rounded-full border-[var(--border-default-grey)]"
           />
-          <div className="fr-col"> form </div>
+          <div className="fr-col">
+            <React.Suspense fallback={<div> {`Chargement en cours…`->React.string} </div>}>
+              <RjsfFormDsfrLazy
+                schema={FormInfos.webAssets.schema}
+                uiSchema={FormInfos.webAssets.uiSchema}
+                formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
+                onSubmit={t => {
+                  setFormData(_ => {
+                    let formData = t->Js.Dict.get("formData")
+                    switch (FormInfos.formDataPostProcessing, formData) {
+                    | (Some(f), Some(formData)) => {
+                        let newFormData = f(formData)
+                        Some(newFormData)
+                      }
+
+                    | _ => formData
+                    }
+                  })
+                }}
+              />
+            </React.Suspense>
+          </div>
           <div
             className="w-full fr-m-1w border-2 border-solid rounded-full border-[var(--border-default-grey)]"
           />

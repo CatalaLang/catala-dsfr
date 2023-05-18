@@ -1,11 +1,7 @@
 %%raw(`import "./css/index.css";`)
 %%raw(`import { startReactDsfr } from '@codegouvfr/react-dsfr/spa';`)
 
-%%raw(`
-
-startReactDsfr({ defaultColorScheme: "system", Link: Router.Link.make});
-
-`)
+%%raw(`startReactDsfr({ defaultColorScheme: "system", Link: Router.Link.make});`)
 
 module App = {
   @react.component
