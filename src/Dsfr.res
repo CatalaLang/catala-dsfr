@@ -1,3 +1,13 @@
+module Spa = {
+  type startReactDsfrOpts<'props> = {
+    defaultColorScheme: string,
+    @as("Link") link: 'props => React.element,
+  }
+
+  @module("@codegouvfr/react-dsfr/spa")
+  external startReactDsfr: startReactDsfrOpts<'props> => unit = "startReactDsfr"
+}
+
 module Button = {
   @react.component @module("@codegouvfr/react-dsfr/Button")
   external make: (
