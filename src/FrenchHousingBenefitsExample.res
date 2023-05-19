@@ -6,6 +6,7 @@ let pageTitle =
 module FormInfos = {
   let webAssets = WebAssets.frenchHousingAssets
   let resultLabel = `Montant mensuel brut des aides au logement`
+  let name = "aides au logement"
   // This function automatically assigns numerical ID to kids so we don't
   // have to ask the question in the form
   let formDataPostProcessing = %raw(`
