@@ -7,7 +7,7 @@ module Spa = {
   }
 
   @module("@codegouvfr/react-dsfr/spa")
-  external startReactDsfr: startReactDsfrParams<'children> => unit = "startReactDsfr"
+  external startReactDsfr: startReactDsfrParams<'props> => unit = "startReactDsfr"
 }
 
 module Button = {
