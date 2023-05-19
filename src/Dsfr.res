@@ -1,11 +1,13 @@
 module Spa = {
-  type startReactDsfrOpts<'props> = {
-    defaultColorScheme: string,
+  type startReactDsfrParams<'props> = {
+    defaultColorScheme: [#light | #dark | #system],
+    verbose?: bool,
     @as("Link") link: 'props => React.element,
+    useLang?: unit => [#fr | #en],
   }
 
   @module("@codegouvfr/react-dsfr/spa")
-  external startReactDsfr: startReactDsfrOpts<'props> => unit = "startReactDsfr"
+  external startReactDsfr: startReactDsfrParams<'children> => unit = "startReactDsfr"
 }
 
 module Button = {

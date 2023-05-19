@@ -1,6 +1,10 @@
 %%raw(`import "./css/index.css";`)
 
-Dsfr.Spa.startReactDsfr({defaultColorScheme: "system", link: Router.Link.make})
+Dsfr.Spa.startReactDsfr({
+  defaultColorScheme: #system,
+  link: Router.Link.make,
+  useLang: () => #fr,
+})
 
 module App = {
   @react.component
