@@ -258,12 +258,6 @@ function FieldTemplate({
   schema,
   uiSchema,
 }: FieldTemplateProps) {
-  // const hintText = uiSchema ? uiSchema["ui:help"] : undefined;
-  if (label.startsWith("Usufruitier du logement")) {
-    console.log("label", label);
-    console.log("uiSchema", uiSchema);
-    console.log("description", description);
-  }
   const title = !schemaTypesToNotRenderTitles.includes(schema.type) &&
     (!uiSchema || !uiSchema["ui:hideTitle"]) && (
       <LabelWithHint hintText={uiSchema ? uiSchema["ui:help"] : undefined}>

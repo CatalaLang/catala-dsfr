@@ -165,7 +165,7 @@ module Make = (
                   )}
                 iconPosition="right"
                 iconId="fr-icon-newspaper-line">
-                {`Générer une explication de la décision`->React.string}
+                {`Télécharger une explication du calcul`->React.string}
               </Dsfr.Button>
             </div>
           } catch {
