@@ -58,6 +58,7 @@ const readFileAsJSON = (file, callback) => {
 module Make = (
   FormInfos: {
     let webAssets: WebAssets.t
+    let name: string
     let resultLabel: string
     let formDataPostProcessing: option<Js.Json.t => Js.Json.t>
     let computeAndPrintResult: Js.Json.t => React.element
@@ -157,7 +158,7 @@ module Make = (
                       description: `Détails de la décision pour le calcul de ${FormInfos.name} générés automatiquement à partir du programme Catala est des entrées du formulaire`,
                       creator: `catala-dsfr`,
                       filename: `explication-decision-${FormInfos.name}`,
-                      jsonSchema: FormInfos.frenchSchema,
+                      jsonSchema: FormInfos.webAssets.schema,
                     },
                     ~userInputs=formData,
                     ~events=CatalaFrenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents,
@@ -169,7 +170,7 @@ module Make = (
             </div>
           } catch {
           | err => {
-              %raw(`console.log('ERROR:', err)`)
+              Console.log2(`ERROR:`, err)
               <>
                 <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
                 {err
