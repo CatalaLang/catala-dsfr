@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rescript clean -with-deps",
     "build": "vite build",
-	"deploy": "yarn run build && rsync -r dist/ emilerolley@code.gouv.fr:~/catala-dsfr",
+	"deploy": "yarn run build && rsync -r dist/",
     "serve": "vite preview",
     "dev": "vite",
     "re:build": "rescript",
