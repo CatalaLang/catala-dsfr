@@ -2,9 +2,13 @@
 let make = () => {
   <Dsfr.Footer
     accessibility="partially compliant"
-    brandTop={<> {`République`->React.string} <br /> {`Française`->React.string} </>}
+    brandTop={<>
+      {`République`->React.string}
+      <br />
+      {`Française`->React.string}
+    </>}
     contentDescription={<>
-      {"Ce site est développé dans le câdre de la "->React.string}
+      {"Ce site est développé dans le cadre de la "->React.string}
       <a href="https://www.code.gouv.fr">
         {`mission logiciels libres et communs numériques`->React.string}
       </a>
@@ -14,7 +18,10 @@ let make = () => {
       </a>
       {" en collaboration avec le projet "->React.string}
       <a href="https://catala-lang.org/"> {`Catala`->React.string} </a>
-      {"."->React.string}
+      {`, avec l'objectif de tester des solutions techniques de conformité à l'`->React.string}
+      <a href="https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037823131">
+        {`article 47-2 de la loi informatique et libertés`->React.string}
+      </a>
     </>}
     homeLinkProps={"href": "https://www.code.gouv.fr", "title": "Code du travail numérique"}
     license={<>

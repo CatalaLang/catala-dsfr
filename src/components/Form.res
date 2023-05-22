@@ -102,36 +102,34 @@ module Make = (
       }
     }
 
-    let form_header =
-      <div className="fr-col-8">
-        <div className="fr-container--fluid">
-          <div className="fr-grid-col fr-grid-row--center">
-            <div className="fr-col">
-              <Button.Group
-                buttons=[
-                  {
-                    label: `Exporter les données au format JSON`,
-                    onClick: _ => {
-                      let data_str = Js.Json.stringify(
-                        formData->Belt.Option.getWithDefault(Js.Json.null),
-                      )
-                      downloadJSONstring(data_str)
-                    },
+    let form_footer =
+      <div className="fr-container--fluid">
+        <div className="fr-grid-col fr-grid-row--center">
+          <div className="fr-col">
+            <Button.Group
+              buttons=[
+                {
+                  label: `Exporter les données au format JSON`,
+                  onClick: _ => {
+                    let data_str = Js.Json.stringify(
+                      formData->Belt.Option.getWithDefault(Js.Json.null),
+                    )
+                    downloadJSONstring(data_str)
                   },
-                  {
-                    label: `Réinitialiser le formulaire`,
-                    onClick: _ => {
-                      setFormData(_ => None)
-                    },
+                },
+                {
+                  label: `Réinitialiser le formulaire`,
+                  onClick: _ => {
+                    setFormData(_ => None)
                   },
-                  {
-                    label: `Importer les données au format JSON`,
-                    onClick: retrieveFileContents,
-                    body: <input type_="file" onChange={fileChangeHandler} />,
-                  },
-                ]
-              />
-            </div>
+                },
+                {
+                  label: `Importer les données au format JSON`,
+                  onClick: retrieveFileContents,
+                  body: <input type_="file" onChange={fileChangeHandler} />,
+                },
+              ]
+            />
           </div>
         </div>
       </div>
@@ -184,10 +182,6 @@ module Make = (
             Ainsi, ce site ne collecte aucune donnée de ses utilisateurs.`}
             isClosable=true
           />
-          form_header
-          <div
-            className="w-full border-2 border-solid rounded-full border-[var(--border-default-grey)]"
-          />
           <div className="fr-col">
             <React.Suspense fallback={<div> {`Chargement en cours…`->React.string} </div>}>
               <RjsfFormDsfrLazy
@@ -215,6 +209,7 @@ module Make = (
           />
           <div className="fr-col"> form_result </div>
         </div>
+        form_footer
       </div>
     </>
   }
