@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rescript clean -with-deps",
     "build": "vite build",
-	"deploy": "yarn run build && rsync -r dist/",
+    "deploy": "yarn run build && rsync -r dist/",
     "serve": "vite preview",
     "dev": "vite",
     "re:build": "rescript",
@@ -24,7 +24,7 @@
   "author": "Emile Rolley <emile.rolley@tuta.io>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@catala-lang/french-law": "^0.8.0",
+    "@catala-lang/french-law": "^0.8.1",
     "@catala-lang/rescript-catala": "^0.8.0",
     "@codegouvfr/react-dsfr": "^0.52.1",
     "@rescript/react": "^0.11.0",
@@ -36,7 +36,7 @@
     "rescript": "^10.1.2"
   },
   "devDependencies": {
-    "@catala-lang/catala-web-assets": "^0.1.0-b.2",
+    "@catala-lang/catala-web-assets": "^0.8.0-b",
     "@jihchi/vite-plugin-rescript": "^5.1.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@rescript/core": "^0.3.1",

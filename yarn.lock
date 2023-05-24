@@ -210,15 +210,15 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@catala-lang/catala-web-assets@^0.1.0-b.2":
-  version "0.1.0-b.2"
-  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.1.0-b.2.tgz#c7b4f0c46b3de7b8d53f8e4b5f5d1ced776a4754"
-  integrity sha512-e/G5Wjg8LkI5Fa/xKFsVH4Go0oQwjFbeQxJ6ghuBBOfOEWyQ9RT5KInxUXWJTIbgUCgUU90dJORkod3mAUZVLg==
+"@catala-lang/catala-web-assets@^0.8.0-b":
+  version "0.8.0-b"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.0-b.tgz#a937592cae4591c81b377202e289d98cab60ff76"
+  integrity sha512-QT0REj3ssDdcgn/MtEGtssd6pJN4MXjHIWL7CQrUK2AvXO6Qgab1UXdLgxThKqxvPNdMkQyTkD6NV75gG8u7rQ==
 
-"@catala-lang/french-law@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@catala-lang/french-law/-/french-law-0.8.0.tgz#5fc6248b4953039c7f372d0ed98af21070e95ff5"
-  integrity sha512-uLzSfWk52vNZvTm3KgGH747xRYWLcx+NY46VX3S+zD/fO6dw2A9JyO6lq8Afr95w/6sUMX/j4Nc8GhygozZpqg==
+"@catala-lang/french-law@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@catala-lang/french-law/-/french-law-0.8.1.tgz#2554f13a5f116fb7ebce029857b08763651d5d79"
+  integrity sha512-XjeKCrydhvwIjebNP0ny4F8QZnJCQYP5SwlgMgT5O13T/J4COybvZU+zIsrvCwsfQSdDF4419wEYOjBkFEuYwA==
   dependencies:
     benchmark "^2.1.4"
     lodash "^4.17.21"
