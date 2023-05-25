@@ -32,8 +32,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@catala-lang/catala-web-assets": "^0.1.0-b.2",
-    "@catala-lang/french-law": "^0.8.0",
+    "@catala-lang/catala-web-assets": "^0.8.0-b",
+    "@catala-lang/french-law": "^0.8.1",
     "@catala-lang/rescript-catala": "^0.8.0",
     "@jihchi/vite-plugin-rescript": "^5.1.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
