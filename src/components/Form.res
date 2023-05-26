@@ -65,25 +65,20 @@ module Make = (
   },
 ) => {
   @react.component
-  let make = (
-    ~setEventsOpt: (
-      option<array<CatalaRuntime.event>> => option<array<CatalaRuntime.event>>
-    ) => unit,
-  ) => {
-    let (formData, setFormData) = React.useState(_ => {
-      FormInfos.webAssets.initialData
-    })
+  let make = () => {
+    let (formData, setFormData) = React.useState(_ => FormInfos.webAssets.initialData)
+    let (eventsOpt, setEventsOpt) = React.useState(_ => None)
     React.useEffect2(() => {
       setEventsOpt(_ => {
-        let logs = {
+        let events = {
           try {CatalaFrenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
           | _ => []
           }
         }
-        if 0 == logs->Belt.Array.size {
+        if 0 == events->Belt.Array.size {
           None
         } else {
-          Some(logs)
+          Some(events)
         }
       })
       None
@@ -135,8 +130,6 @@ module Make = (
         </div>
       </div>
 
-    // let form =
-
     let form_result =
       <Dsfr.CallOut>
         {switch formData {
@@ -161,7 +154,9 @@ module Make = (
                       jsonSchema: FormInfos.webAssets.schema,
                     },
                     ~userInputs=formData,
-                    ~events=CatalaFrenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents,
+                    // NOTE(@EmileRolley): we assume that the events exist,
+                    // because we have a result.
+                    ~events=eventsOpt->Option.getExn,
                   )}
                 iconPosition="right"
                 iconId="fr-icon-newspaper-line">

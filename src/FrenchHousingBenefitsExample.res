@@ -42,6 +42,6 @@ let make = () => {
   })
   <div className="fr-container">
     <PageComponents.Title> pageTitle </PageComponents.Title>
-    <Form setEventsOpt={_ => ()} />
+    <Form />
   </div>
 }
