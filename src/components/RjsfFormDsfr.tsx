@@ -258,14 +258,37 @@ function FieldTemplate({
   schema,
   uiSchema,
 }: FieldTemplateProps) {
-  const title = !schemaTypesToNotRenderTitles.includes(schema.type) &&
-    (!uiSchema || !uiSchema["ui:hideTitle"]) && (
-      <LabelWithHint hintText={uiSchema ? uiSchema["ui:help"] : undefined}>
-        <label htmlFor={id} className="fr-label">
-          {label + (required ? "*" : "")}
-        </label>
-      </LabelWithHint>
-    );
+  let title;
+  let heading = uiSchema && uiSchema["ui:heading"];
+
+  if (heading != undefined) {
+    switch (heading) {
+      case "h3":
+        title = <h3 className="fr-h3">{label}</h3>;
+        break;
+      case "h4":
+        title = <h4 className="fr-h4">{label}</h4>;
+        break;
+      case "h5":
+        title = <h5 className="fr-h5">{label}</h5>;
+        break;
+      case "h6":
+        title = <h6 className="fr-h6">{label}</h6>;
+        break;
+      default:
+        title = <h2 className="fr-h2">{label}</h2>;
+        break;
+    }
+  } else {
+    title = !schemaTypesToNotRenderTitles.includes(schema.type) &&
+      (!uiSchema || !uiSchema["ui:hideTitle"]) && (
+        <LabelWithHint hintText={uiSchema ? uiSchema["ui:help"] : undefined}>
+          <label htmlFor={id} className="fr-label">
+            {label + (required ? "*" : "")}
+          </label>
+        </LabelWithHint>
+      );
+  }
 
   return (
     <div className={classNames + " fr-mt-1w"} style={style}>
@@ -278,8 +301,8 @@ function FieldTemplate({
   );
 }
 
-function TitleFieldTemplate({}: TitleFieldProps) {
-  // Lengends and labels are managed directly by the widgets.
+function TitleFieldTemplate({ id, title }: TitleFieldProps) {
+  // Legends and labels are managed directly by the widgets.
   return null;
 }
 
