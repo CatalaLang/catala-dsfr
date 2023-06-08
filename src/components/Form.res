@@ -146,12 +146,13 @@ module Make = (
                 onClick={_ =>
                   CatalaExplain.generate(
                     ~opts={
-                      title: `Explication de la décision pour le calcul de ${FormInfos.name}`,
+                      title: `Explication de la décision pour le calcul des ${FormInfos.name}`,
                       // Contains an explicatory text about the computation and the catala program etc...
-                      description: `Détails de la décision pour le calcul de ${FormInfos.name} générés automatiquement à partir du programme Catala est des entrées du formulaire`,
+                      description: `Détails de la décision pour le calcul des ${FormInfos.name} générés automatiquement à partir de la trace d'exécution du programme Catala et des entrées du formulaire`,
                       creator: `catala-dsfr`,
                       filename: `explication-decision-${FormInfos.name}`,
-                      jsonSchema: FormInfos.webAssets.schema,
+                      schema: FormInfos.webAssets.schema,
+                      uiSchema: FormInfos.webAssets.uiSchema,
                     },
                     ~userInputs=formData,
                     // NOTE(@EmileRolley): we assume that the events exist,
@@ -203,7 +204,6 @@ module Make = (
                         let newFormData = f(formData)
                         Some(newFormData)
                       }
-
                     | _ => formData
                     }
                   })
