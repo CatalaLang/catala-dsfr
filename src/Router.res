@@ -5,6 +5,9 @@ let make = () => {
   switch url.path {
   | list{"french-family-benefits"} => <FrenchFamilyBenefitsExample />
   | list{"french-housing-benefits"} => <FrenchHousingBenefitsExample />
+  | list{"sources", "french-family-benefits"} => <FrenchHousingBenefitsExampleCodeSource />
+  | list{"sources", "french-housing-benefits"} => <FrenchHousingBenefitsExampleCodeSource />
+
   | list{} => <Home />
   | _ => <Home />
   }
