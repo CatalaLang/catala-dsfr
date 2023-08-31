@@ -40,3 +40,11 @@ yarn serve
 # Build for production and rsync files to the <destination> (could be a ssh address)
 yarn deploy <destination>
 ```
+
+## Sponsors
+
+This library has been developed during a research project funded by the
+[_mission logiciels libres et communs numériques_](https://www.code.gouv.fr/)
+of the [_direction interministérielle du
+numérique_](https://www.numerique.gouv.fr/) in collaboration with the
+[Catala](https://catala-lang.org/) project.
