@@ -4,19 +4,15 @@
   "repository": "https://github.com/CatalaLang/catala-dsfr",
   "scripts": {
     "clean": "rescript clean -with-deps",
-    "build": "vite build",
+    "build": "yarn run pre && vite build",
     "deploy": "yarn run build && rsync -r dist/",
     "serve": "vite preview",
-    "dev": "vite",
+    "dev": "yarn run pre && vite",
     "re:build": "rescript",
-    "re:watch": "rescript build -w -with-deps",
+    "re:watch": "yarn run pre && rescript build -w -with-deps",
     "assets": "rsync -r node_modules/@catala-lang/catala-web-assets/assets/* assets",
     "postinstall": "copy-dsfr-to-public",
-    "pre": "only-include-used-icons && yarn run assets",
-    "predev": "yarn run pre",
-    "prebuild": "yarn run pre",
-    "prere:build": "yarn run pre",
-    "prere:watch": "yarn run pre"
+    "pre": "only-include-used-icons && yarn run assets"
   },
   "keywords": [
     "rescript"
@@ -32,7 +28,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@catala-lang/catala-web-assets": "^0.8.2",
+    "@catala-lang/catala-explain": "^0.1.1",
+    "@catala-lang/catala-web-assets": "^0.8.4",
     "@catala-lang/french-law": "^0.8.3-b.3",
     "@catala-lang/rescript-catala": "^0.8.1-b.0",
     "@jihchi/vite-plugin-rescript": "^5.1.0",
@@ -46,6 +43,11 @@
     "jsdom": "^21.1.0",
     "rescript": "^10.1.4",
     "tailwindcss": "^3.2.6",
-    "vite": "^4.1.1"
+    "vite": "^4.4.9"
+  },
+  "packageManager": "yarn@3.6.3",
+  "resolutions": {
+    "@catala-lang/catala-explain": "portal:../catala-explain",
+    "@catala-lang/catala-web-assets": "portal:../catala-web-assets"
   }
 }
