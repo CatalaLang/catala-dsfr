@@ -153,6 +153,8 @@ module Make = (
                       filename: `explication-decision-${FormInfos.name}`,
                       schema: FormInfos.webAssets.schema,
                       uiSchema: FormInfos.webAssets.uiSchema,
+                      keysToIgnore: FormInfos.webAssets.keysToIgnore,
+                      selectedOutput: FormInfos.webAssets.selectedOutput,
                     },
                     ~userInputs=formData,
                     // NOTE(@EmileRolley): we assume that the events exist,
