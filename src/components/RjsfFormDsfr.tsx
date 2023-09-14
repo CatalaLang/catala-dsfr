@@ -1,4 +1,4 @@
-import React, { useCallback, useState, ReactElement } from "react";
+import React, { useCallback, useState, PropsWithChildren } from "react";
 import Form, { FormProps } from "@rjsf/core";
 import {
   SubmitButtonProps,
@@ -181,8 +181,7 @@ function ArrayFieldTemplate({
 
 type ElementWithHintProps = {
   hintText: string | undefined;
-  children: ReactElement;
-};
+} & PropsWithChildren;
 
 function LabelWithHint({ hintText, children }: ElementWithHintProps) {
   const [showHint, setShowHint] = useState(false);
@@ -221,7 +220,11 @@ function CheckBoxDsfr(props: WidgetProps) {
         options={[
           {
             label: (
-              <LabelWithHint hintText={props.uiSchema["ui:help"]}>
+              <LabelWithHint
+                hintText={
+                  props.uiSchema !== undefined && props.uiSchema["ui:help"]
+                }
+              >
                 {props.schema.title + (props.required ? "*" : "")}
               </LabelWithHint>
             ),
@@ -249,7 +252,6 @@ const schemaTypesToNotRenderTitles = ["boolean", "array"];
 function FieldTemplate({
   classNames,
   style,
-  description,
   errors,
   children,
   id,
@@ -294,7 +296,7 @@ function FieldTemplate({
     <div className={classNames + " fr-mt-1w"} style={style}>
       {title}
       {children}
-      {errors.props.errors != null && (
+      {errors?.props?.errors != null && (
         <Alert severity="error" description={errors} small />
       )}
     </div>

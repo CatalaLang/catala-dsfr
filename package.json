@@ -8,7 +8,7 @@
     "deploy": "yarn run build && rsync -r dist/",
     "serve": "vite preview",
     "dev": "yarn run pre && vite",
-    "re:build": "rescript",
+    "re:build": "rescript -with-deps",
     "re:watch": "yarn run pre && rescript build -w -with-deps",
     "assets": "rsync -r node_modules/@catala-lang/catala-web-assets/assets/* assets",
     "postinstall": "copy-dsfr-to-public",
@@ -25,7 +25,8 @@
     "@rjsf/utils": "^5.1.0",
     "@rjsf/validator-ajv8": "^5.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@catala-lang/catala-explain": "^0.1.1",
@@ -45,9 +46,8 @@
     "tailwindcss": "^3.2.6",
     "vite": "^4.4.9"
   },
-  "packageManager": "yarn@3.6.3",
-  "resolutions": {
-    "@catala-lang/catala-explain": "portal:../catala-explain",
-    "@catala-lang/catala-web-assets": "portal:../catala-web-assets"
-  }
+  "engines": {
+    "node": "=18"
+  },
+  "packageManager": "yarn@1.22.19"
 }
