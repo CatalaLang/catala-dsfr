@@ -173,18 +173,15 @@ module Make = (
               </Dsfr.Button>
             </div>
           } catch {
-          | err => {
-              Console.log2(`ERROR:`, err)
-              <>
-                <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
-                {err
-                ->Js.Exn.asJsExn
-                ->Belt.Option.map(Js.Exn.message)
-                ->Belt.Option.getWithDefault(Some(""))
-                ->Belt.Option.getWithDefault("unknwon error, please retry the computation")
-                ->React.string}
-              </>
-            }
+          | err => <>
+              <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
+              {err
+              ->Js.Exn.asJsExn
+              ->Belt.Option.map(Js.Exn.message)
+              ->Belt.Option.getWithDefault(Some(""))
+              ->Belt.Option.getWithDefault("unknwon error, please retry the computation")
+              ->React.string}
+            </>
           }
         }}
       </Dsfr.CallOut>
