@@ -27,7 +27,8 @@
     "@rescript/core",
     "@catala-lang/french-law",
     "@catala-lang/rescript-catala",
-    "@catala-lang/catala-explain"
+    "@catala-lang/catala-explain",
+    "rescript-docx"
   ],
   "bsc-flags": ["-open RescriptCore"],
   "ppx-flags": []

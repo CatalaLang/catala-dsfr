@@ -143,24 +143,30 @@ module Make = (
                 {FormInfos.computeAndPrintResult(formData)}
               </div>
               <Dsfr.Button
-                onClick={_ =>
-                  CatalaExplain.generate(
+                onClick={_ => {
+                  let doc = CatalaExplain.generate(
+                    // NOTE(@EmileRolley): we assume that the events exist,
+                    // because we have a result.
+                    ~events=eventsOpt->Option.getExn,
+                    ~userInputs=formData,
+                    ~schema=FormInfos.webAssets.schema,
                     ~opts={
                       title: `Explication de la décision pour le calcul des ${FormInfos.name}`,
                       // Contains an explicatory text about the computation and the catala program etc...
                       description: `Détails de la décision pour le calcul des ${FormInfos.name} générés automatiquement à partir de la trace d'exécution du programme Catala et des entrées du formulaire`,
                       creator: `catala-dsfr`,
-                      filename: `explication-decision-${FormInfos.name}`,
-                      schema: FormInfos.webAssets.schema,
-                      uiSchema: FormInfos.webAssets.uiSchema,
                       keysToIgnore: FormInfos.webAssets.keysToIgnore,
                       selectedOutput: FormInfos.webAssets.selectedOutput,
                     },
-                    ~userInputs=formData,
-                    // NOTE(@EmileRolley): we assume that the events exist,
-                    // because we have a result.
-                    ~events=eventsOpt->Option.getExn,
-                  )}
+                  )
+
+                  doc
+                  ->Docx.Packer.toBlob
+                  ->Promise.thenResolve(blob => {
+                    FileSaver.saveAs(blob, `explication-decision-${FormInfos.name}.docx`)
+                  })
+                  ->ignore
+                }}
                 iconPosition="right"
                 iconId="fr-icon-newspaper-line">
                 {`Télécharger une explication du calcul`->React.string}
