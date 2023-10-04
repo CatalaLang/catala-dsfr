@@ -4,19 +4,15 @@
   "repository": "https://github.com/CatalaLang/catala-dsfr",
   "scripts": {
     "clean": "rescript clean -with-deps",
-    "build": "vite build",
+    "build": "yarn run pre && vite build",
     "deploy": "yarn run build && rsync -r dist/",
     "serve": "vite preview",
-    "dev": "vite",
-    "re:build": "rescript",
-    "re:watch": "rescript build -w -with-deps",
+    "dev": "yarn run pre && vite",
+    "re:build": "rescript -with-deps",
+    "re:watch": "yarn run pre && rescript build -w -with-deps",
     "assets": "rsync -r node_modules/@catala-lang/catala-web-assets/assets/* assets",
     "postinstall": "copy-dsfr-to-public",
-    "pre": "only-include-used-icons && yarn run assets",
-    "predev": "yarn run pre",
-    "prebuild": "yarn run pre",
-    "prere:build": "yarn run pre",
-    "prere:watch": "yarn run pre"
+    "pre": "only-include-used-icons && yarn run assets"
   },
   "keywords": [
     "rescript"
@@ -24,27 +20,36 @@
   "author": "Emile Rolley <emile.rolley@tuta.io>",
   "license": "Apache-2.0",
   "dependencies": {
-    "@catala-lang/french-law": "^0.8.1",
-    "@catala-lang/rescript-catala": "^0.8.0",
-    "@codegouvfr/react-dsfr": "^0.52.1",
-    "@rescript/react": "^0.11.0",
+    "@codegouvfr/react-dsfr": "^0.77.1",
     "@rjsf/core": "^5.1.0",
     "@rjsf/utils": "^5.1.0",
     "@rjsf/validator-ajv8": "^5.1.0",
+    "file-saver": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rescript": "^10.1.2"
+    "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "@catala-lang/catala-web-assets": "^0.8.0-b",
+    "@catala-lang/catala-explain": "^0.1.4",
+    "@catala-lang/catala-web-assets": "^0.8.4",
+    "@catala-lang/french-law": "^0.8.3-b.3",
+    "@catala-lang/rescript-catala": "^0.8.1-b.0",
     "@jihchi/vite-plugin-rescript": "^5.1.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@rescript/core": "^0.3.1",
+    "@rescript/react": "^0.11.0",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
+    "docx": "^8.0.4",
     "gentype": "^4.5.0",
     "jsdom": "^21.1.0",
+    "rescript": "^10.1.4",
+    "rescript-docx": "^0.1.3",
     "tailwindcss": "^3.2.6",
-    "vite": "^4.1.1"
-  }
+    "vite": "^4.4.9"
+  },
+  "engines": {
+    "node": "=18"
+  },
+  "packageManager": "yarn@1.22.19"
 }

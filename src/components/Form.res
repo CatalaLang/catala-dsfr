@@ -58,31 +58,27 @@ const readFileAsJSON = (file, callback) => {
 module Make = (
   FormInfos: {
     let webAssets: WebAssets.t
+    let name: string
     let resultLabel: string
     let formDataPostProcessing: option<Js.Json.t => Js.Json.t>
     let computeAndPrintResult: Js.Json.t => React.element
   },
 ) => {
   @react.component
-  let make = (
-    ~setEventsOpt: (
-      option<array<CatalaRuntime.event>> => option<array<CatalaRuntime.event>>
-    ) => unit,
-  ) => {
-    let (formData, setFormData) = React.useState(_ => {
-      FormInfos.webAssets.initialData
-    })
+  let make = () => {
+    let (formData, setFormData) = React.useState(_ => FormInfos.webAssets.initialData)
+    let (eventsOpt, setEventsOpt) = React.useState(_ => None)
     React.useEffect2(() => {
       setEventsOpt(_ => {
-        let logs = {
+        let events = {
           try {CatalaFrenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
           | _ => []
           }
         }
-        if 0 == logs->Belt.Array.size {
+        if 0 == events->Belt.Array.size {
           None
         } else {
-          Some(logs)
+          Some(events)
         }
       })
       None
@@ -134,8 +130,6 @@ module Make = (
         </div>
       </div>
 
-    // let form =
-
     let form_result =
       <Dsfr.CallOut>
         {switch formData {
@@ -149,26 +143,45 @@ module Make = (
                 {FormInfos.computeAndPrintResult(formData)}
               </div>
               <Dsfr.Button
-                onClick={_ => ()}
-                disabled=true
+                onClick={_ => {
+                  let doc = CatalaExplain.generate(
+                    // NOTE(@EmileRolley): we assume that the events exist,
+                    // because we have a result.
+                    ~events=eventsOpt->Option.getExn,
+                    ~userInputs=formData,
+                    ~schema=FormInfos.webAssets.schema,
+                    ~opts={
+                      title: `Explication de la décision pour le calcul des ${FormInfos.name}`,
+                      // Contains an explicatory text about the computation and the catala program etc...
+                      description: `Détails de la décision pour le calcul des ${FormInfos.name} générés automatiquement à partir de la trace d'exécution du programme Catala et des entrées du formulaire`,
+                      creator: `catala-dsfr`,
+                      keysToIgnore: FormInfos.webAssets.keysToIgnore,
+                      selectedOutput: FormInfos.webAssets.selectedOutput,
+                    },
+                  )
+
+                  doc
+                  ->Docx.Packer.toBlob
+                  ->Promise.thenResolve(blob => {
+                    FileSaver.saveAs(blob, `explication-decision-${FormInfos.name}.docx`)
+                  })
+                  ->ignore
+                }}
                 iconPosition="right"
                 iconId="fr-icon-newspaper-line">
-                {`Générer une explication de la décision`->React.string}
+                {`Télécharger une explication du calcul`->React.string}
               </Dsfr.Button>
             </div>
           } catch {
-          | err => {
-              %raw(`console.log('ERROR:', err)`)
-              <>
-                <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
-                {err
-                ->Js.Exn.asJsExn
-                ->Belt.Option.map(Js.Exn.message)
-                ->Belt.Option.getWithDefault(Some(""))
-                ->Belt.Option.getWithDefault("unknwon error, please retry the computation")
-                ->React.string}
-              </>
-            }
+          | err => <>
+              <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
+              {err
+              ->Js.Exn.asJsExn
+              ->Belt.Option.map(Js.Exn.message)
+              ->Belt.Option.getWithDefault(Some(""))
+              ->Belt.Option.getWithDefault("unknwon error, please retry the computation")
+              ->React.string}
+            </>
           }
         }}
       </Dsfr.CallOut>
@@ -196,7 +209,6 @@ module Make = (
                         let newFormData = f(formData)
                         Some(newFormData)
                       }
-
                     | _ => formData
                     }
                   })

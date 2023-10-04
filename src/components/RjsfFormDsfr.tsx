@@ -1,4 +1,4 @@
-import React, { useCallback, useState, ReactElement } from "react";
+import React, { useCallback, useState, PropsWithChildren } from "react";
 import Form, { FormProps } from "@rjsf/core";
 import {
   SubmitButtonProps,
@@ -181,8 +181,7 @@ function ArrayFieldTemplate({
 
 type ElementWithHintProps = {
   hintText: string | undefined;
-  children: ReactElement;
-};
+} & PropsWithChildren;
 
 function LabelWithHint({ hintText, children }: ElementWithHintProps) {
   const [showHint, setShowHint] = useState(false);
@@ -221,7 +220,11 @@ function CheckBoxDsfr(props: WidgetProps) {
         options={[
           {
             label: (
-              <LabelWithHint hintText={props.uiSchema["ui:help"]}>
+              <LabelWithHint
+                hintText={
+                  props.uiSchema !== undefined && props.uiSchema["ui:help"]
+                }
+              >
                 {props.schema.title + (props.required ? "*" : "")}
               </LabelWithHint>
             ),
@@ -249,7 +252,6 @@ const schemaTypesToNotRenderTitles = ["boolean", "array"];
 function FieldTemplate({
   classNames,
   style,
-  description,
   errors,
   children,
   id,
@@ -258,34 +260,51 @@ function FieldTemplate({
   schema,
   uiSchema,
 }: FieldTemplateProps) {
-  // const hintText = uiSchema ? uiSchema["ui:help"] : undefined;
-  if (label.startsWith("Usufruitier du logement")) {
-    console.log("label", label);
-    console.log("uiSchema", uiSchema);
-    console.log("description", description);
+  let title;
+  let heading = uiSchema && uiSchema["ui:heading"];
+
+  if (heading != undefined) {
+    switch (heading) {
+      case "h3":
+        title = <h3 className="fr-h3">{label}</h3>;
+        break;
+      case "h4":
+        title = <h4 className="fr-h4">{label}</h4>;
+        break;
+      case "h5":
+        title = <h5 className="fr-h5">{label}</h5>;
+        break;
+      case "h6":
+        title = <h6 className="fr-h6">{label}</h6>;
+        break;
+      default:
+        title = <h2 className="fr-h2">{label}</h2>;
+        break;
+    }
+  } else {
+    title = !schemaTypesToNotRenderTitles.includes(schema.type) &&
+      (!uiSchema || !uiSchema["ui:hideTitle"]) && (
+        <LabelWithHint hintText={uiSchema ? uiSchema["ui:help"] : undefined}>
+          <label htmlFor={id} className="fr-label">
+            {label + (required ? "*" : "")}
+          </label>
+        </LabelWithHint>
+      );
   }
-  const title = !schemaTypesToNotRenderTitles.includes(schema.type) &&
-    (!uiSchema || !uiSchema["ui:hideTitle"]) && (
-      <LabelWithHint hintText={uiSchema ? uiSchema["ui:help"] : undefined}>
-        <label htmlFor={id} className="fr-label">
-          {label + (required ? "*" : "")}
-        </label>
-      </LabelWithHint>
-    );
 
   return (
     <div className={classNames + " fr-mt-1w"} style={style}>
       {title}
       {children}
-      {errors.props.errors != null && (
+      {errors?.props?.errors != null && (
         <Alert severity="error" description={errors} small />
       )}
     </div>
   );
 }
 
-function TitleFieldTemplate({}: TitleFieldProps) {
-  // Lengends and labels are managed directly by the widgets.
+function TitleFieldTemplate({ id, title }: TitleFieldProps) {
+  // Legends and labels are managed directly by the widgets.
   return null;
 }
 

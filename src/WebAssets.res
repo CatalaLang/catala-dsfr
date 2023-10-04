@@ -12,16 +12,23 @@ import housingBenefitsInitialData from "../assets/aides_logement_init.json";
 type t = {
   schema: JSON.t,
   uiSchema: JSON.t,
+  selectedOutput: CatalaRuntime.information,
+  keysToIgnore: array<string>,
   initialData?: JSON.t,
+  html?: string,
 }
 
 let frenchFamilyAssets: t = {
   schema: %raw(`familyBenefitsSchemaFr`),
   uiSchema: %raw(`familyBenefitsUISchema`),
+  keysToIgnore: ["dIdentifiant"],
+  selectedOutput: list{"InterfaceAllocationsFamiliales", "i_montant_versé"},
 }
 
 let frenchHousingAssets: t = {
   schema: %raw(`housingBenefitsSchema`),
   uiSchema: %raw(`housingBenefitsUISchemaFr`),
   initialData: %raw(`housingBenefitsInitialData`),
+  selectedOutput: list{"CalculetteAidesAuLogementGardeAlternée", "aide_finale"},
+  keysToIgnore: ["identifiant"],
 }

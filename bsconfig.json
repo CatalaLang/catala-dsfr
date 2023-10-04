@@ -10,12 +10,12 @@
       }
     ]
   },
-    "generators": [
-      {
-        "name": "gen-tailwind",
-        "command": "tailwindcss build -i $in -o $out -c ../../tailwind.config.js"
-      }
-    ],
+  "generators": [
+    {
+      "name": "gen-tailwind",
+      "command": "tailwindcss build -i $in -o $out -c ../../tailwind.config.js"
+    }
+  ],
   "package-specs": {
     "module": "es6",
     "in-source": true
@@ -24,10 +24,12 @@
   "jsx": { "version": 4, "mode": "classic" },
   "bs-dependencies": [
     "@rescript/react",
-	"@rescript/core",
+    "@rescript/core",
     "@catala-lang/french-law",
-    "@catala-lang/rescript-catala"
+    "@catala-lang/rescript-catala",
+    "@catala-lang/catala-explain",
+    "rescript-docx"
   ],
-"bsc-flags": ["-open RescriptCore"],
+  "bsc-flags": ["-open RescriptCore"],
   "ppx-flags": []
 }
