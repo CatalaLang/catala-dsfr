@@ -1,13 +1,26 @@
-# catala-dsfr
+<div align="center">
+  <h3 align="center">
+	<big>Catala DFSR</big>
+  </h3>
+  <p align="center">
+   <a href="https://github.com/CatalaLang/catala-dsfr/issues">Report Bug</a>
+   •
+   <a href="https://code.gouv.fr/fr/explicabilite/catala/">Website</a>
+  </p>
 
-A DSFR front-end for the
-[`@catala-lang/catala-web-assets`](https://github.com/CatalaLang/catala-web-assets).
+Source code for web demonstration about the explainability of Catala programs.
 
-It uses [`@rescript/react`](https://github.com/rescript-lang/rescript-react/)
-and custom ReScript bindings to
-[`@codegouvfr/react-dsfr`](https://github.com/codegouvfr/react-dsfr/) which can
-be found in
-[`src/Dsfr.res`](https://github.com/CatalaLang/catala-dsfr/blob/main/src/Dsfr.res)
+</div>
+
+---
+
+This project is built on top of the following libraries:
+
+- [`@catala-lang/french-law`](https://github.com/CatalaLang/catala/tree/master/french_law/js)
+- [`@catala-lang/rescript-catala`](https://github.com/CatalaLang/catala/tree/master/runtimes/rescript)
+- [`@catala-lang/catala-explain`](https://github.com/CatalaLang/catala-explain)
+- [`@catala-lang/catala-web-assets`](https://github.com/CatalaLang/catala-web-assets)
+- [`@codegouvfr/react-dsfr`](https://github.com/codegouvfr/react-dsfr/) 
 
 ## Local dev
 
@@ -19,7 +32,7 @@ yarn
 yarn dev
 ```
 
-> Note: you need to have `rsync` installed to copy web assets from the
+> ℹ️ You need to have `rsync` installed to copy web assets from the
 > `catala-web-assets` node package.
 
 ## Build for production and deploy
