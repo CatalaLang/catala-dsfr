@@ -1,8 +1,3 @@
-let pageTitle =
-  <Lang.String
-    english="French housing benefits computation" french={`Calcul des aides au logement`}
-  />
-
 module FormInfos = {
   let webAssets = WebAssets.frenchHousingAssets
   let name = "aides au logement"
@@ -41,7 +36,7 @@ let make = () => {
     None
   })
   <div className="fr-container">
-    <PageComponents.Title> pageTitle </PageComponents.Title>
+    <PageComponents.Title> {"Calcul des aides au logement"->React.string} </PageComponents.Title>
     <Form />
   </div>
 }

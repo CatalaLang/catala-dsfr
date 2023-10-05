@@ -6,14 +6,14 @@ let make = () => {
         <Dsfr.Card
           title="Allocations Familiales"
           desc="Simulateur du calcul des allocations familiales"
-          linkProps={"href": "/french-family-benefits"}
+          linkProps={"href": "/allocations-familiales"}
           enlargeLink=true
           size="large"
         />
         <Dsfr.Card
           title="Aides Logements"
           desc="Simulateur du calcul des aides aux logements"
-          linkProps={"href": "/french-housing-benefits"}
+          linkProps={"href": "/aides-logement"}
           enlargeLink=true
           size="large"
         />

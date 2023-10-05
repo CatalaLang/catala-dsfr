@@ -3,9 +3,10 @@ let make = () => {
   let url = RescriptReactRouter.useUrl()
 
   switch url.path {
-  | list{"french-family-benefits"} => <FrenchFamilyBenefitsExample />
-  | list{"french-housing-benefits"} => <FrenchHousingBenefitsExample />
-  | list{} => <Home />
+  | list{"allocations-familiales"} => <FrenchFamilyBenefitsExample />
+  | list{"aides-logement"} => <FrenchHousingBenefitsExample />
+  | list{"allocations-familiales", "sources", source} =>
+    <SourceCode html={WebAssets.frenchFamilyAssets.html} source />
   | _ => <Home />
   }
 }
