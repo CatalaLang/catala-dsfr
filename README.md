@@ -20,7 +20,7 @@ This project is built on top of the following libraries:
 - [`@catala-lang/rescript-catala`](https://github.com/CatalaLang/catala/tree/master/runtimes/rescript)
 - [`@catala-lang/catala-explain`](https://github.com/CatalaLang/catala-explain)
 - [`@catala-lang/catala-web-assets`](https://github.com/CatalaLang/catala-web-assets)
-- [`@codegouvfr/react-dsfr`](https://github.com/codegouvfr/react-dsfr/) 
+- [`@codegouvfr/react-dsfr`](https://github.com/codegouvfr/react-dsfr/)
 
 ## Local dev
 
@@ -34,6 +34,20 @@ yarn dev
 
 > ℹ️ You need to have `rsync` installed to copy web assets from the
 > `catala-web-assets` node package.
+
+### Using local packages
+
+If you want to use one of the `@catala-lang` packages from your local machine
+instead of the published version, you can use `yarn link` to link them to this
+project.
+
+```
+# In the library you want to link
+yarn link
+
+# In this project
+yarn link @catala-lang/<library-name>
+```
 
 ## Build for production and deploy
 
