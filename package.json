@@ -8,11 +8,11 @@
     "deploy": "yarn run build && rsync -r dist/",
     "serve": "vite preview",
     "dev": "yarn run pre && vite",
-    "re:build": "rescript -with-deps",
+    "re:build": "rescript build -with-deps",
     "re:watch": "yarn run pre && rescript build -w -with-deps",
     "assets": "rsync -r node_modules/@catala-lang/catala-web-assets/assets/* assets",
     "postinstall": "copy-dsfr-to-public",
-    "pre": "only-include-used-icons && yarn run assets"
+    "pre": "yarn run re:build && only-include-used-icons && yarn run assets"
   },
   "keywords": [
     "rescript"
