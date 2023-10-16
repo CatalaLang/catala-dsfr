@@ -58,8 +58,14 @@ module Footer = {
     ~brandTop: React.element=?,
     ~contentDescription: React.element=?,
     ~homeLinkProps: {"href": string, "title": string}=?,
+    ~bottomItems: array<'button>=?,
     ~license: React.element=?,
   ) => React.element = "default"
+}
+
+module Display = {
+  @module("@codegouvfr/react-dsfr/Display")
+  external headerFooterDisplayItem: 'button = "headerFooterDisplayItem"
 }
 
 module Notice = {

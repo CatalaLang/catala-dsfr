@@ -30,5 +30,6 @@ let make = () => {
         {`Apache 2.0`->React.string}
       </a>
     </>}
+    bottomItems=[Dsfr.Display.headerFooterDisplayItem]
   />
 }
