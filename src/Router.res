@@ -3,10 +3,14 @@ let make = () => {
   let url = RescriptReactRouter.useUrl()
 
   switch url.path {
-  | list{"allocations-familiales"} => <FrenchFamilyBenefitsExample />
-  | list{"aides-logement"} => <FrenchHousingBenefitsExample />
-  | list{"allocations-familiales", "sources", source} =>
-    <SourceCode html={WebAssets.frenchFamilyAssets.html} source />
+  | list{route} if route == AllocationsFamiliales.url => <AllocationsFamiliales />
+  | list{route} if route == AidesLogement.url => <AidesLogement />
+  | list{route, "sources"} if route == AllocationsFamiliales.url =>
+    <SourceCode
+      html={WebAssets.alloactionsFamilialesAssets.html} simulatorUrl={AllocationsFamiliales.url}
+    />
+  | list{route, "sources"} if route == AidesLogement.url =>
+    <SourceCode html={WebAssets.aidesLogementAssets.html} simulatorUrl={AidesLogement.url} />
   | _ => <Home />
   }
 }

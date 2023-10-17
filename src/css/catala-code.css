@@ -1,0 +1,333 @@
+:root {
+  --underline-max-width: 0;
+  --hover-color: var(--blue-france-sun-113-625-hover);
+  --code-bg-color: var(--grey-975-125);
+  --line-number-bg-color: var(--grey-925-125);
+  --filename-bg-color: var(--grey-900-175);
+  --metadata-tag-bg-color: var(--info-425-625);
+}
+
+html .catala-code {
+  background-color: transparent;
+}
+
+.catala-code summary {
+  background-color: var(--background-alt-raised-grey);
+  padding: 0.5rem 1rem 0rem 1rem;
+  margin-bottom: 1rem;
+  font-style: normal !important;
+}
+
+.catala-code summary ::marker {
+  color: red;
+}
+
+.catala-code summary:hover {
+  background-color: var(--background-alt-raised-grey-hover);
+}
+
+.catala-code .toc summary {
+  background-color: transparent;
+}
+
+.catala-code .link-article {
+  padding-left: 8px;
+  font-style: italic;
+  font-size: 0.9rem;
+  font-family: serif;
+}
+
+.catala-code .link-article:hover {
+  cursor: pointer;
+  color: var(--hover-color);
+}
+
+.catala-code summary {
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+  font-style: italic;
+}
+
+.catala-code .toc summary {
+  font-weight: bold;
+  font-size: 1.25rem;
+  font-style: normal;
+  padding: 16px 0;
+}
+
+.catala-code .toc-0,
+.catala-code .toc-1,
+.catala-code .toc-2,
+.catala-code .toc-3,
+.catala-code .toc-4,
+.catala-code .toc-5,
+.catala-code .toc-6,
+.catala-code .toc-7,
+.catala-code .toc-8,
+.catala-code .toc-9 {
+  padding-left: 32px;
+  font-size: 1.2rem;
+  align-items: center;
+}
+
+.catala-code .toc-0 {
+  list-style-type: upper-roman;
+}
+
+.catala-code .toc-1 {
+  list-style-type: upper-latin;
+}
+
+.catala-code .toc-2 {
+  list-style-type: decimal;
+}
+
+.catala-code .toc-3 {
+  list-style-type: lower-latin;
+}
+
+.catala-code .toc-4 {
+  list-style-type: lower-roman;
+}
+
+.catala-code .toc-5,
+.catala-code .toc-6,
+.catala-code .toc-7,
+.catala-code .toc-8,
+.catala-code .toc-9 {
+  list-style-type: decimal;
+}
+
+.catala-code .toc-item a:hover {
+  cursor: pointer;
+  color: var(--grey-1000-75-hover);
+  opacity: 100%;
+}
+
+.catala-code .selected {
+  background-color: var(--selected-bg-color);
+  border-bottom: none;
+}
+
+.catala-code .law-text {
+  /* font-family: "Inter", "Open Sans", sans-serif; */
+  /*  font-family: "Spectral", serif; */
+  /*  font-weight: semi-bold; */
+  /* font-size: 1.1rem; */
+}
+
+.catala-code .linenos {
+  background-color: var(--line-number-bg-color);
+  opacity: 0.75;
+  padding: 0;
+}
+
+.catala-code .linenos pre {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+  width: fit-content;
+  padding: 0.5rem 0.25rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.catala-code .linenodiv span:hover {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--hover-color);
+  opacity: 100%;
+}
+
+.catala-code ul {
+  padding-left: 3rem;
+}
+
+.catala-code ul,
+.catala-code li {
+  list-style-type: disc !important;
+}
+
+.catala-code .filename {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: space-between;
+  justify-content: space-between;
+  width: 100%;
+  font-family: monospace;
+  color: var(--grey-200-850);
+  font-size: 1rem;
+  padding: 0.5rem;
+  background-color: var(--filename-bg-color);
+  border: none;
+}
+
+.catala-code .filename:hover {
+  color: var(--hover-color);
+}
+
+.catala-code .code-wrapper {
+  padding: 0;
+  margin: 1rem 0;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+}
+
+.catala-code .code {
+  background-color: var(--code-bg-color);
+  padding-left: 0.5rem;
+  width: 100%;
+}
+
+.catala-code .code-metadata .filename::after {
+  content: "metadata";
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: fit-content;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  min-height: 1.5rem;
+  padding: 0 0.5rem;
+  overflow: initial;
+  max-height: none;
+  font-weight: 700;
+  max-width: 100%;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  color: var(--text-default-info);
+  background-color: var(--background-contrast-info);
+  --text-spacing: 0;
+  --title-spacing: 0;
+  --underline-img: none;
+  --hover-tint: var(--hover);
+  --idle: transparent;
+  --hover: var(--background-contrast-info-hover);
+  --active: var(--background-contrast-info-active);
+}
+
+.catala-code h1,
+.catala-code h2,
+.catala-code h3,
+.catala-code h4,
+.catala-code h5,
+.catala-code h6,
+.catala-code h7,
+.catala-code h8,
+.catala-code h9 {
+  font-weight: 700 !important;
+  margin: var(--title-spacing);
+  text-decoration-style: none !important;
+}
+
+.catala-code h1 {
+  font-size: 2rem !important;
+  line-height: 2.5rem !important;
+}
+
+.catala-code h2 {
+  font-size: 1.75rem !important;
+  line-height: 2.25rem !important;
+}
+
+.catala-code h3 {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+
+.catala-code h4 {
+  font-size: 1.375rem !important;
+  line-height: 1.75rem !important;
+}
+
+.catala-code h5 {
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
+}
+
+.catala-code h6 {
+  font-size: 1.125rem !important;
+  line-height: 1.5rem !important;
+}
+
+.catala-code h7 {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.catala-code h8 {
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  padding-bottom: 0.25rem;
+  padding-top: 0.5rem;
+}
+
+.catala-code h9 {
+  font-size: 1rem;
+  line-height: 1rem;
+  padding-bottom: 0rem;
+  padding-top: 0rem;
+}
+
+@media (max-width: 740px) {
+  html .catala-code {
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
+
+  .catala-code .code-wrapper {
+    font-size: 0.9rem;
+    line-height: 1rem;
+  }
+
+  .catala-code h1 {
+    font-size: 2rem;
+    line-height: 2.15rem;
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .catala-code h2 {
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+    padding: 1.5rem 0;
+  }
+
+  .catala-code h3 {
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    padding-top: 1rem;
+  }
+
+  .catala-code h4 {
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    padding-top: 0;
+  }
+
+  .catala-code h5 {
+    font-size: 1.15rem;
+    padding: 0;
+  }
+
+  .catala-code h6 {
+    font-size: 1rem;
+    padding: 0;
+  }
+
+  .catala-code h7 {
+    font-size: 0.9rem;
+    padding: 0;
+  }
+
+  .catala-code h8 {
+    font-size: 0.8rem;
+    padding: 0;
+  }
+}

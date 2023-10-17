@@ -1,3 +1,5 @@
+type linkProps = {"href": string, "title": string}
+
 module Spa = {
   type startReactDsfrParams<'props> = {
     defaultColorScheme: [#light | #dark | #system],
@@ -10,7 +12,29 @@ module Spa = {
   external startReactDsfr: startReactDsfrParams<'props> => unit = "startReactDsfr"
 }
 
+module Breadcrumb = {
+  type segment = {label: string, linkProps: linkProps}
+  @react.component @module("@codegouvfr/react-dsfr/Breadcrumb")
+  external make: (
+    ~id: string=?,
+    ~className: string=?,
+    ~homeLinkProps: linkProps=?,
+    ~segments: array<segment>,
+    ~currentPageLabel: string=?,
+  ) => React.element = "default"
+}
+
 module Button = {
+  type options = {
+    disabled?: bool,
+    iconId?: string,
+    iconPosition?: string,
+    onClick: JsxEvent.Mouse.t => unit,
+    priority?: string,
+    size?: string,
+    children: React.element,
+  }
+
   @react.component @module("@codegouvfr/react-dsfr/Button")
   external make: (
     ~children: React.element,
@@ -20,6 +44,19 @@ module Button = {
     ~onClick: JsxEvent.Mouse.t => unit,
     ~priority: string=?,
     ~size: string=?,
+  ) => React.element = "default"
+}
+
+module ButtonsGroup = {
+  @react.component @module("@codegouvfr/react-dsfr/ButtonsGroup")
+  external make: (
+    ~alignment: string=?,
+    ~buttonsSize: string=?,
+    ~buttonsIconPosition: string=?,
+    ~buttonsEquisized: bool=?,
+    ~buttons: array<Button.options>,
+    ~inlineLayoutWhen: string=?,
+    ~className: string=?,
   ) => React.element = "default"
 }
 
@@ -34,7 +71,7 @@ module Card = {
   external make: (
     ~title: string,
     ~desc: string,
-    ~linkProps: {"href": string},
+    ~linkProps: linkProps,
     ~enlargeLink: bool=?,
     ~size: string=?,
   ) => React.element = "default"
@@ -44,7 +81,7 @@ module Header = {
   @react.component @module("@codegouvfr/react-dsfr/Header")
   external make: (
     ~brandTop: React.element=?,
-    ~homeLinkProps: {"href": string, "title": string},
+    ~homeLinkProps: linkProps,
     ~serviceTagline: string,
     ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": string}=?,
     ~serviceTitle: string,
@@ -57,7 +94,7 @@ module Footer = {
     ~accessibility: string,
     ~brandTop: React.element=?,
     ~contentDescription: React.element=?,
-    ~homeLinkProps: {"href": string, "title": string}=?,
+    ~homeLinkProps: linkProps=?,
     ~bottomItems: array<'button>=?,
     ~license: React.element=?,
   ) => React.element = "default"

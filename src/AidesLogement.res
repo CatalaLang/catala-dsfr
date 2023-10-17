@@ -1,5 +1,7 @@
+let url = "aides-au-logement"
+
 module FormInfos = {
-  let webAssets = WebAssets.frenchHousingAssets
+  let webAssets = WebAssets.aidesLogementAssets
   let name = "aides au logement"
   let resultLabel = `Montant mensuel brut des ${name}`
 

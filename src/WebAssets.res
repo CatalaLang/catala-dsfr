@@ -20,7 +20,7 @@ type t = {
   html?: string,
 }
 
-let frenchFamilyAssets: t = {
+let alloactionsFamilialesAssets: t = {
   schema: %raw(`familyBenefitsSchemaFr`),
   uiSchema: %raw(`familyBenefitsUISchema`),
   keysToIgnore: ["dIdentifiant"],
@@ -144,7 +144,7 @@ let alLocatifExemple4: JSON.t = %raw(`
 }
 `)
 
-let frenchHousingAssets: t = {
+let aidesLogementAssets: t = {
   schema: %raw(`housingBenefitsSchema`),
   uiSchema: %raw(`housingBenefitsUISchemaFr`),
   initialData: alLocatifExemple4,

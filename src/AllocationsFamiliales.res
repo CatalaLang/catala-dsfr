@@ -1,5 +1,7 @@
+let url = "allocations-familiales"
+
 module FormInfos = {
-  let webAssets = WebAssets.frenchFamilyAssets
+  let webAssets = WebAssets.alloactionsFamilialesAssets
   let name = `allocations familiales`
   let resultLabel = `Montant mensuel des ${name}`
 

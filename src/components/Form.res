@@ -66,6 +66,7 @@ module Make = (
 ) => {
   @react.component
   let make = () => {
+    let {path: currentPath} = RescriptReactRouter.useUrl()
     let (formData, setFormData) = React.useState(_ => FormInfos.webAssets.initialData)
     let (eventsOpt, setEventsOpt) = React.useState(_ => None)
     React.useEffect2(() => {
@@ -98,37 +99,56 @@ module Make = (
       }
     }
 
-    let form_footer =
-      <div className="fr-container--fluid">
-        <div className="fr-grid-col fr-grid-row--center">
-          <div className="fr-col">
-            <Button.Group
-              buttons=[
-                {
-                  label: `Exporter les données au format JSON`,
-                  onClick: _ => {
-                    let data_str = Js.Json.stringify(
-                      formData->Belt.Option.getWithDefault(Js.Json.null),
-                    )
-                    downloadJSONstring(data_str)
-                  },
-                },
-                {
-                  label: `Réinitialiser le formulaire`,
-                  onClick: _ => {
-                    setFormData(_ => None)
-                  },
-                },
-                {
-                  label: `Importer les données au format JSON`,
-                  onClick: retrieveFileContents,
-                  body: <input type_="file" onChange={fileChangeHandler} />,
-                },
-              ]
-            />
-          </div>
-        </div>
-      </div>
+    let form_footer = {
+      let priority = "tertiary"
+      <Dsfr.ButtonsGroup
+        inlineLayoutWhen="always"
+        className="text-left"
+        buttonsEquisized=true
+        buttonsSize="medium"
+        alignment="center"
+        buttons=[
+          {
+            children: `Réinitialiser le formulaire`->React.string,
+            onClick: _ => {
+              Console.debug("Resetting form data")
+              setFormData(_ => FormInfos.webAssets.initialData)
+            },
+            iconId: "fr-icon-refresh-line",
+            priority,
+          },
+          {
+            children: `Exporter les données au format JSON`->React.string,
+            onClick: _ => {
+              let data_str = Js.Json.stringify(formData->Belt.Option.getWithDefault(Js.Json.null))
+              downloadJSONstring(data_str)
+            },
+            iconId: "fr-icon-upload-line",
+            priority,
+          },
+          {
+            children: <>
+              <input
+                className="hidden w-100" id="file-upload" type_="file" onChange={fileChangeHandler}
+              />
+              <label htmlFor="file-upload" className="cursor-pointer">
+                {`Importer les données au format JSON `->React.string}
+              </label>
+              <p />
+            </>,
+            onClick: retrieveFileContents,
+            iconId: "fr-icon-download-line",
+            priority,
+          },
+          {
+            children: {"Code source du programme"->React.string},
+            onClick: {_ => currentPath->List.concat(list{`sources`})->Nav.goToPath},
+            iconId: "fr-icon-code-s-slash-line",
+            priority,
+          },
+        ]
+      />
+    }
 
     let form_result =
       <Dsfr.CallOut>
@@ -167,8 +187,9 @@ module Make = (
                   })
                   ->ignore
                 }}
-                iconPosition="right"
-                iconId="fr-icon-newspaper-line">
+                iconPosition="left"
+                iconId="fr-icon-newspaper-line"
+                priority="secondary">
                 {`Télécharger une explication du calcul`->React.string}
               </Dsfr.Button>
             </div>
