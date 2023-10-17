@@ -2,9 +2,14 @@
   --underline-max-width: 0;
   --hover-color: var(--blue-france-sun-113-625-hover);
   --code-bg-color: var(--grey-975-125);
-  --line-number-bg-color: var(--grey-925-125);
+  --line-number-bg-color: var(--background-contrast-grey);
   --filename-bg-color: var(--grey-900-175);
   --metadata-tag-bg-color: var(--info-425-625);
+  --selected-bg-color: yellow;
+}
+
+:root[data-fr-theme="dark"] {
+  --line-number-bg-color: var(--background-alt-grey);
 }
 
 html .catala-code {
@@ -104,11 +109,6 @@ html .catala-code {
   opacity: 100%;
 }
 
-.catala-code .selected {
-  background-color: var(--selected-bg-color);
-  border-bottom: none;
-}
-
 .catala-code .law-text {
   /* font-family: "Inter", "Open Sans", sans-serif; */
   /*  font-family: "Spectral", serif; */
@@ -118,7 +118,6 @@ html .catala-code {
 
 .catala-code .linenos {
   background-color: var(--line-number-bg-color);
-  opacity: 0.75;
   padding: 0;
 }
 
@@ -273,6 +272,19 @@ html .catala-code {
   line-height: 1rem;
   padding-bottom: 0rem;
   padding-top: 0rem;
+}
+
+.catala-code .selected.number {
+  color: var(--text-default-info);
+  font-weight: bold;
+  opacity: 100%;
+}
+
+.catala-code .selected.line::before {
+  content: "●";
+  margin-right: 0.1rem;
+  margin-left: -0.25rem;
+  color: var(--text-default-info);
 }
 
 @media (max-width: 740px) {
