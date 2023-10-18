@@ -151,9 +151,9 @@ module Make = (
                     ~userInputs=formData,
                     ~schema=FormInfos.webAssets.schema,
                     ~opts={
-                      title: `Explication de la décision pour le calcul des ${FormInfos.name}`,
+                      title: `Calcul des ${FormInfos.name}`,
                       // Contains an explicatory text about the computation and the catala program etc...
-                      description: `Détails de la décision pour le calcul des ${FormInfos.name} générés automatiquement à partir de la trace d'exécution du programme Catala et des entrées du formulaire`,
+                      description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${FormInfos.name} pour votre demande.`,
                       creator: `catala-dsfr`,
                       keysToIgnore: FormInfos.webAssets.keysToIgnore,
                       selectedOutput: FormInfos.webAssets.selectedOutput,
@@ -173,7 +173,8 @@ module Make = (
               </Dsfr.Button>
             </div>
           } catch {
-          | err => <>
+          | err =>
+            <>
               <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
               {err
               ->Js.Exn.asJsExn
