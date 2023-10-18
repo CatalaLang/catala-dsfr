@@ -153,7 +153,7 @@ module Make = (
                     ~opts={
                       title: `Calcul des ${FormInfos.name}`,
                       // Contains an explicatory text about the computation and the catala program etc...
-                      description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${FormInfos.name} pour votre demande.`,
+                      description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${FormInfos.name} pour votre demande`,
                       creator: `catala-dsfr`,
                       keysToIgnore: FormInfos.webAssets.keysToIgnore,
                       selectedOutput: FormInfos.webAssets.selectedOutput,

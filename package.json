@@ -30,7 +30,7 @@
     "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "@catala-lang/catala-explain": "^0.1.4",
+    "@catala-lang/catala-explain": "^0.1.5",
     "@catala-lang/catala-web-assets": "^0.8.4",
     "@catala-lang/french-law": "^0.8.3-b.3",
     "@catala-lang/rescript-catala": "^0.8.1-b.0",
