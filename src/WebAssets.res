@@ -8,7 +8,7 @@ import familyBenefitsHtml from "../assets/allocations_familiales.html?raw";
 import {uiSchema as housingBenefitsUISchemaFr} from "../assets/aides_logement_ui_fr.schema.jsx";
 import housingBenefitsSchema from "../assets/aides_logement_schema_fr.json";
 import housingBenefitsInitialData from "../assets/aides_logement_init.json";
-import housingBenefitsHtml from "../assets/allocations_familiales.html?raw";
+import housingBenefitsHtml from "../assets/aides_logement.html?raw";
 `)
 
 type t = {
@@ -20,7 +20,7 @@ type t = {
   html?: string,
 }
 
-let alloactionsFamilialesAssets: t = {
+let allocationsFamilialesAssets: t = {
   schema: %raw(`familyBenefitsSchemaFr`),
   uiSchema: %raw(`familyBenefitsUISchema`),
   keysToIgnore: ["dIdentifiant"],

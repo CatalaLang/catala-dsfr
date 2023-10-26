@@ -62,6 +62,7 @@ module Make = (
     let resultLabel: string
     let formDataPostProcessing: option<Js.Json.t => Js.Json.t>
     let computeAndPrintResult: Js.Json.t => React.element
+    let url: string
   },
 ) => {
   @react.component
@@ -69,6 +70,7 @@ module Make = (
     let {path: currentPath} = RescriptReactRouter.useUrl()
     let (formData, setFormData) = React.useState(_ => FormInfos.webAssets.initialData)
     let (eventsOpt, setEventsOpt) = React.useState(_ => None)
+
     React.useEffect2(() => {
       setEventsOpt(_ => {
         let events = {
@@ -177,6 +179,9 @@ module Make = (
                       creator: `catala-dsfr`,
                       keysToIgnore: FormInfos.webAssets.keysToIgnore,
                       selectedOutput: FormInfos.webAssets.selectedOutput,
+                      sourcesURL: %raw(`import.meta.env.DEV`)
+                        ? `http://localhost:5173/${FormInfos.url}/sources`
+                        : "", //TODO: change this to the code.gouv url when we have one",
                     },
                   )
 

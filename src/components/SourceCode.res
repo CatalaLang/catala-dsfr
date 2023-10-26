@@ -1,46 +1,14 @@
 %%raw(`import  "../css/catala-code.css"`)
 %%raw(`import  "../css/syntax-highlighting.css"`)
+%%raw(`import scrollAndHighlightLine from '../utils/scrollAndHightlightLine.ts'`)
 
 /*
 [scrollToAndHighlightLineNum(parentElem, ids)] scrolls into the corresponding
 Catala code line of [ids] inside the [parentElem] DOM element and highlight the
 line numbers.
 */
-let scrollToAndHighlightLineNum: (Dom.element, string) => unit = %raw(`
-function(parentElem, id) {
-    if (null != parent) {
-	// remove previous selected line
-	parentElem.querySelectorAll(".selected").forEach((elem) =>
-	    elem.className = ""
-	)
 
-	let idEscaped = id.replaceAll(/\./g, "\\\.").replaceAll(/\//g, "\\\/")
-	let lineToScroll = parentElem.querySelector("#" + idEscaped)
-	if (null != lineToScroll) {
-	    let parent = lineToScroll.parentNode;
-	    while (null != parent) {
-		if ('DETAILS' == parent.nodeName) {
-		    parent.setAttribute("open", true);
-		    parent = null;
-		}
-		else {
-		    parent = parent.parentNode;
-		}
-	    }
-	    lineToScroll.scrollIntoView({block: "center"});
-	    lineToScroll.className = "selected line";
-	    var links = lineToScroll.parentNode.parentNode.parentNode.parentNode.firstChild.firstChild.firstChild.getElementsByTagName('A');
-	    for (var i = 0; i < links.length; i++) {
-		if (links[i].href.includes(id)) {
-		    links[i].className = "selected number"
-		} else {
-		    links[i].className = ""
-		}
-	    }
-	}
-    }
-}
-`)
+external scrollToAndHighlightLineNum: (Dom.element, string) => unit = "scrollAndHighlightLine"
 
 @react.component
 let make = (~html: option<string>, ~simulatorUrl: string) => {
@@ -48,9 +16,8 @@ let make = (~html: option<string>, ~simulatorUrl: string) => {
 
   let parentDomElemRef = React.useRef(Js.Nullable.null)
   React.useEffect1(() => {
-    Console.log2("parentDomElemRef", parentDomElemRef)
     switch (parentDomElemRef.current->Js.Nullable.toOption, hash) {
-    | (Some(parentDomElem), ids) if ids != "" => parentDomElem->scrollToAndHighlightLineNum(ids)
+    | (Some(parentDomElem), ids) if ids != "" => scrollToAndHighlightLineNum(parentDomElem, ids)
     | _ => ()
     }
     None

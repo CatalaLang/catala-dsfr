@@ -16,6 +16,10 @@ html .catala-code {
   background-color: transparent;
 }
 
+/* .catala-code a:target ~ span { */
+/*   background-color: yellow; */
+/* } */
+
 .catala-code summary {
   background-color: var(--background-alt-raised-grey);
   padding: 0.5rem 1rem 0rem 1rem;
@@ -109,16 +113,14 @@ html .catala-code {
   opacity: 100%;
 }
 
-.catala-code .law-text {
-  /* font-family: "Inter", "Open Sans", sans-serif; */
-  /*  font-family: "Spectral", serif; */
-  /*  font-weight: semi-bold; */
-  /* font-size: 1.1rem; */
-}
-
 .catala-code .linenos {
   background-color: var(--line-number-bg-color);
   padding: 0;
+}
+
+.catala-code td.linenos .normal {
+  color: var(--text-default-grey);
+  background-color: var(--line-number-bg-color);
 }
 
 .catala-code .linenos pre {
@@ -176,7 +178,7 @@ html .catala-code {
 
 .catala-code .code {
   background-color: var(--code-bg-color);
-  padding-left: 0.5rem;
+  padding-left: 1rem;
   width: 100%;
 }
 
@@ -280,10 +282,11 @@ html .catala-code {
   opacity: 100%;
 }
 
-.catala-code .selected.line::before {
+.catala-code .selected.line::after {
   content: "●";
-  margin-right: 0.1rem;
-  margin-left: -0.25rem;
+  margin-right: 0rem;
+  margin-left: -0.8rem;
+  position: absolute;
   color: var(--text-default-info);
 }
 
