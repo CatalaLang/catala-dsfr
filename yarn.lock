@@ -213,15 +213,15 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@catala-lang/catala-explain@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@catala-lang/catala-explain/-/catala-explain-0.1.4.tgz#8622e41cd7a867e7649759a4723e8e4b11bc2849"
-  integrity sha512-rAGREcKvEGTWF0S/b2wD87eeknf+K1NOGm4S77w5asDHX4O57Kj8fxlV2n8tgEusaAL3Rp7qcBFXDT3LugQQ1A==
+"@catala-lang/catala-explain@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-explain/-/catala-explain-0.1.6.tgz#1994ad16e814ea84b62e7176f5244009c5278385"
+  integrity sha512-9/fS4o5mRjQ/ZC63X2XzULSg+pX3rQqge25veJaYm4x3wOgtJZylW/O8oL12m5KcMrAYp06pAQQRR2TQwtnRoA==
 
-"@catala-lang/catala-web-assets@^0.8.4":
-  version "0.8.6"
-  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.6.tgz#f2db05172b4d25912440ad9c889523aea6726f8d"
-  integrity sha512-+G2iMJfX/g1tDtGA0yE2Gg/UhJmoLRqKHMi78FYz2Wi00lCGd8yep/PAyiHwRntMmpX1/ldSDtOFhJwlabw2CA==
+"@catala-lang/catala-web-assets@^0.8.7":
+  version "0.8.7"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.7.tgz#2189028648f25339f145162ecf66829a5b5b05e8"
+  integrity sha512-tJNryXNBi+jdFF4Ov5AlKR9sEhgzJrXW7KZUdoLxBoILeC/3ThL7G39uxpmflQusgUtG1s/yM391mIkkE81EGw==
 
 "@catala-lang/french-law@^0.8.3-b.3":
   version "0.8.3-b.3"
