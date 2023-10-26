@@ -16,9 +16,9 @@ html .catala-code {
   background-color: transparent;
 }
 
-/* .catala-code a:target ~ span { */
-/*   background-color: yellow; */
-/* } */
+.catala-code .law-text {
+  color: var(--text-default-grey) !important;
+}
 
 .catala-code summary {
   background-color: var(--background-alt-raised-grey);

@@ -7,6 +7,7 @@
   --literal-string-color: var(--text-label-purple-glycine);
   --operator-color: var(--text-default-grey);
   --literal-number-integer-color: var(--text-label-purple-glycine);
+  --constant-color: var(--text-label-orange-terre-battue);
 }
 
 .catala-code .hll {
@@ -86,7 +87,7 @@
   color: #0044dd;
 } /* Generic.Traceback */
 .catala-code .kc {
-  color: #008000;
+  color: var(--constant-color) !important;
   font-weight: bold;
 } /* Keyword.Constant */
 .catala-code .kd {
