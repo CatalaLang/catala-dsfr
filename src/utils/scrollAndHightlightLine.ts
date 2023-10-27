@@ -32,7 +32,6 @@ function getAllLineIds(urlHash: string): string[] | undefined {
 
 function openParentDetails(lineToScroll: Element) {
   let parent = lineToScroll.parentNode as any;
-  console.log("parent:", parent);
   while (null != parent) {
     if ("DETAILS" == parent.nodeName) {
       parent.setAttribute("open", true);
@@ -44,8 +43,7 @@ function openParentDetails(lineToScroll: Element) {
 }
 
 export default function (parentElem: HTMLElement | null, urlHash: string) {
-  console.log("parentElem:", parentElem);
-  console.log("urlHash:", urlHash);
+  console.debug("scrollAndHightlightLine", parentElem, urlHash);
   if (parentElem == null) {
     return;
   }
@@ -76,6 +74,4 @@ export default function (parentElem: HTMLElement | null, urlHash: string) {
       links[i].className = "selected line";
     }
   }
-
-  console.log("ids:", ids);
 }
