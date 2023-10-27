@@ -3,6 +3,12 @@ import scrollToAndHighlightLine from "../utils/scrollAndHightlightLine";
 
 export default function ({ html, hash }) {
   useEffect(() => {
+    if (window.MathJax) {
+      window.MathJax.typeset();
+    }
+  });
+
+  useEffect(() => {
     if (hash !== "") {
       scrollToAndHighlightLine(document.getElementById("app-root"), hash);
     }
