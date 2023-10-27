@@ -25,7 +25,7 @@ module Link = {
       href={href}
       onClick={evt => {
         evt->ReactEvent.Mouse.preventDefault
-        href->RescriptReactRouter.push
+        href->Nav.goTo
       }}>
       children
     </a>
