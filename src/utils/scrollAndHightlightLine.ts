@@ -32,6 +32,7 @@ function getAllLineIds(urlHash: string): string[] | undefined {
 
 function openParentDetails(lineToScroll: Element) {
   let parent = lineToScroll.parentNode as any;
+  console.log("parent:", parent);
   while (null != parent) {
     if ("DETAILS" == parent.nodeName) {
       parent.setAttribute("open", true);
@@ -42,7 +43,9 @@ function openParentDetails(lineToScroll: Element) {
   }
 }
 
-export default function (parentElem: HTMLElement, urlHash: string) {
+export default function (parentElem: HTMLElement | null, urlHash: string) {
+  console.log("parentElem:", parentElem);
+  console.log("urlHash:", urlHash);
   if (parentElem == null) {
     return;
   }

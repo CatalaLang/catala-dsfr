@@ -223,7 +223,7 @@ module Make = (
             isClosable=true
           />
           <div className="fr-col">
-            <React.Suspense fallback={<div> {`Chargement en cours…`->React.string} </div>}>
+            <React.Suspense fallback={Spinners.loader}>
               <RjsfFormDsfrLazy
                 schema={FormInfos.webAssets.schema}
                 uiSchema={FormInfos.webAssets.uiSchema}
