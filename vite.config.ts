@@ -25,6 +25,7 @@ export default defineConfig({
       transformMixedEsModules: true,
     },
   },
+  // NOTE: To uncomment when using linked local packages
   // optimizeDeps: {
   //   exclude: ["@catala-lang/catala-explain"],
   // },
