@@ -1,10 +1,8 @@
-let url = "allocations-familiales"
-
 module FormInfos = {
   let webAssets = WebAssets.allocationsFamilialesAssets
   let name = `allocations familiales`
   let resultLabel = `Montant mensuel des ${name}`
-  let url = url
+  let url = "allocations-familiales"
 
   // This function automatically assigns numerical ID to kids so we don't
   // have to ask the question in the form
@@ -36,6 +34,7 @@ let make = () => {
     CatalaFrenchLaw.resetLog()
     None
   })
+
   <div className="fr-container">
     <PageComponents.Title>
       {"Calcul des allocations familiales"->React.string}

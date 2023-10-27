@@ -7,7 +7,7 @@ let make = () => {
           title="Allocations Familiales"
           desc="Simulateur du calcul des allocations familiales"
           linkProps={
-            "href": AllocationsFamiliales.url,
+            "href": AllocationsFamiliales.FormInfos.url,
             "title": "Allocations Familiales",
           }
           enlargeLink=true
@@ -17,7 +17,7 @@ let make = () => {
           title="Aides aux Logements"
           desc="Simulateur du calcul des aides aux logements"
           linkProps={
-            "href": AidesLogement.url,
+            "href": AidesLogement.FormInfos.url,
             "title": "Aides Logements",
           }
           enlargeLink=true

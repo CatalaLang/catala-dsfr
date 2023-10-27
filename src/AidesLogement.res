@@ -1,10 +1,8 @@
-let url = "aides-au-logement"
-
 module FormInfos = {
   let webAssets = WebAssets.aidesLogementAssets
   let name = "aides au logement"
   let resultLabel = `Montant mensuel brut des ${name}`
-  let url = url
+  let url = "aides-au-logement"
 
   // This function automatically assigns numerical ID to kids so we don't
   // have to ask the question in the form
