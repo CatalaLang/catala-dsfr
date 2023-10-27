@@ -26,7 +26,13 @@ function getAllLineIds(urlHash: string): string[] | undefined {
   const endNum = nums[3] != null ? Number(nums[3]) : startNum;
 
   return new Array(endNum - startNum + 1).fill(0).map((_, i) => {
-    return filename + "-" + (startNum + i);
+    return (
+      decodeURIComponent(filename)
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") +
+      "-" +
+      (startNum + i)
+    );
   });
 }
 
@@ -58,7 +64,6 @@ export default function (parentElem: HTMLElement | null, urlHash: string) {
     .replaceAll(/\./g, "\\.")
     .replaceAll(/\//g, "\\/");
   const lineToScroll = parentElem.querySelector("#" + lineToScrollId);
-  console.log("lineToScroll:", lineToScroll);
   if (lineToScroll === null) {
     return;
   }

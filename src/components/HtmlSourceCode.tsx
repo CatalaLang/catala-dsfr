@@ -10,9 +10,15 @@ export default function ({ html, hash }) {
 
   useEffect(() => {
     if (hash !== "") {
-      scrollToAndHighlightLine(document.getElementById("app-root"), hash);
+      try {
+        console.log("calling scrollToAndHighlightLine with:", hash);
+        scrollToAndHighlightLine(document.getElementById("app-root"), hash);
+      } catch (e) {
+        console.error(`Error while scrolling to id ${hash}:`);
+        console.error(e);
+      }
     }
-  }, [hash]);
+  });
 
   return (
     <div className="catala-code" dangerouslySetInnerHTML={{ __html: html }} />
