@@ -23,11 +23,11 @@
   "suffix": ".bs.js",
   "jsx": { "version": 4, "mode": "classic" },
   "bs-dependencies": [
-    "@rescript/react",
-    "@rescript/core",
+    "@catala-lang/catala-explain",
     "@catala-lang/french-law",
     "@catala-lang/rescript-catala",
-    "@catala-lang/catala-explain",
+    "@rescript/core",
+    "@rescript/react",
     "rescript-docx"
   ],
   "bsc-flags": ["-open RescriptCore"],

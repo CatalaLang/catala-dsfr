@@ -11,7 +11,7 @@ export default defineConfig({
   plugins: [react(), rescript(), viteCommonjs()],
   server: {
     watch: {
-      ignored: ["**/dsfr/**/*"],
+      ignored: ["**/dsfr/**/*", "!**/node_modules/@catala-lang/**/*"],
     },
   },
   css: {
@@ -25,5 +25,9 @@ export default defineConfig({
       transformMixedEsModules: true,
     },
   },
+  // NOTE: To uncomment when using linked local packages
+  // optimizeDeps: {
+  //   exclude: ["@catala-lang/catala-explain"],
+  // },
   assetsInclude: ["./assets/*.html"],
 });
