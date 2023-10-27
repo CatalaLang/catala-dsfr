@@ -254,10 +254,10 @@
     decco "^1.6.0"
     rescript "^10.1.4"
 
-"@codegouvfr/react-dsfr@^0.77.3":
-  version "0.77.3"
-  resolved "https://registry.yarnpkg.com/@codegouvfr/react-dsfr/-/react-dsfr-0.77.3.tgz#d604e7e3bcd449f5a1763a4050891507d2f70fab"
-  integrity sha512-rn0/tFP4g3+dVLyv4w5WHw83jYnrF6tfW+Wj/lsb4v1/9vL3zphTwfew+edqVW2yF9eOSfGLMqy6XHXKwVTmRQ==
+"@codegouvfr/react-dsfr@^0.78.2":
+  version "0.78.2"
+  resolved "https://registry.yarnpkg.com/@codegouvfr/react-dsfr/-/react-dsfr-0.78.2.tgz#2cd7824454f8ac5278866a6df468a18873d57d49"
+  integrity sha512-yKevS3nJKbOr3dSkGKqmURnRvaLzUmkTLIL59zxFHWWnARhqGcnOFUGvwy5G4lhPmbyDVT3QvkclRr/SSQky/Q==
   dependencies:
     tsafe "^1.6.3"
 
