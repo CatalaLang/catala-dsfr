@@ -188,7 +188,13 @@ module Make = (
                   doc
                   ->Docx.Packer.toBlob
                   ->Promise.thenResolve(blob => {
-                    FileSaver.saveAs(blob, `explication-decision-${FormInfos.name}.docx`)
+                    FileSaver.saveAs(
+                      blob,
+                      `explication-decision-${FormInfos.name->String.replaceRegExp(
+                          %re("/\s/g"),
+                          "_",
+                        )}.docx`,
+                    )
                   })
                   ->ignore
                 }}
