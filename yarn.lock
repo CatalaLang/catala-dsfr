@@ -232,10 +232,10 @@
   resolved "https://registry.yarnpkg.com/@catala-lang/catala-explain/-/catala-explain-0.1.6.tgz#1994ad16e814ea84b62e7176f5244009c5278385"
   integrity sha512-9/fS4o5mRjQ/ZC63X2XzULSg+pX3rQqge25veJaYm4x3wOgtJZylW/O8oL12m5KcMrAYp06pAQQRR2TQwtnRoA==
 
-"@catala-lang/catala-web-assets@^0.8.8":
-  version "0.8.8"
-  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.8.tgz#19ba83eded6bc4a51c609526aee29dc03546a2c6"
-  integrity sha512-5GTu89HFjEaHi9249RihDzhbmV8gaDb1yt2FacjX1vIVlKwCFFqi4wGTOCiW9Q4n/9koaeFyGuvN6JEZj7RKXQ==
+"@catala-lang/catala-web-assets@^0.8.9":
+  version "0.8.9"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.9.tgz#77b6278369f003656a91ae8f01c710b0c13716a4"
+  integrity sha512-Tpi5LCwPiLAuYlPccSYn7bpd1mrmihgabkvhXL7PE0KOB3hc+rNoZBkVF42UaagXh7UqX8dnaKhoeI3muGfCrQ==
 
 "@catala-lang/french-law@^0.8.3-b.3":
   version "0.8.3-b.3"
