@@ -179,9 +179,7 @@ module Make = (
                       creator: `catala-dsfr`,
                       keysToIgnore: FormInfos.webAssets.keysToIgnore,
                       selectedOutput: FormInfos.webAssets.selectedOutput,
-                      sourcesURL: %raw(`import.meta.env.DEV`)
-                        ? `http://localhost:5173/${FormInfos.url}/sources`
-                        : "", //TODO: change this to the code.gouv url when we have one",
+                      sourcesURL: `${Constants.host}/${FormInfos.url}/sources`,
                     },
                   )
 
