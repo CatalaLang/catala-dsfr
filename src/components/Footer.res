@@ -30,6 +30,12 @@ let make = () => {
         {`Apache 2.0`->React.string}
       </a>
     </>}
-    bottomItems=[Dsfr.Display.headerFooterDisplayItem]
+    bottomItems=[
+      {
+        "text": {"Code source"->React.string},
+        "linkProps": {"href": "https://github.com/catalalang/catala-dsfr"},
+      },
+      Dsfr.Display.headerFooterDisplayItem,
+    ]
   />
 }

@@ -12,6 +12,20 @@ module Spa = {
   external startReactDsfr: startReactDsfrParams<'props> => unit = "startReactDsfr"
 }
 
+module Badge = {
+  type severity = [#success | #info | #warning | #error]
+  type tag = [#span | #div | #p]
+  @react.component @module("@codegouvfr/react-dsfr/Badge")
+  external make: (
+    ~className: string=?,
+    ~children: React.element,
+    ~noIcon: bool=?,
+    ~small: bool=?,
+    ~severity: severity=?,
+    @as("as") ~as_: tag=?,
+  ) => React.element = "default"
+}
+
 module Breadcrumb = {
   type segment = {label: string, linkProps: linkProps}
   @react.component @module("@codegouvfr/react-dsfr/Breadcrumb")
@@ -84,7 +98,7 @@ module Header = {
     ~homeLinkProps: linkProps,
     ~serviceTagline: string,
     ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": string}=?,
-    ~serviceTitle: string,
+    ~serviceTitle: React.element,
   ) => React.element = "default"
 }
 
