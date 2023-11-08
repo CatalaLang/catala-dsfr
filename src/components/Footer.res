@@ -9,17 +9,17 @@ let make = () => {
     </>}
     contentDescription={<>
       {"Ce site est développé dans le cadre de la "->React.string}
-      <a href="https://www.code.gouv.fr">
+      <a href="https://www.code.gouv.fr" target="_blank">
         {`mission logiciels libres et communs numériques`->React.string}
       </a>
       {" de la "->React.string}
-      <a href="https://www.numerique.gouv.fr/">
+      <a href="https://www.numerique.gouv.fr/" target="_blank">
         {`direction interministérielle du numérique`->React.string}
       </a>
       {" en collaboration avec le projet "->React.string}
-      <a href="https://catala-lang.org/"> {`Catala`->React.string} </a>
+      <a href="https://catala-lang.org/" target="_blank"> {`Catala`->React.string} </a>
       {`, avec l'objectif de tester des solutions techniques de conformité à l'`->React.string}
-      <a href="https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037823131">
+      <a href="https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037823131" target="_blank">
         {`article 47-2 de la loi informatique et libertés`->React.string}
       </a>
     </>}
