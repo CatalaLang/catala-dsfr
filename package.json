@@ -20,7 +20,13 @@
   "author": "Emile Rolley <emile.rolley@tuta.io>",
   "license": "Apache-2.0",
   "dependencies": {
+    "@catala-lang/catala-explain": "^0.2.1",
+    "@catala-lang/catala-web-assets": "^0.8.9",
+    "@catala-lang/french-law": "^0.8.3-b.3",
+    "@catala-lang/rescript-catala": "^0.8.1-b.0",
     "@codegouvfr/react-dsfr": "^0.78.2",
+    "@rescript/core": "^0.5.0",
+    "@rescript/react": "^0.11.0",
     "@rjsf/core": "^5.1.0",
     "@rjsf/utils": "^5.1.0",
     "@rjsf/validator-ajv8": "^5.1.0",
@@ -28,21 +34,15 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.4.5",
+    "rescript-docx": "^0.1.5",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "@catala-lang/catala-explain": "^0.2.1",
-    "@catala-lang/catala-web-assets": "^0.8.9",
-    "@catala-lang/french-law": "^0.8.3-b.3",
-    "@catala-lang/rescript-catala": "^0.8.1-b.0",
     "@jihchi/vite-plugin-rescript": "^5.1.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
-    "@rescript/core": "^0.3.1",
-    "@rescript/react": "^0.11.0",
     "@vitejs/plugin-react": "^3.1.0",
     "jsdom": "^21.1.0",
     "rescript": "^10.1.4",
-    "rescript-docx": "^0.1.5",
     "tailwindcss": "^3.2.6",
     "vite": "^4.4.9"
   }
