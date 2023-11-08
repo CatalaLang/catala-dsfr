@@ -140,6 +140,7 @@ html .catala-code {
 .catala-code .linenos {
   background-color: var(--line-number-bg-color);
   padding: 0;
+  --underline-img: none;
 }
 
 .catala-code td.linenos .normal {
