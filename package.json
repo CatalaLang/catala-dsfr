@@ -1,6 +1,6 @@
 {
   "name": "catala-dsfr",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": "https://github.com/CatalaLang/catala-dsfr",
   "scripts": {
     "clean": "rescript clean -with-deps",
