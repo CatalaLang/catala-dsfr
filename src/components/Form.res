@@ -67,7 +67,7 @@ module Make = (
 ) => {
   @react.component
   let make = () => {
-    let {path: currentPath} = RescriptReactRouter.useUrl()
+    let currentPath = Nav.getCurrentURL().path
     let (formData, setFormData) = React.useState(_ => FormInfos.webAssets.initialData)
     let (eventsOpt, setEventsOpt) = React.useState(_ => None)
 

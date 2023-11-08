@@ -5,7 +5,7 @@
   "scripts": {
     "clean": "rescript clean -with-deps",
     "build": "yarn run pre && vite build",
-    "deploy": "yarn run build && rsync -r dist/",
+    "deploy": "yarn run build --base=/demos/catala/ && rsync -rv --delete-before dist/*",
     "serve": "vite preview",
     "dev": "yarn run pre && vite",
     "re:build": "rescript build -with-deps",

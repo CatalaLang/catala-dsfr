@@ -14,7 +14,7 @@ module HtmlSourceCodeLazy = {
 
 @react.component
 let make = (~html: option<string>, ~simulatorUrl: string) => {
-  let {hash} = RescriptReactRouter.useUrl()
+  let {hash} = Nav.getCurrentURL()
 
   switch html {
   | Some(html) =>

@@ -1,8 +1,6 @@
 @react.component
 let make = () => {
-  let url = RescriptReactRouter.useUrl()
-
-  switch url.path {
+  switch Nav.getCurrentURL().path {
   | list{route} if route == AllocationsFamiliales.FormInfos.url => <AllocationsFamiliales />
   | list{route} if route == AidesLogement.FormInfos.url => <AidesLogement />
   | list{route, "sources"} if route == AllocationsFamiliales.FormInfos.url =>
