@@ -9,7 +9,7 @@ let make = () => {
     </>}
     contentDescription={<>
       {`Ce site est développé dans le cadre de la `->React.string}
-      <a href="https://www.code.gouv.fr" target="_blank">
+      <a href="https://code.gouv.fr/" target="_blank">
         {`mission logiciels libres et communs numériques`->React.string}
       </a>
       {` de la `->React.string}
