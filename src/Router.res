@@ -1,16 +1,20 @@
+module AF = AllocationsFamiliales
+module AL = AidesLogement
+
 @react.component
 let make = () => {
   switch Nav.getCurrentURL().path {
-  | list{route} if route == AllocationsFamiliales.FormInfos.url => <AllocationsFamiliales />
-  | list{route} if route == AidesLogement.FormInfos.url => <AidesLogement />
-  | list{route, "sources"} if route == AllocationsFamiliales.FormInfos.url =>
+  | list{route} if route == AF.FormInfos.url => <AllocationsFamiliales />
+  | list{route} if route == AL.FormInfos.url => <AidesLogement />
+  | list{route, "sources"} if route == AF.FormInfos.url =>
     <SourceCode
-      html={WebAssets.allocationsFamilialesAssets.html}
-      simulatorUrl={AllocationsFamiliales.FormInfos.url}
+      htmlImport={WebAssets.getAllocationsFamilialesSourceCode(WebAssets.Versions.latest)}
+      simulatorUrl={AF.FormInfos.url}
     />
-  | list{route, "sources"} if route == AidesLogement.FormInfos.url =>
+  | list{route, "sources"} if route == AL.FormInfos.url =>
     <SourceCode
-      html={WebAssets.aidesLogementAssets.html} simulatorUrl={AidesLogement.FormInfos.url}
+      htmlImport={WebAssets.getAidesLogementSourceCode(WebAssets.Versions.latest)}
+      simulatorUrl={AL.FormInfos.url}
     />
   | _ => <Home />
   }

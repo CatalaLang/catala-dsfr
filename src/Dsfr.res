@@ -43,7 +43,7 @@ module Button = {
     disabled?: bool,
     iconId?: string,
     iconPosition?: string,
-    onClick: JsxEvent.Mouse.t => unit,
+    onClick: ReactEvent.Mouse.t => unit,
     priority?: string,
     size?: string,
     children: React.element,
@@ -55,7 +55,7 @@ module Button = {
     ~disabled: bool=?,
     ~iconId: string=?,
     ~iconPosition: string=?,
-    ~onClick: JsxEvent.Mouse.t => unit,
+    ~onClick: ReactEvent.Mouse.t => 'a,
     ~priority: string=?,
     ~size: string=?,
   ) => React.element = "default"

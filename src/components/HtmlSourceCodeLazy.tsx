@@ -2,7 +2,7 @@ import { RefObject, lazy } from "react";
 
 type Props = {
   html: string;
-  domRef: RefObject<HTMLElement>;
+  hash: string;
 };
 
 const HtmlSourceCode = lazy(() => import("./HtmlSourceCode.tsx"));

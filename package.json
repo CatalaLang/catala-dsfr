@@ -10,9 +10,8 @@
     "dev": "yarn run pre && vite",
     "re:build": "rescript build -with-deps",
     "re:watch": "yarn run pre && rescript build -w -with-deps",
-    "assets": "rsync -r node_modules/@catala-lang/catala-web-assets/assets/* assets",
     "postinstall": "copy-dsfr-to-public",
-    "pre": "yarn run re:build && only-include-used-icons && yarn run assets"
+    "pre": "yarn run re:build && only-include-used-icons"
   },
   "keywords": [
     "rescript"
@@ -21,7 +20,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@catala-lang/catala-explain": "^0.2.2",
-    "@catala-lang/catala-web-assets": "^0.8.9",
     "@catala-lang/french-law": "^0.8.3-b.3",
     "@catala-lang/rescript-catala": "^0.8.1-b.0",
     "@codegouvfr/react-dsfr": "^0.78.2",

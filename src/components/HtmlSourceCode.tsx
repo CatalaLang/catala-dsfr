@@ -18,7 +18,7 @@ export default function ({ html, hash }) {
         console.error(e);
       }
     }
-  });
+  }, [hash]);
 
   return (
     <div className="catala-code" dangerouslySetInnerHTML={{ __html: html }} />

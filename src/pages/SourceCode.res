@@ -13,30 +13,38 @@ module HtmlSourceCodeLazy = {
 }
 
 @react.component
-let make = (~html: option<string>, ~simulatorUrl: string) => {
+let make = (~htmlImport: WebAssets.importFn<string>, ~simulatorUrl: string) => {
   let {hash} = Nav.getCurrentURL()
+  let (htmlState, setHtmlState) = React.useState(_ => None)
 
-  switch html {
-  | Some(html) =>
-    <div className="fr-container">
-      <Button.RightAlign
-        props={
-          iconId: "fr-icon-equalizer-line",
-          iconPosition: "left",
-          priority: "tertiary",
-          size: "medium",
-          onClick: {_ => `/${simulatorUrl}`->Nav.goTo},
-          children: {"Accéder au simulateur"->React.string},
-        }
-      />
+  React.useEffect0(() => {
+    htmlImport()
+    ->Promise.thenResolve(html => {
+      setHtmlState(_ => Some(html))
+    })
+    ->Promise.done
+    None
+  })
+
+  <div className="fr-container">
+    <Button.RightAlign
+      props={
+        iconId: "fr-icon-equalizer-line",
+        iconPosition: "left",
+        priority: "tertiary",
+        size: "medium",
+        onClick: {_ => `/${simulatorUrl}`->Nav.goTo},
+        children: {"Accéder au simulateur"->React.string},
+      }
+    />
+    {switch htmlState {
+    | Some(html) =>
+      Console.log2("hash", hash)
+
       <React.Suspense fallback={Spinners.loader}>
         <HtmlSourceCodeLazy html hash />
       </React.Suspense>
-    </div>
-  | None =>
-    ()
-    <div>
-      <p> {"No source code available for this snippet."->React.string} </p>
-    </div>
-  }
+    | None => Spinners.loader
+    }}
+  </div>
 }

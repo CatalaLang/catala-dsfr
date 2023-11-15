@@ -1,32 +1,101 @@
 // TODO: migrate to @catala-lang/catala-web-assets
 
 %%raw(`
-import familyBenefitsSchemaFr from "../../assets/allocations_familiales_schema_fr.json";
-import familyBenefitsUISchema from "../../assets/allocations_familiales_ui_schema_fr.json";
-import familyBenefitsHtml from "../../assets/allocations_familiales.html?raw";
+import familyBenefitsSchemaFr from "../../assets/v0.8.9/allocations_familiales_schema_fr.json";
+import familyBenefitsUISchema from "../../assets/v0.8.9/allocations_familiales_ui_schema_fr.json";
+import familyBenefitsHtml from "../../assets/v0.8.9/allocations_familiales.html?raw";
 
-import {uiSchema as housingBenefitsUISchemaFr} from "../../assets/aides_logement_ui_fr.schema.jsx";
-import housingBenefitsSchema from "../../assets/aides_logement_schema_fr.json";
-import housingBenefitsInitialData from "../../assets/aides_logement_init.json";
-import housingBenefitsHtml from "../../assets/aides_logement.html?raw";
+import {uiSchema as housingBenefitsUISchemaFr} from "../../assets/v0.8.9/aides_logement_ui_fr.schema.jsx";
+import housingBenefitsSchema from "../../assets/v0.8.9/aides_logement_schema_fr.json";
+import housingBenefitsInitialData from "../../assets/v0.8.9/aides_logement_init.json";
+import housingBenefitsHtml from "../../assets/v0.8.9/aides_logement.html?raw";
 `)
 
-type t = {
-  schema: JSON.t,
-  uiSchema: JSON.t,
-  selectedOutput: CatalaRuntime.information,
-  keysToIgnore: array<string>,
-  initialData?: JSON.t,
-  html?: string,
+type importFn<'a> = unit => promise<'a>
+
+module Versions = {
+  @module("./versionedAssets.ts")
+  external available: array<string> = "versions"
+
+  type versionedAssets<'a> = Dict.t<importFn<'a>>
+
+  @module("./versionedAssets.ts")
+  external assetsImports: versionedAssets<'a> = "versionedAssets"
+  @module("./versionedAssets.ts")
+  external sourceCodesImports: versionedAssets<'a> = "versionedSources"
+
+  let latest = available->Array.get(0)->Option.getExn
 }
 
-let allocationsFamilialesAssets: t = {
-  schema: %raw(`familyBenefitsSchemaFr`),
-  uiSchema: %raw(`familyBenefitsUISchema`),
-  keysToIgnore: ["dIdentifiant"],
-  selectedOutput: list{"InterfaceAllocationsFamiliales", "i_montant_versé"},
-  html: %raw(`familyBenefitsHtml`),
+type t = {
+  schemaImport: importFn<JSON.t>,
+  uiSchemaImport: importFn<JSON.t>,
+  initialDataImport?: importFn<JSON.t>,
+  selectedOutput: CatalaRuntime.information,
+  keysToIgnore: array<string>,
 }
+
+let getAllocationsFamiliales = version => {
+  let schema =
+    Versions.assetsImports->Dict.get(
+      `../../assets/${version}/allocations_familiales_schema_fr.json`,
+    )
+  let uiSchema =
+    Versions.assetsImports->Dict.get(
+      `../../assets/${version}/allocations_familiales_ui_schema_fr.json`,
+    )
+  switch (schema, uiSchema) {
+  | (Some(schemaImport), Some(uiSchemaImport)) => {
+      schemaImport,
+      uiSchemaImport,
+      keysToIgnore: ["dIdentifiant"],
+      selectedOutput: list{"InterfaceAllocationsFamiliales", "i_montant_versé"},
+    }
+  | _ => Js.Exn.raiseError(`Version ${version} not found in ${Versions.available->Array.toString}`)
+  }
+}
+
+let allocationsFamilialesAssets: t = getAllocationsFamiliales(Versions.latest)
+let getAllocationsFamilialesSourceCode = version =>
+  switch Versions.sourceCodesImports->Dict.get(
+    `../../assets/${version}/allocations_familiales.html`,
+  ) {
+  | Some(htmlImport) => htmlImport
+  | None =>
+    Js.Exn.raiseError(
+      `HTML source code for version ${version} not found in ${Versions.available->Array.toString}`,
+    )
+  }
+
+let getAidesLogement = version => {
+  let schema =
+    Versions.assetsImports->Dict.get(`../../assets/${version}/aides_logement_schema_fr.json`)
+  let uiSchema =
+    Versions.assetsImports->Dict.get(`../../assets/${version}/aides_logement_ui_fr.schema.jsx`)
+  let initialData =
+    Versions.assetsImports->Dict.get(`../../assets/${version}/aides_logement_init.json`)
+
+  switch (schema, uiSchema, initialData) {
+  | (Some(schemaImport), Some(uiSchemaImport), Some(initialDataImport)) => {
+      schemaImport: async () => (await schemaImport())["default"],
+      uiSchemaImport: async () => (await uiSchemaImport())["uiSchema"]["default"],
+      initialDataImport: async () => (await initialDataImport())["default"],
+      selectedOutput: list{"CalculetteAidesAuLogementGardeAlternée", "aide_finale"},
+      keysToIgnore: ["identifiant"],
+    }
+  | _ => Js.Exn.raiseError(`Version ${version} not found in ${Versions.available->Array.toString}`)
+  }
+}
+//
+let aidesLogementAssets: t = getAidesLogement(Versions.latest)
+let getAidesLogementSourceCode = version =>
+  switch Versions.sourceCodesImports->Dict.get(`../../assets/${version}/aides_logement.html`) {
+  | Some(htmlImport) => htmlImport
+  | None =>
+    Js.Exn.raiseError(
+      `HTML source code for version ${version} not found in ${Versions.available->Array.toString}`,
+    )
+  }
 
 // Infered from: https://github.com/CatalaLang/catala/blob/master/examples/aides_logement/tests/tests_calcul_al_locatif.catala_fr#L93-L126
 let alLocatifExemple4: JSON.t = %raw(`
@@ -144,11 +213,11 @@ let alLocatifExemple4: JSON.t = %raw(`
 }
 `)
 
-let aidesLogementAssets: t = {
-  schema: %raw(`housingBenefitsSchema`),
-  uiSchema: %raw(`housingBenefitsUISchemaFr`),
-  initialData: %raw(`housingBenefitsInitialData`),
-  html: %raw(`housingBenefitsHtml`),
-  selectedOutput: list{"CalculetteAidesAuLogementGardeAlternée", "aide_finale"},
-  keysToIgnore: ["identifiant"],
-}
+// let aidesLogementAssets: t = {
+//   schema: %raw(`housingBenefitsSchema`),
+//   uiSchema: %raw(`housingBenefitsUISchemaFr`),
+//   initialData: %raw(`housingBenefitsInitialData`),
+//   html: %raw(`housingBenefitsHtml`),
+//   selectedOutput: list{"CalculetteAidesAuLogementGardeAlternée", "aide_finale"},
+//   keysToIgnore: ["identifiant"],
+// }

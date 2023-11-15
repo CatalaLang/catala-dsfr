@@ -68,8 +68,41 @@ module Make = (
   @react.component
   let make = () => {
     let currentPath = Nav.getCurrentURL().path
-    let (formData, setFormData) = React.useState(_ => FormInfos.webAssets.initialData)
+    let (formData, setFormData) = React.useState(_ => None)
+    let (initialData, setInitialData) = React.useState(_ => None)
+    let (schemaState, setSchemaState) = React.useState(_ => None)
+    let (uiSchemaState, setUiSchemaState) = React.useState(_ => None)
     let (eventsOpt, setEventsOpt) = React.useState(_ => None)
+
+    React.useEffect0(() => {
+      switch FormInfos.webAssets.initialDataImport {
+      | Some(init) =>
+        init()
+        ->Promise.thenResolve(data => {
+          setInitialData(_ => Some(data))
+          setFormData(_ => Some(data))
+        })
+        ->Promise.done
+      | None => ()
+      }
+      None
+    })
+
+    React.useEffect0(() => {
+      FormInfos.webAssets.schemaImport()
+      ->Promise.thenResolve(schema => {
+        setSchemaState(_ => Some(schema))
+        None
+      })
+      ->Promise.done
+      FormInfos.webAssets.uiSchemaImport()
+      ->Promise.thenResolve(uiSchema => {
+        setUiSchemaState(_ => Some(uiSchema))
+        None
+      })
+      ->Promise.done
+      None
+    })
 
     React.useEffect2(() => {
       setEventsOpt(_ => {
@@ -114,7 +147,7 @@ module Make = (
             children: `Réinitialiser le formulaire`->React.string,
             onClick: _ => {
               Console.debug("Resetting form data")
-              setFormData(_ => FormInfos.webAssets.initialData)
+              setFormData(_ => initialData)
             },
             iconId: "fr-icon-refresh-line",
             priority,
@@ -166,35 +199,41 @@ module Make = (
               </div>
               <Dsfr.Button
                 onClick={_ => {
-                  let doc = CatalaExplain.generate(
-                    // NOTE(@EmileRolley): we assume that the events exist,
-                    // because we have a result.
-                    ~events=eventsOpt->Option.getExn,
-                    ~userInputs=formData,
-                    ~schema=FormInfos.webAssets.schema,
-                    ~opts={
-                      title: `Calcul des ${FormInfos.name}`,
-                      // Contains an explicatory text about the computation and the catala program etc...
-                      description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${FormInfos.name} pour votre demande`,
-                      creator: `catala-dsfr`,
-                      keysToIgnore: FormInfos.webAssets.keysToIgnore,
-                      selectedOutput: FormInfos.webAssets.selectedOutput,
-                      sourcesURL: `${Constants.host}/${FormInfos.url}/sources`,
-                    },
-                  )
+                  switch schemaState {
+                  | Some(schema) => {
+                      Console.log2("schema", schema)
+                      let doc = CatalaExplain.generate(
+                        // NOTE(@EmileRolley): we assume that the events exist,
+                        // because we have a result.
+                        ~events=eventsOpt->Option.getExn,
+                        ~userInputs=formData,
+                        ~schema,
+                        ~opts={
+                          title: `Calcul des ${FormInfos.name}`,
+                          // Contains an explicatory text about the computation and the catala program etc...
+                          description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${FormInfos.name} pour votre demande`,
+                          creator: `catala-dsfr`,
+                          keysToIgnore: FormInfos.webAssets.keysToIgnore,
+                          selectedOutput: FormInfos.webAssets.selectedOutput,
+                          sourcesURL: `${Constants.host}/${FormInfos.url}/sources`,
+                        },
+                      )
 
-                  doc
-                  ->Docx.Packer.toBlob
-                  ->Promise.thenResolve(blob => {
-                    FileSaver.saveAs(
-                      blob,
-                      `explication-decision-${FormInfos.name->String.replaceRegExp(
-                          %re("/\s/g"),
-                          "_",
-                        )}.docx`,
-                    )
-                  })
-                  ->ignore
+                      doc
+                      ->Docx.Packer.toBlob
+                      ->Promise.thenResolve(blob => {
+                        FileSaver.saveAs(
+                          blob,
+                          `explication-decision-${FormInfos.name->String.replaceRegExp(
+                              %re("/\s/g"),
+                              "_",
+                            )}.docx`,
+                        )
+                      })
+                      ->ignore
+                    }
+                  | None => Console.error("Missing schema to generate the doc")
+                  }
                 }}
                 iconPosition="left"
                 iconId="fr-icon-newspaper-line"
@@ -227,25 +266,29 @@ module Make = (
             isClosable=true
           />
           <div className="fr-col">
-            <React.Suspense fallback={Spinners.loader}>
-              <RjsfFormDsfrLazy
-                schema={FormInfos.webAssets.schema}
-                uiSchema={FormInfos.webAssets.uiSchema}
-                formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
-                onSubmit={t => {
-                  setFormData(_ => {
-                    let formData = t->Js.Dict.get("formData")
-                    switch (FormInfos.formDataPostProcessing, formData) {
-                    | (Some(f), Some(formData)) => {
-                        let newFormData = f(formData)
-                        Some(newFormData)
+            {switch (schemaState, uiSchemaState) {
+            | (Some(schema), Some(uiSchema)) =>
+              <React.Suspense fallback={Spinners.loader}>
+                <RjsfFormDsfrLazy
+                  schema
+                  uiSchema
+                  formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
+                  onSubmit={t => {
+                    setFormData(_ => {
+                      let formData = t->Js.Dict.get("formData")
+                      switch (FormInfos.formDataPostProcessing, formData) {
+                      | (Some(f), Some(formData)) => {
+                          let newFormData = f(formData)
+                          Some(newFormData)
+                        }
+                      | _ => formData
                       }
-                    | _ => formData
-                    }
-                  })
-                }}
-              />
-            </React.Suspense>
+                    })
+                  }}
+                />
+              </React.Suspense>
+            | _ => Spinners.loader
+            }}
           </div>
           <div
             className="w-full fr-m-1w border-2 border-solid rounded-full border-[var(--border-default-grey)]"
