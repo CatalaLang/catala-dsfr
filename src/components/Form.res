@@ -66,7 +66,7 @@ module Make = (
   },
 ) => {
   @react.component
-  let make = () => {
+  let make = (~assetsVersion: string) => {
     let currentPath = Nav.getCurrentURL().path
     let (formData, setFormData) = React.useState(_ => None)
     let (initialData, setInitialData) = React.useState(_ => None)
@@ -74,7 +74,7 @@ module Make = (
     let (uiSchemaState, setUiSchemaState) = React.useState(_ => None)
     let (eventsOpt, setEventsOpt) = React.useState(_ => None)
 
-    React.useEffect0(() => {
+    React.useEffect1(() => {
       switch FormInfos.webAssets.initialDataImport {
       | Some(init) =>
         init()
@@ -86,9 +86,9 @@ module Make = (
       | None => ()
       }
       None
-    })
+    }, [FormInfos.webAssets.initialDataImport])
 
-    React.useEffect0(() => {
+    React.useEffect2(() => {
       FormInfos.webAssets.schemaImport()
       ->Promise.thenResolve(schema => {
         setSchemaState(_ => Some(schema))
@@ -102,7 +102,7 @@ module Make = (
       })
       ->Promise.done
       None
-    })
+    }, (FormInfos.webAssets.schemaImport, FormInfos.webAssets.uiSchemaImport))
 
     React.useEffect2(() => {
       setEventsOpt(_ => {
@@ -177,7 +177,11 @@ module Make = (
           },
           {
             children: {"Code source du programme"->React.string},
-            onClick: {_ => currentPath->List.concat(list{`sources`})->Nav.goToPath},
+            onClick: {
+              _ =>
+                // TODO: the version should be linked to the version of the french-law
+                currentPath->List.concat(list{`sources`, assetsVersion})->Nav.goToPath
+            },
             iconId: "fr-icon-code-s-slash-line",
             priority,
           },
@@ -212,10 +216,10 @@ module Make = (
                           title: `Calcul des ${FormInfos.name}`,
                           // Contains an explicatory text about the computation and the catala program etc...
                           description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${FormInfos.name} pour votre demande`,
-                          creator: `catala-dsfr`,
+                          creator: `catala-dsfr / assets ${assetsVersion}`,
                           keysToIgnore: FormInfos.webAssets.keysToIgnore,
                           selectedOutput: FormInfos.webAssets.selectedOutput,
-                          sourcesURL: `${Constants.host}/${FormInfos.url}/sources`,
+                          sourcesURL: `${Constants.host}/${FormInfos.url}/sources/${assetsVersion}`,
                         },
                       )
 

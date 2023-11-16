@@ -30,7 +30,7 @@ module FormInfos = {
 module Form = Form.Make(FormInfos)
 
 @react.component
-let make = () => {
+let make = (~assetsVersion: string) => {
   React.useEffect0(() => {
     // Reset the log when the page is loaded.
     CatalaFrenchLaw.resetLog()
@@ -38,6 +38,6 @@ let make = () => {
   })
   <div className="fr-container">
     <PageComponents.Title> {"Calcul des aides au logement"->React.string} </PageComponents.Title>
-    <Form />
+    <Form assetsVersion />
   </div>
 }
