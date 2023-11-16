@@ -1,32 +1,3 @@
-module FormInfos = {
-  let webAssets = WebAssets.allocationsFamilialesAssets
-  let name = `allocations familiales`
-  let resultLabel = `Montant mensuel des ${name}`
-  let url = "allocations-familiales"
-
-  // This function automatically assigns numerical ID to kids so we don't
-  // have to ask the question in the form
-  let formDataPostProcessing = %raw(`
-	  function (data) {
-		  var i = 0;
-		  for (var enfant of data.iEnfantsIn) {
-			  enfant.dIdentifiant = i;
-			  i++;
-		  }
-		  return data;
-	  }
-  `)
-
-  let computeAndPrintResult = (input: Js.Json.t): React.element => <>
-    <span className="font-mono font-bold text-[var(--text-active-blue-france)]">
-      {input->CatalaFrenchLaw.computeAllocationsFamiliales->Belt.Float.toString->React.string}
-    </span>
-    {React.string(` €`)}
-  </>
-}
-
-module Form = Form.Make(FormInfos)
-
 @react.component
 let make = (~assetsVersion: string) => {
   React.useEffect0(() => {
@@ -39,6 +10,6 @@ let make = (~assetsVersion: string) => {
     <PageComponents.Title>
       {"Calcul des allocations familiales"->React.string}
     </PageComponents.Title>
-    <Form assetsVersion />
+    <Form assetsVersion formInfos={AllocationsFamilialesUtils.formInfos} />
   </div>
 }

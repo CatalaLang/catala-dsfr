@@ -55,252 +55,241 @@ const readFileAsJSON = (file, callback) => {
 /*
   Builds a React component from provided information.
 */
-module Make = (
-  FormInfos: {
-    let webAssets: WebAssets.t
-    let name: string
-    let resultLabel: string
-    let formDataPostProcessing: option<Js.Json.t => Js.Json.t>
-    let computeAndPrintResult: Js.Json.t => React.element
-    let url: string
-  },
-) => {
-  @react.component
-  let make = (~assetsVersion: string) => {
-    let currentPath = Nav.getCurrentURL().path
-    let (formData, setFormData) = React.useState(_ => None)
-    let (initialData, setInitialData) = React.useState(_ => None)
-    let (schemaState, setSchemaState) = React.useState(_ => None)
-    let (uiSchemaState, setUiSchemaState) = React.useState(_ => None)
-    let (eventsOpt, setEventsOpt) = React.useState(_ => None)
+@react.component
+let make = (~assetsVersion: string, ~formInfos: FormInfos.t) => {
+  let currentPath = Nav.getCurrentURL().path
+  let (formData, setFormData) = React.useState(_ => None)
+  let (initialData, setInitialData) = React.useState(_ => None)
+  let (schemaState, setSchemaState) = React.useState(_ => None)
+  let (uiSchemaState, setUiSchemaState) = React.useState(_ => None)
+  let (eventsOpt, setEventsOpt) = React.useState(_ => None)
 
-    React.useEffect1(() => {
-      switch FormInfos.webAssets.initialDataImport {
-      | Some(init) =>
-        init()
-        ->Promise.thenResolve(data => {
-          setInitialData(_ => Some(data))
-          setFormData(_ => Some(data))
-        })
-        ->Promise.done
-      | None => ()
-      }
-      None
-    }, [FormInfos.webAssets.initialDataImport])
-
-    React.useEffect2(() => {
-      FormInfos.webAssets.schemaImport()
-      ->Promise.thenResolve(schema => {
-        setSchemaState(_ => Some(schema))
-        None
+  React.useEffect1(() => {
+    switch formInfos.webAssets.initialDataImport {
+    | Some(init) =>
+      init()
+      ->Promise.thenResolve(data => {
+        setInitialData(_ => Some(data))
+        setFormData(_ => Some(data))
       })
       ->Promise.done
-      FormInfos.webAssets.uiSchemaImport()
-      ->Promise.thenResolve(uiSchema => {
-        setUiSchemaState(_ => Some(uiSchema))
-        None
-      })
-      ->Promise.done
-      None
-    }, (FormInfos.webAssets.schemaImport, FormInfos.webAssets.uiSchemaImport))
+    | None => ()
+    }
+    None
+  }, [formInfos.webAssets.initialDataImport])
 
-    React.useEffect2(() => {
-      setEventsOpt(_ => {
-        let events = {
-          try {CatalaFrenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
-          | _ => []
-          }
-        }
-        if 0 == events->Belt.Array.size {
-          None
-        } else {
-          Some(events)
-        }
-      })
+  React.useEffect2(() => {
+    formInfos.webAssets.schemaImport()
+    ->Promise.thenResolve(schema => {
+      setSchemaState(_ => Some(schema))
       None
-    }, (formData, setEventsOpt))
-
-    let (uploadedFile, setUploadedFile) = React.useState(_ => {
-      Js.Json.object_(Js.Dict.empty())
     })
+    ->Promise.done
+    formInfos.webAssets.uiSchemaImport()
+    ->Promise.thenResolve(uiSchema => {
+      setUiSchemaState(_ => Some(uiSchema))
+      None
+    })
+    ->Promise.done
+    None
+  }, (formInfos.webAssets.schemaImport, formInfos.webAssets.uiSchemaImport))
 
-    let fileChangeHandler = (_event: ReactEvent.Form.t) => {
-      setUploadedFile(%raw(`_event.target.files[0]`))
-    }
-
-    let retrieveFileContents = _ => {
-      if %raw(`uploadedFile instanceof File`) {
-        readFileAsJSON(uploadedFile, form_data => setFormData(_ => Some(form_data)))
+  React.useEffect2(() => {
+    setEventsOpt(_ => {
+      let events = {
+        try {CatalaFrenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
+        | _ => []
+        }
       }
+      if 0 == events->Belt.Array.size {
+        None
+      } else {
+        Some(events)
+      }
+    })
+    None
+  }, (formData, setEventsOpt))
+
+  let (uploadedFile, setUploadedFile) = React.useState(_ => {
+    Js.Json.object_(Js.Dict.empty())
+  })
+
+  let fileChangeHandler = (_event: ReactEvent.Form.t) => {
+    setUploadedFile(%raw(`_event.target.files[0]`))
+  }
+
+  let retrieveFileContents = _ => {
+    if %raw(`uploadedFile instanceof File`) {
+      readFileAsJSON(uploadedFile, form_data => setFormData(_ => Some(form_data)))
     }
+  }
 
-    let form_footer = {
-      let priority = "tertiary"
-      <Dsfr.ButtonsGroup
-        inlineLayoutWhen="always"
-        className="text-left"
-        buttonsEquisized=true
-        buttonsSize="medium"
-        alignment="center"
-        buttons=[
-          {
-            children: `Réinitialiser le formulaire`->React.string,
-            onClick: _ => {
-              Console.debug("Resetting form data")
-              setFormData(_ => initialData)
-            },
-            iconId: "fr-icon-refresh-line",
-            priority,
+  let form_footer = {
+    let priority = "tertiary"
+    <Dsfr.ButtonsGroup
+      inlineLayoutWhen="always"
+      className="text-left"
+      buttonsEquisized=true
+      buttonsSize="medium"
+      alignment="center"
+      buttons=[
+        {
+          children: `Réinitialiser le formulaire`->React.string,
+          onClick: _ => {
+            Console.debug("Resetting form data")
+            setFormData(_ => initialData)
           },
-          {
-            children: `Exporter les données au format JSON`->React.string,
-            onClick: _ => {
-              let data_str = Js.Json.stringify(formData->Belt.Option.getWithDefault(Js.Json.null))
-              downloadJSONstring(data_str)
-            },
-            iconId: "fr-icon-upload-line",
-            priority,
+          iconId: "fr-icon-refresh-line",
+          priority,
+        },
+        {
+          children: `Exporter les données au format JSON`->React.string,
+          onClick: _ => {
+            let data_str = Js.Json.stringify(formData->Belt.Option.getWithDefault(Js.Json.null))
+            downloadJSONstring(data_str)
           },
-          {
-            children: <>
-              <input
-                className="hidden w-100" id="file-upload" type_="file" onChange={fileChangeHandler}
-              />
-              <label htmlFor="file-upload" className="cursor-pointer">
-                {`Importer les données au format JSON `->React.string}
-              </label>
-              <p />
-            </>,
-            onClick: retrieveFileContents,
-            iconId: "fr-icon-download-line",
-            priority,
+          iconId: "fr-icon-upload-line",
+          priority,
+        },
+        {
+          children: <>
+            <input
+              className="hidden w-100" id="file-upload" type_="file" onChange={fileChangeHandler}
+            />
+            <label htmlFor="file-upload" className="cursor-pointer">
+              {`Importer les données au format JSON `->React.string}
+            </label>
+            <p />
+          </>,
+          onClick: retrieveFileContents,
+          iconId: "fr-icon-download-line",
+          priority,
+        },
+        {
+          children: {"Code source du programme"->React.string},
+          onClick: {
+            _ =>
+              // TODO: the version should be linked to the version of the french-law
+              currentPath->List.concat(list{`sources`, assetsVersion})->Nav.goToPath
           },
-          {
-            children: {"Code source du programme"->React.string},
-            onClick: {
-              _ =>
-                // TODO: the version should be linked to the version of the french-law
-                currentPath->List.concat(list{`sources`, assetsVersion})->Nav.goToPath
-            },
-            iconId: "fr-icon-code-s-slash-line",
-            priority,
-          },
-        ]
-      />
-    }
+          iconId: "fr-icon-code-s-slash-line",
+          priority,
+        },
+      ]
+    />
+  }
 
-    let form_result =
-      <Dsfr.CallOut>
-        {switch formData {
-        | None => `En attente de la confirmation du formulaire...`->React.string
-        | Some(formData) =>
-          try {
-            <div className="flex flex-col">
-              <div>
-                {FormInfos.resultLabel->React.string}
-                {": "->React.string}
-                {FormInfos.computeAndPrintResult(formData)}
-              </div>
-              <Dsfr.Button
-                onClick={_ => {
-                  switch schemaState {
-                  | Some(schema) => {
-                      Console.log2("schema", schema)
-                      let doc = CatalaExplain.generate(
-                        // NOTE(@EmileRolley): we assume that the events exist,
-                        // because we have a result.
-                        ~events=eventsOpt->Option.getExn,
-                        ~userInputs=formData,
-                        ~schema,
-                        ~opts={
-                          title: `Calcul des ${FormInfos.name}`,
-                          // Contains an explicatory text about the computation and the catala program etc...
-                          description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${FormInfos.name} pour votre demande`,
-                          creator: `catala-dsfr / assets ${assetsVersion}`,
-                          keysToIgnore: FormInfos.webAssets.keysToIgnore,
-                          selectedOutput: FormInfos.webAssets.selectedOutput,
-                          sourcesURL: `${Constants.host}/${FormInfos.url}/sources/${assetsVersion}`,
-                        },
-                      )
-
-                      doc
-                      ->Docx.Packer.toBlob
-                      ->Promise.thenResolve(blob => {
-                        FileSaver.saveAs(
-                          blob,
-                          `explication-decision-${FormInfos.name->String.replaceRegExp(
-                              %re("/\s/g"),
-                              "_",
-                            )}.docx`,
-                        )
-                      })
-                      ->ignore
-                    }
-                  | None => Console.error("Missing schema to generate the doc")
-                  }
-                }}
-                iconPosition="left"
-                iconId="fr-icon-newspaper-line"
-                priority="secondary">
-                {`Télécharger une explication du calcul`->React.string}
-              </Dsfr.Button>
+  let form_result =
+    <Dsfr.CallOut>
+      {switch formData {
+      | None => `En attente de la confirmation du formulaire...`->React.string
+      | Some(formData) =>
+        try {
+          <div className="flex flex-col">
+            <div>
+              {formInfos.resultLabel->React.string}
+              {" = "->React.string}
+              {formInfos.computeAndPrintResult(formData)}
             </div>
-          } catch {
-          | err =>
-            <>
-              <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
-              {err
-              ->Js.Exn.asJsExn
-              ->Belt.Option.map(Js.Exn.message)
-              ->Belt.Option.getWithDefault(Some(""))
-              ->Belt.Option.getWithDefault("unknwon error, please retry the computation")
-              ->React.string}
-            </>
-          }
-        }}
-      </Dsfr.CallOut>
+            <Dsfr.Button
+              onClick={_ => {
+                switch schemaState {
+                | Some(schema) => {
+                    Console.log2("schema", schema)
+                    let doc = CatalaExplain.generate(
+                      // NOTE(@EmileRolley): we assume that the events exist,
+                      // because we have a result.
+                      ~events=eventsOpt->Option.getExn,
+                      ~userInputs=formData,
+                      ~schema,
+                      ~opts={
+                        title: `Calcul des ${formInfos.name}`,
+                        // Contains an explicatory text about the computation and the catala program etc...
+                        description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${formInfos.name} pour votre demande`,
+                        creator: `catala-dsfr / assets ${assetsVersion}`,
+                        keysToIgnore: formInfos.webAssets.keysToIgnore,
+                        selectedOutput: formInfos.webAssets.selectedOutput,
+                        sourcesURL: `${Constants.host}/${formInfos.url}/sources/${assetsVersion}`,
+                      },
+                    )
 
-    <>
-      <div className="fr-container--fluid">
-        <div className="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
-          <Dsfr.Notice
-            title={`Les données collectées par ce formulaire ne sont envoyées nulle part, et sont gérées uniquement par votre navigateur internet. \
+                    doc
+                    ->Docx.Packer.toBlob
+                    ->Promise.thenResolve(blob => {
+                      FileSaver.saveAs(
+                        blob,
+                        `explication-decision-${formInfos.name->String.replaceRegExp(
+                            %re("/\s/g"),
+                            "_",
+                          )}.docx`,
+                      )
+                    })
+                    ->ignore
+                  }
+                | None => Console.error("Missing schema to generate the doc")
+                }
+              }}
+              iconPosition="left"
+              iconId="fr-icon-newspaper-line"
+              priority="secondary">
+              {`Télécharger une explication du calcul`->React.string}
+            </Dsfr.Button>
+          </div>
+        } catch {
+        | err =>
+          <>
+            <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
+            {err
+            ->Js.Exn.asJsExn
+            ->Belt.Option.map(Js.Exn.message)
+            ->Belt.Option.getWithDefault(Some(""))
+            ->Belt.Option.getWithDefault("unknwon error, please retry the computation")
+            ->React.string}
+          </>
+        }
+      }}
+    </Dsfr.CallOut>
+
+  <>
+    <div className="fr-container--fluid">
+      <div className="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
+        <Dsfr.Notice
+          title={`Les données collectées par ce formulaire ne sont envoyées nulle part, et sont gérées uniquement par votre navigateur internet. \
             Les données sont traitées localement par un programme Javascript qui a été transmis avec le reste de ce site Internet. \
             Ainsi, ce site ne collecte aucune donnée de ses utilisateurs.`}
-            isClosable=true
-          />
-          <div className="fr-col">
-            {switch (schemaState, uiSchemaState) {
-            | (Some(schema), Some(uiSchema)) =>
-              <React.Suspense fallback={Spinners.loader}>
-                <RjsfFormDsfrLazy
-                  schema
-                  uiSchema
-                  formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
-                  onSubmit={t => {
-                    setFormData(_ => {
-                      let formData = t->Js.Dict.get("formData")
-                      switch (FormInfos.formDataPostProcessing, formData) {
-                      | (Some(f), Some(formData)) => {
-                          let newFormData = f(formData)
-                          Some(newFormData)
-                        }
-                      | _ => formData
+          isClosable=true
+        />
+        <div className="fr-col">
+          {switch (schemaState, uiSchemaState) {
+          | (Some(schema), Some(uiSchema)) =>
+            <React.Suspense fallback={Spinners.loader}>
+              <RjsfFormDsfrLazy
+                schema
+                uiSchema
+                formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
+                onSubmit={t => {
+                  setFormData(_ => {
+                    let formData = t->Js.Dict.get("formData")
+                    switch (formInfos.formDataPostProcessing, formData) {
+                    | (Some(f), Some(formData)) => {
+                        let newFormData = f(formData)
+                        Some(newFormData)
                       }
-                    })
-                  }}
-                />
-              </React.Suspense>
-            | _ => Spinners.loader
-            }}
-          </div>
-          <div
-            className="w-full fr-m-1w border-2 border-solid rounded-full border-[var(--border-default-grey)]"
-          />
-          <div className="fr-col"> form_result </div>
+                    | _ => formData
+                    }
+                  })
+                }}
+              />
+            </React.Suspense>
+          | _ => Spinners.loader
+          }}
         </div>
-        form_footer
+        <div
+          className="w-full fr-m-1w border-2 border-solid rounded-full border-[var(--border-default-grey)]"
+        />
+        <div className="fr-col"> form_result </div>
       </div>
-    </>
-  }
+      form_footer
+    </div>
+  </>
 }

@@ -1,53 +1,36 @@
-module AF = AllocationsFamiliales
-module AL = AidesLogement
+let alURL = AidesLogementUtils.formInfos.url
+let afURL = AllocationsFamilialesUtils.formInfos.url
 
 @react.component
 let make = () => {
   switch Nav.getCurrentURL().path {
-  | list{route} if route == AF.FormInfos.url =>
+  | list{route} if route == afURL =>
     <AllocationsFamiliales assetsVersion={WebAssets.Versions.latest} />
-  | list{route} if route == AL.FormInfos.url =>
-    <AidesLogement assetsVersion={WebAssets.Versions.latest} />
-  | list{route, "sources"} if route == AF.FormInfos.url =>
+  | list{route} if route == alURL => <AidesLogement assetsVersion={WebAssets.Versions.latest} />
+  | list{route, "sources"} if route == afURL =>
     <SourceCode
       version={WebAssets.Versions.latest}
       htmlImport={WebAssets.getAllocationsFamilialesSourceCode(WebAssets.Versions.latest)}
-      simulatorUrl={AF.FormInfos.url}
+      simulatorUrl={afURL}
     />
-  | list{route, "sources", "debug"} if route == AL.FormInfos.url =>
+  | list{route, "sources", "debug"} if route == alURL =>
     <SourceCode
       version={WebAssets.Versions.latest}
       htmlImport={WebAssets.getAidesLogementSourceCode(WebAssets.Versions.latest)}
-      simulatorUrl={AL.FormInfos.url}
+      simulatorUrl={alURL}
     />
   | list{route, "sources", version}
-    if WebAssets.Versions.available->Array.includes(version) && route == AF.FormInfos.url =>
+    if WebAssets.Versions.available->Array.includes(version) && route == afURL =>
     <SourceCode
       version
       htmlImport={WebAssets.getAllocationsFamilialesSourceCode(version)}
-      simulatorUrl={AF.FormInfos.url}
+      simulatorUrl={afURL}
     />
   | list{route, "sources", version}
-    if WebAssets.Versions.available->Array.includes(version) && route == AL.FormInfos.url =>
+    if WebAssets.Versions.available->Array.includes(version) && route == alURL =>
     <SourceCode
-      version
-      htmlImport={WebAssets.getAidesLogementSourceCode(version)}
-      simulatorUrl={AL.FormInfos.url}
+      version htmlImport={WebAssets.getAidesLogementSourceCode(version)} simulatorUrl={alURL}
     />
   | _ => <Home />
-  }
-}
-
-module Link = {
-  @react.component
-  let make = (~href: string, ~children) => {
-    <a
-      href={href}
-      onClick={evt => {
-        evt->ReactEvent.Mouse.preventDefault
-        href->Nav.goTo
-      }}>
-      children
-    </a>
   }
 }
