@@ -195,7 +195,6 @@ let make = (~assetsVersion: string, ~formInfos: FormInfos.t) => {
               onClick={_ => {
                 switch schemaState {
                 | Some(schema) => {
-                    Console.log2("schema", schema)
                     let doc = CatalaExplain.generate(
                       // NOTE(@EmileRolley): we assume that the events exist,
                       // because we have a result.

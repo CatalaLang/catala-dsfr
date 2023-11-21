@@ -14,15 +14,21 @@ import housingBenefitsHtml from "../../assets/v0.8.9/aides_logement.html?raw";
 type importFn<'a> = unit => promise<'a>
 
 module Versions = {
-  @module("./versionedAssets.ts")
-  external available: array<string> = "versions"
-
   type versionedAssets<'a> = Dict.t<importFn<'a>>
 
-  @module("./versionedAssets.ts")
-  external assetsImports: versionedAssets<'a> = "versionedAssets"
-  @module("./versionedAssets.ts")
-  external sourceCodesImports: versionedAssets<'a> = "versionedSources"
+  let assetsImports: versionedAssets<
+    JSON.t,
+  > = %raw(`import.meta.glob(["../../assets/**/*.{json,js,jsx}"])`)
+
+  let sourceCodesImports: versionedAssets<
+    string,
+  > = %raw(`import.meta.glob("../../assets/**/*.html", { as: "raw" })`)
+
+  let available =
+    assetsImports
+    ->Dict.keysToArray
+    ->Array.map(key => key->String.split("/")->Array.getUnsafe(3))
+    ->Utils.toUnique
 
   let latest = available->Array.get(0)->Option.getExn
 }
@@ -46,8 +52,8 @@ let getAllocationsFamiliales = version => {
     )
   switch (schema, uiSchema) {
   | (Some(schemaImport), Some(uiSchemaImport)) => {
-      schemaImport,
-      uiSchemaImport,
+      schemaImport: async () => (await schemaImport())->Utils.getFromJSONExn("default"),
+      uiSchemaImport: async () => (await uiSchemaImport())->Utils.getFromJSONExn("default"),
       keysToIgnore: ["dIdentifiant"],
       selectedOutput: list{"InterfaceAllocationsFamiliales", "i_montant_versé"},
     }
@@ -77,9 +83,10 @@ let getAidesLogement = version => {
 
   switch (schema, uiSchema, initialData) {
   | (Some(schemaImport), Some(uiSchemaImport), Some(initialDataImport)) => {
-      schemaImport: async () => (await schemaImport())["default"],
-      uiSchemaImport: async () => (await uiSchemaImport())["uiSchema"]["default"],
-      initialDataImport: async () => (await initialDataImport())["default"],
+      schemaImport: async () => (await schemaImport())->Utils.getFromJSONExn("default"),
+      uiSchemaImport: async () =>
+        (await uiSchemaImport())->Utils.getFromJSONExn("uiSchema")->Utils.getFromJSONExn("default"),
+      initialDataImport: async () => (await initialDataImport())->Utils.getFromJSONExn("default"),
       selectedOutput: list{"CalculetteAidesAuLogementGardeAlternée", "aide_finale"},
       keysToIgnore: ["identifiant"],
     }
