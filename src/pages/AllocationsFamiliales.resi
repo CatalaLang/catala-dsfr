@@ -1,2 +1,2 @@
 @react.component
-let make: (~assetsVersion: string) => React.element
+let make: (~assetsVersion: string, ~frenchLawVersion: string=?) => React.element

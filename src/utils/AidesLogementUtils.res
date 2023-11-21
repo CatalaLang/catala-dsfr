@@ -15,10 +15,16 @@ let formInfos: FormInfos.t = {
 	  return data;
 	}
   `),
-  computeAndPrintResult: input => <>
-    <span className="font-mono font-bold text-[var(--text-active-blue-france)]">
-      {input->CatalaFrenchLaw.computeAidesAuLogement->Belt.Float.toString->React.string}
-    </span>
-    {React.string(` €`)}
-  </>,
+  computeAndPrintResult: async input => {
+    let res =
+      (await CatalaFrenchLaw.get(CatalaFrenchLaw.Versions.latest)()).computeAidesAuLogement(
+        input,
+      )->Float.toString
+    <>
+      <span className="font-mono font-bold text-[var(--text-active-blue-france)]">
+        {React.string(res)}
+      </span>
+      {React.string(` €`)}
+    </>
+  },
 }

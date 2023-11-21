@@ -4,5 +4,5 @@ type t = {
   resultLabel: string,
   url: string,
   formDataPostProcessing?: JSON.t => JSON.t,
-  computeAndPrintResult: JSON.t => React.element,
+  computeAndPrintResult: JSON.t => promise<React.element>,
 }

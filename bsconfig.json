@@ -1,15 +1,21 @@
 {
   "name": "catala-dsfr",
-  "sources": {
-    "dir": "src",
-    "subdirs": true,
-    "generators": [
-      {
-        "name": "gen-tailwind",
-        "edge": ["css/tailwind.css", ":", "css/index.css"]
-      }
-    ]
-  },
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true,
+      "generators": [
+        {
+          "name": "gen-tailwind",
+          "edge": ["css/tailwind.css", ":", "css/index.css"]
+        }
+      ]
+    },
+    {
+      "dir": "french-law",
+      "subdirs": true
+    }
+  ],
   "generators": [
     {
       "name": "gen-tailwind",
@@ -24,7 +30,6 @@
   "jsx": { "version": 4, "mode": "classic" },
   "bs-dependencies": [
     "@catala-lang/catala-explain",
-    "@catala-lang/french-law",
     "@catala-lang/rescript-catala",
     "@rescript/core",
     "@rescript/react",

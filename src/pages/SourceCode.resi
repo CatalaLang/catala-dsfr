@@ -1,6 +1,6 @@
 @react.component
 let make: (
   ~version: string,
-  ~htmlImport: WebAssets.importFn<string>,
+  ~htmlImport: Vite.getPromise<string>,
   ~simulatorUrl: string,
 ) => React.element

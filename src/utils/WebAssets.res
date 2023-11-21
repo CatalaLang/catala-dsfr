@@ -20,8 +20,9 @@ module Versions = {
     ->Dict.keysToArray
     ->Array.map(key => key->String.split("/")->Array.getUnsafe(3))
     ->Utils.toUnique
+    ->Array.toSorted((a, b) => String.compare(b, a))
 
-  let latest = available->Array.get(0)->Option.getExn
+  let latest = available->Array.getUnsafe(0)
 }
 
 type t = {
@@ -43,8 +44,14 @@ let getAllocationsFamiliales = version => {
     )
   switch (schema, uiSchema) {
   | (Some(schemaImport), Some(uiSchemaImport)) => {
-      schemaImport: async () => (await schemaImport())->Utils.getFromJSONExn("default"),
-      uiSchemaImport: async () => (await uiSchemaImport())->Utils.getFromJSONExn("default"),
+      schemaImport: async () => {
+        let schema = await schemaImport()
+        schema->Utils.getFromJSONExn("default")
+      },
+      uiSchemaImport: async () => {
+        let uiSchema = await uiSchemaImport()
+        uiSchema->Utils.getFromJSONExn("default")
+      },
       keysToIgnore: ["dIdentifiant"],
       selectedOutput: list{"InterfaceAllocationsFamiliales", "i_montant_versé"},
     }
@@ -74,10 +81,18 @@ let getAidesLogement = version => {
 
   switch (schema, uiSchema, initialData) {
   | (Some(schemaImport), Some(uiSchemaImport), Some(initialDataImport)) => {
-      schemaImport: async () => (await schemaImport())->Utils.getFromJSONExn("default"),
-      uiSchemaImport: async () =>
-        (await uiSchemaImport())->Utils.getFromJSONExn("uiSchema")->Utils.getFromJSONExn("default"),
-      initialDataImport: async () => (await initialDataImport())->Utils.getFromJSONExn("default"),
+      schemaImport: async () => {
+        let schema = await schemaImport()
+        schema->Utils.getFromJSONExn("default")
+      },
+      uiSchemaImport: async () => {
+        let uiSchema = await uiSchemaImport()
+        uiSchema->Utils.getFromJSONExn("uiSchema")
+      },
+      initialDataImport: async () => {
+        let initialData = await initialDataImport()
+        initialData->Utils.getFromJSONExn("default")
+      },
       selectedOutput: list{"CalculetteAidesAuLogementGardeAlternée", "aide_finale"},
       keysToIgnore: ["identifiant"],
     }

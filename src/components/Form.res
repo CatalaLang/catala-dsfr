@@ -56,13 +56,14 @@ const readFileAsJSON = (file, callback) => {
   Builds a React component from provided information.
 */
 @react.component
-let make = (~assetsVersion: string, ~formInfos: FormInfos.t) => {
+let make = (~assetsVersion: string, ~frenchLaw: CatalaFrenchLaw.t, ~formInfos: FormInfos.t) => {
   let currentPath = Nav.getCurrentURL().path
   let (formData, setFormData) = React.useState(_ => None)
   let (initialData, setInitialData) = React.useState(_ => None)
   let (schemaState, setSchemaState) = React.useState(_ => None)
   let (uiSchemaState, setUiSchemaState) = React.useState(_ => None)
   let (eventsOpt, setEventsOpt) = React.useState(_ => None)
+  let (formResult, setFormResult) = React.useState(_ => None)
 
   React.useEffect1(() => {
     switch formInfos.webAssets.initialDataImport {
@@ -80,6 +81,7 @@ let make = (~assetsVersion: string, ~formInfos: FormInfos.t) => {
 
   React.useEffect2(() => {
     formInfos.webAssets.schemaImport()
+    // TODO: factorize
     ->Promise.thenResolve(schema => {
       setSchemaState(_ => Some(schema))
       None
@@ -97,18 +99,27 @@ let make = (~assetsVersion: string, ~formInfos: FormInfos.t) => {
   React.useEffect2(() => {
     setEventsOpt(_ => {
       let events = {
-        try {CatalaFrenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
+        try {frenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
         | _ => []
         }
       }
-      if 0 == events->Belt.Array.size {
-        None
-      } else {
-        Some(events)
-      }
+      0 == events->Belt.Array.size ? None : Some(events)
     })
     None
-  }, (formData, setEventsOpt))
+  }, (formResult, setEventsOpt))
+
+  React.useEffect1(() => {
+    switch formData {
+    | Some(data) =>
+      formInfos.computeAndPrintResult(data)
+      ->Promise.thenResolve(res => {
+        setFormResult(_ => Some(res))
+      })
+      ->Promise.done
+    | None => setFormResult(_ => None)
+    }
+    None
+  }, [formData])
 
   let (uploadedFile, setUploadedFile) = React.useState(_ => {
     Js.Json.object_(Js.Dict.empty())
@@ -181,15 +192,14 @@ let make = (~assetsVersion: string, ~formInfos: FormInfos.t) => {
 
   let form_result =
     <Dsfr.CallOut>
-      {switch formData {
-      | None => `En attente de la confirmation du formulaire...`->React.string
-      | Some(formData) =>
+      {switch (formData, formResult) {
+      | (Some(formData), Some(formResult)) =>
         try {
           <div className="flex flex-col">
             <div>
               {formInfos.resultLabel->React.string}
               {" = "->React.string}
-              {formInfos.computeAndPrintResult(formData)}
+              {formResult}
             </div>
             <Dsfr.Button
               onClick={_ => {
@@ -246,6 +256,7 @@ let make = (~assetsVersion: string, ~formInfos: FormInfos.t) => {
             ->React.string}
           </>
         }
+      | _ => `En attente de la confirmation du formulaire...`->React.string
       }}
     </Dsfr.CallOut>
 

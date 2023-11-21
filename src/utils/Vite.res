@@ -2,7 +2,7 @@ type getPromise<'a> = unit => promise<'a>
 
 module Import = {
   module Meta = {
-    type opts = {@as("as") as_?: string}
+    type opts = {@as("as") as_?: string, import?: string}
 
     external glob: string => Dict.t<getPromise<'a>> = "import.meta.glob"
 
