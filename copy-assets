@@ -1,0 +1,22 @@
+#!/bin/bash
+
+destination_dir="assets"
+
+for folder in node_modules/@catala-lang/catala-web-assets-*; do
+    if [ -d "$folder" ]; then
+        version_number=$(echo "$folder" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+
+        mkdir -p "$destination_dir/$version_number"
+
+        cp $folder/assets/allocations_familiales.html $destination_dir/$version_number/
+        cp $folder/assets/allocations_familiales_schema_fr.json $destination_dir/$version_number/
+        cp $folder/assets/allocations_familiales_ui_schema_fr.json $destination_dir/$version_number/
+        
+	cp $folder/assets/aides_logement.html $destination_dir/$version_number/
+	cp $folder/assets/aides_logement_schema_fr.json $destination_dir/$version_number/
+        cp $folder/assets/aides_logement_ui_fr.schema.jsx $destination_dir/$version_number/
+        cp $folder/assets/aides_logement_init.json $destination_dir/$version_number/
+        
+        echo "Copied $folder to $destination_dir/$version_number"
+    fi
+done

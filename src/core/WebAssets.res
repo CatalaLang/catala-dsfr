@@ -1,14 +1,3 @@
-%%raw(`
-import familyBenefitsSchemaFr from "../../assets/v0.8.9/allocations_familiales_schema_fr.json";
-import familyBenefitsUISchema from "../../assets/v0.8.9/allocations_familiales_ui_schema_fr.json";
-import familyBenefitsHtml from "../../assets/v0.8.9/allocations_familiales.html?raw";
-
-import {uiSchema as housingBenefitsUISchemaFr} from "../../assets/v0.8.9/aides_logement_ui_fr.schema.jsx";
-import housingBenefitsSchema from "../../assets/v0.8.9/aides_logement_schema_fr.json";
-import housingBenefitsInitialData from "../../assets/v0.8.9/aides_logement_init.json";
-import housingBenefitsHtml from "../../assets/v0.8.9/aides_logement.html?raw";
-`)
-
 open Vite
 
 module Versions = {
