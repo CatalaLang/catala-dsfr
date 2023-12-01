@@ -17,7 +17,7 @@ let formInfos: FormInfos.t = {
   `),
   computeAndPrintResult: async input => {
     let res =
-      (await CatalaFrenchLaw.get(CatalaFrenchLaw.Versions.latest)()).computeAllocationsFamiliales(
+      (await FrenchLaw.get(FrenchLaw.Versions.latest)()).computeAllocationsFamiliales(
         input,
       )->Float.toString
     <>

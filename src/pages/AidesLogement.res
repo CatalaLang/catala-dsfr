@@ -1,10 +1,10 @@
 @react.component
-let make = (~assetsVersion, ~frenchLawVersion=CatalaFrenchLaw.Versions.latest) => {
+let make = (~assetsVersion, ~frenchLawVersion=FrenchLaw.Versions.latest) => {
   // TODO: factorize with AllocationsLogement
   let (frenchLaw, setFrenchLaw) = React.useState(_ => None)
 
   React.useEffect1(() => {
-    CatalaFrenchLaw.get(frenchLawVersion)()
+    FrenchLaw.get(frenchLawVersion)()
     ->Promise.thenResolve(frenchLaw => {
       setFrenchLaw(_ => Some(frenchLaw))
       None

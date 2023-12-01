@@ -11,8 +11,7 @@ module Versions = {
     frenchLawImports
     ->Dict.keysToArray
     ->Array.map(key => key->String.split("/")->Array.getUnsafe(3))
-    ->Utils.toUnique
-    ->Array.toSorted((a, b) => String.compare(b, a))
+    ->SemVer.sort
 
   let latest = available->Array.getUnsafe(0)
 }

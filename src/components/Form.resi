@@ -1,6 +1,6 @@
 @react.component
 let make: (
   ~assetsVersion: string,
-  ~frenchLaw: CatalaFrenchLaw.t,
+  ~frenchLaw: FrenchLaw.t,
   ~formInfos: FormInfos.t,
 ) => React.element

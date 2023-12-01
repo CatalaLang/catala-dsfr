@@ -56,7 +56,7 @@ const readFileAsJSON = (file, callback) => {
   Builds a React component from provided information.
 */
 @react.component
-let make = (~assetsVersion: string, ~frenchLaw: CatalaFrenchLaw.t, ~formInfos: FormInfos.t) => {
+let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos.t) => {
   let currentPath = Nav.getCurrentURL().path
   let (formData, setFormData) = React.useState(_ => None)
   let (initialData, setInitialData) = React.useState(_ => None)
