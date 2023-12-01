@@ -495,6 +495,11 @@
   resolved "https://registry.yarnpkg.com/@rescript/core/-/core-0.5.0.tgz#3e83e75aaa60f42f4279e0d184358f2db5d40955"
   integrity sha512-Keqnpi+8VqyhCk/3aMwar8hJbNy2IsINAAfIFeQC65IIegCR0QXFDBpQxfVcmbbtoHq6HnW4B3RLm/9GCUJQhQ==
 
+"@rescript/core@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@rescript/core/-/core-0.6.0.tgz#d2aae335c2a91dd68acce0ec11716861e08500d5"
+  integrity sha512-D4ykxSpbmxbQa99kCg6/DztwCNt1tV3t11BLSOvJPHNLSIuQxfAU3ddgRruaH9LQSKOrMUjxQS9z6RdG5iFPoA==
+
 "@rescript/react@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@rescript/react/-/react-0.11.0.tgz#d2545546d823bdb8e6b59daa1790098d1666f79e"
