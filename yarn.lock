@@ -236,6 +236,11 @@
     "@rescript/core" "^0.5.0"
     rescript-docx "^0.1.5"
 
+"@catala-lang/catala-web-assets-0.8.10@npm:@catala-lang/catala-web-assets@0.8.10":
+  version "0.8.10"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.10.tgz#14ced662842ec1d563b3808de8ae00144e145e9d"
+  integrity sha512-M0lDiB3Rk6bSWCQoneMocYtx4zVY6eFZgEuIGPgeCoQsBfdkm7coYhcYimX2oFW1VnL3nlQlCHjWwuwCUCC4ww==
+
 "@catala-lang/catala-web-assets-0.8.8@npm:@catala-lang/catala-web-assets@0.8.8":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.8.tgz#19ba83eded6bc4a51c609526aee29dc03546a2c6"
@@ -245,6 +250,15 @@
   version "0.8.9"
   resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.9.tgz#77b6278369f003656a91ae8f01c710b0c13716a4"
   integrity sha512-Tpi5LCwPiLAuYlPccSYn7bpd1mrmihgabkvhXL7PE0KOB3hc+rNoZBkVF42UaagXh7UqX8dnaKhoeI3muGfCrQ==
+
+"@catala-lang/french-law-0.8.10@npm:@catala-lang/french-law@0.8.10":
+  version "0.8.10"
+  resolved "https://registry.yarnpkg.com/@catala-lang/french-law/-/french-law-0.8.10.tgz#570cfaa0f4003a7fbe28646ea103f25445e93d5b"
+  integrity sha512-/cBU+6CyrIUwyT1Y2Ngk42Og70McLSiKFwlYNrKb1gZA4iZPunVDsVexDQLCUw2FGAJS8PpdWll06Sk8kN3rmw==
+  dependencies:
+    benchmark "^2.1.4"
+    lodash "^4.17.21"
+    platform "^1.3.6"
 
 "@catala-lang/french-law-0.8.3-b.3@npm:@catala-lang/french-law@0.8.3-b.3":
   version "0.8.3-b.3"
