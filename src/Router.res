@@ -13,12 +13,6 @@ let make = () => {
       htmlImport={WebAssets.getAllocationsFamilialesSourceCode(WebAssets.Versions.latest)}
       simulatorUrl={afURL}
     />
-  | list{route, "sources", "debug"} if route == alURL =>
-    <SourceCode
-      version={WebAssets.Versions.latest}
-      htmlImport={WebAssets.getAidesLogementSourceCode(WebAssets.Versions.latest)}
-      simulatorUrl={alURL}
-    />
   | list{route, "sources", version}
     if WebAssets.Versions.available->Array.includes(version) && route == afURL =>
     <SourceCode

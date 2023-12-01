@@ -13,7 +13,7 @@ const allowPathWithEndingVersionNumbers = () => ({
   configureServer: (server) => {
     server.middlewares.use((req, _, next) => {
       const endPath = req.url.split("?", 2)[0].split("/").slice(-1)[0];
-      if (endPath.match(/v[0-9]\.[0-9]\.[0-9]/)) {
+      if (endPath.match(/[0-9]\.[0-9]\.[0-9]/)) {
         req.url = "/";
       }
       next();
