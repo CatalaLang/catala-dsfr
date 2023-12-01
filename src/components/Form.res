@@ -215,7 +215,7 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
                         title: `Calcul des ${formInfos.name}`,
                         // Contains an explicatory text about the computation and the catala program etc...
                         description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${formInfos.name} pour votre demande`,
-                        creator: `catala-dsfr / assets ${assetsVersion}`,
+                        creator: `${Constants.host} avec catala-web-assets@v${assetsVersion} et french-law@v${frenchLaw.version}`,
                         keysToIgnore: formInfos.webAssets.keysToIgnore,
                         selectedOutput: formInfos.webAssets.selectedOutput,
                         sourcesURL: `${Constants.host}/${formInfos.url}/sources/${assetsVersion}`,
