@@ -2,6 +2,16 @@
 
 destination_dir="assets"
 
+latest_version=$(curl "https://registry.npmjs.org/@catala-lang/catala-web-assets/latest" -s | grep -oP '"version":"\K[0-9]+\.[0-9]+(\.[0-9]+)?(-[a-zA-Z]+(\.[0-9]+)?)?')
+
+echo "Latest version: $latest_version"
+if [ -d "node_modules/@catala-lang/catala-web-assets-$latest_version" ]; then
+    echo "Already up to date"
+else
+   echo "Adding latest version $latest_version"
+   yarn add @catala-lang/catala-web-assets-$latest_version@npm:@catala-lang/catala-web-assets@$latest_version
+fi
+
 for folder in node_modules/@catala-lang/catala-web-assets-*; do
     if [ -d "$folder" ]; then
         version_number=$(echo "$folder" | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?(-[a-zA-Z]+(\.[0-9]+)?)?')

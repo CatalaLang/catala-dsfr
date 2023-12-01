@@ -79,7 +79,24 @@ yarn link @catala-lang/<library-name>
 
 ## Versioned assets
 
-TODO
+Multiple versions of [@catala-lang/catala-web-assets](https://github.com/CatalaLang/catala-web-assets)
+are used in this project. 
+
+### To add a new version
+
+To add a new version of the assets, you need to use the [yarn
+aliases](https://classic.yarnpkg.com/en/docs/cli/add#toc-yarn-add-alias):
+
+```bash
+# For @catala-lang/catala-web-assets
+yarn add @catala-lang/catala-web-assets-<latest-version>@npm:@catala-lang/catala-web-assets@<latest-version>
+
+# For @catala-lang/french-law
+yarn add @catala-lang/french-law-<latest-version>@npm:@catala-lang/french-law@<latest-version>
+```
+
+> [!TIP]
+> The latest version of the `@catala-lang/catala-web-assets` package and the `@catala-lang/french-law` package are automatically updated with the `./update-assets.sh` script run in `postinstall` in `package.json`.
 
 ## Build for production and deploy
 

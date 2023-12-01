@@ -10,7 +10,8 @@
     "dev": "yarn run pre && vite",
     "re:build": "rescript build -with-deps",
     "re:watch": "yarn run pre && rescript build -w -with-deps",
-    "postinstall": "copy-dsfr-to-public && ./copy-assets && ./copy-french-law",
+    "assets": "./update-assets.sh",
+    "postinstall": "copy-dsfr-to-public",
     "pre": "yarn run re:build && only-include-used-icons"
   },
   "keywords": [
