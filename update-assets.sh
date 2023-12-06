@@ -17,8 +17,7 @@ copy_files () {
     echo "[info] Updating $1..."
 
     local package_name="$1"
-    local destination_dir="$2"
-    shift 2
+    shift 1
 
     echo "[info] Checking latest version for @catala-lang/$package_name.."
     check_latest_version "$package_name"
@@ -28,14 +27,15 @@ copy_files () {
     for folder in node_modules/@catala-lang/$package_name-*; do
 	if [ -d "$folder" ]; then
 	    local version_number=$(echo "$folder" | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?(-[a-zA-Z]+(\.[0-9]+)?)?')
+	    local dest="$package_name/$version_number"
 
-	    mkdir -p "$destination_dir/$version_number"
+	    mkdir -p "$dest"
 
 	    for file in $files_to_copy; do
-		cp $folder/$file $destination_dir/$version_number/
+		cp $folder/$file $dest
 	    done
 
-	    echo "[info] Created $destination_dir/$version_number"
+	    echo "[info] Created $dest"
 	fi
     done
 }
@@ -49,7 +49,7 @@ assets_files=(
     "assets/aides_logement_ui_fr.schema.jsx"
     "assets/aides_logement_init.json"
 )
-copy_files "catala-web-assets" "assets" "${assets_files[@]}"
+copy_files "catala-web-assets" "${assets_files[@]}"
 
 french_law_files=("src/french_law.js")
-copy_files "french-law" "french-law" "${french_law_files[@]}"
+copy_files "french-law" "${french_law_files[@]}"

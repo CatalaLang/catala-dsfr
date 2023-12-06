@@ -1,8 +1,11 @@
 open Vite
 
 module Versions = {
-  let assetsImports = Import.Meta.glob("../../assets/**/*.{json,js,jsx}")
-  let sourceCodesImports = Import.Meta.globWithOpts("../../assets/**/*.html", {as_: "raw"})
+  let assetsImports = Import.Meta.glob("../../catala-web-assets/**/*.{json,js,jsx}")
+  let sourceCodesImports = Import.Meta.globWithOpts(
+    "../../catala-web-assets/**/*.html",
+    {as_: "raw"},
+  )
 
   let available =
     assetsImports
@@ -24,11 +27,11 @@ type t = {
 let getAllocationsFamiliales = version => {
   let schema =
     Versions.assetsImports->Dict.get(
-      `../../assets/${version}/allocations_familiales_schema_fr.json`,
+      `../../catala-web-assets/${version}/allocations_familiales_schema_fr.json`,
     )
   let uiSchema =
     Versions.assetsImports->Dict.get(
-      `../../assets/${version}/allocations_familiales_ui_schema_fr.json`,
+      `../../catala-web-assets/${version}/allocations_familiales_ui_schema_fr.json`,
     )
   switch (schema, uiSchema) {
   | (Some(schemaImport), Some(uiSchemaImport)) => {
@@ -50,7 +53,7 @@ let getAllocationsFamiliales = version => {
 let allocationsFamilialesAssets: t = getAllocationsFamiliales(Versions.latest)
 let getAllocationsFamilialesSourceCode = (version): getPromise<string> =>
   switch Versions.sourceCodesImports->Dict.get(
-    `../../assets/${version}/allocations_familiales.html`,
+    `../../catala-web-assets/${version}/allocations_familiales.html`,
   ) {
   | Some(htmlImport) => htmlImport
   | None =>
@@ -61,11 +64,15 @@ let getAllocationsFamilialesSourceCode = (version): getPromise<string> =>
 
 let getAidesLogement = version => {
   let schema =
-    Versions.assetsImports->Dict.get(`../../assets/${version}/aides_logement_schema_fr.json`)
+    Versions.assetsImports->Dict.get(
+      `../../catala-web-assets/${version}/aides_logement_schema_fr.json`,
+    )
   let uiSchema =
-    Versions.assetsImports->Dict.get(`../../assets/${version}/aides_logement_ui_fr.schema.jsx`)
+    Versions.assetsImports->Dict.get(
+      `../../catala-web-assets/${version}/aides_logement_ui_fr.schema.jsx`,
+    )
   let initialData =
-    Versions.assetsImports->Dict.get(`../../assets/${version}/aides_logement_init.json`)
+    Versions.assetsImports->Dict.get(`../../catala-web-assets/${version}/aides_logement_init.json`)
 
   switch (schema, uiSchema, initialData) {
   | (Some(schemaImport), Some(uiSchemaImport), Some(initialDataImport)) => {
@@ -91,7 +98,9 @@ let getAidesLogement = version => {
 let aidesLogementAssets: t = getAidesLogement(Versions.latest)
 
 let getAidesLogementSourceCode = (version): getPromise<string> =>
-  switch Versions.sourceCodesImports->Dict.get(`../../assets/${version}/aides_logement.html`) {
+  switch Versions.sourceCodesImports->Dict.get(
+    `../../catala-web-assets/${version}/aides_logement.html`,
+  ) {
   | Some(htmlImport) => htmlImport
   | None =>
     Js.Exn.raiseError(
