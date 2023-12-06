@@ -1,4 +1,4 @@
-let formInfos: FormInfos.t = {
+let infos: FormInfos.t = {
   webAssets: WebAssets.aidesLogementAssets,
   name: "aides au logement",
   resultLabel: `Montant mensuel brut des aides au logement`,

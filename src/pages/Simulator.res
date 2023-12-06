@@ -1,16 +1,18 @@
 @react.component
-let make = (~assetsVersion, ~frenchLawVersion=FrenchLaw.Versions.latest) => {
+let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
   let (frenchLaw, setFrenchLaw) = React.useState(_ => None)
 
+  Console.log2("version", version["name"])
+
   React.useEffect1(() => {
-    FrenchLaw.get(frenchLawVersion)()
+    FrenchLaw.get(version["french-law"])()
     ->Promise.thenResolve(frenchLaw => {
       setFrenchLaw(_ => Some(frenchLaw))
       None
     })
     ->Promise.done
     None
-  }, [frenchLawVersion])
+  }, [version])
 
   React.useEffect1(() => {
     // Reset the log when the page is loaded.
@@ -22,12 +24,10 @@ let make = (~assetsVersion, ~frenchLawVersion=FrenchLaw.Versions.latest) => {
   }, [frenchLaw])
 
   <div className="fr-container">
-    <PageComponents.Title>
-      {"Calcul des allocations familiales"->React.string}
-    </PageComponents.Title>
+    <h1 className="fr-h1"> {`Calcul des ${formInfos.name}`->React.string} </h1>
     {switch frenchLaw {
     | Some(frenchLaw) =>
-      <Form assetsVersion frenchLaw formInfos={AllocationsFamilialesUtils.formInfos} />
+      <Form assetsVersion={version["catala-web-assets"]} frenchLaw formInfos={formInfos} />
     | None => Spinners.loader
     }}
   </div>
