@@ -1,0 +1,19 @@
+{
+  "available": [
+    {
+      "name": "2023-12-01",
+      "french-law": "0.8.10",
+      "catala-web-assets": "0.8.10"
+    },
+    {
+      "name": "2023-10-31",
+      "french-law": "0.8.3-b.3",
+      "catala-web-assets": "0.8.9"
+    },
+    {
+      "name": "2023-10-27",
+      "french-law": "0.8.3-b.3",
+      "catala-web-assets": "0.8.8"
+    }
+  ]
+}

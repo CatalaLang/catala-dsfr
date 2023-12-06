@@ -79,8 +79,15 @@ yarn link @catala-lang/<library-name>
 
 ## Versioned assets
 
-Multiple versions of [@catala-lang/catala-web-assets](https://github.com/CatalaLang/catala-web-assets)
-are used in this project. 
+Multiple versions of
+[@catala-lang/catala-web-assets](https://github.com/CatalaLang/catala-web-assets)
+and [@catala-lang/french-law](https://github.com/CatalaLang/french-law) are
+used in this project.
+
+In the `assets-versions.json` file is defined the list of versions available.
+Each version is defined by a pair of versions for each package (one for the web
+assets and one for the french law library) and named with the corresponding
+date.
 
 ### To add a new version
 
@@ -96,7 +103,25 @@ yarn add @catala-lang/french-law-<latest-version>@npm:@catala-lang/french-law@<l
 ```
 
 > [!TIP]
-> The latest version of the `@catala-lang/catala-web-assets` package and the `@catala-lang/french-law` package are automatically updated with the `./update-assets.sh` script run in `postinstall` in `package.json`.
+> The latest version of the `@catala-lang/catala-web-assets` package and the
+> `@catala-lang/french-law` package are automatically updated with the
+> `./update-assets.sh` script run in `postinstall` in `package.json`.
+
+> [!IMPORTANT]
+> For now, if a new version of one of the packages is added, you need to **manually** update
+> the `assets-versions.json` file with the new version.
+>
+> ```diff
+> {
+>   "available": [
+> +   {
+> +    "name": "<date>",
+> +    "catala-web-assets": "<latest-version>",
+> +    "french-law": "<latest-version>"
+> +  },
+>   ]
+> }
+> ```
 
 ## Build for production and deploy
 
