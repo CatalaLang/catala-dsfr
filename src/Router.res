@@ -18,6 +18,12 @@ let make = () => {
         simulatorUrl={AF.infos.url}
       />
     }
+  | list{route, "sources"} if route == AL.infos.url => {
+      let version = Versions.latest["catala-web-assets"]
+      <SourceCode
+        htmlImport={WebAssets.getAidesLogementSourceCode(version)} simulatorUrl={AF.infos.url}
+      />
+    }
   | list{route, versionName, "sources"}
     if route == AF.infos.url && Versions.isAvailable(versionName) => {
       let version = Versions.getUnsafe(versionName)["catala-web-assets"]

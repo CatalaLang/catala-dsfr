@@ -56,15 +56,17 @@ const readFileAsJSON = (file, callback) => {
   Builds a React component from provided information.
 */
 @react.component
-let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos.t) => {
+let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos.t) => {
   let currentPath = Nav.getCurrentURL().path
+  let assetsVersion = version["catala-web-assets"]
+  let webAssets = formInfos.getWebAssets(assetsVersion)
+
   let (formData, setFormData) = React.useState(_ => None)
   let (initialData, setInitialData) = React.useState(_ => None)
   let (schemaState, setSchemaState) = React.useState(_ => None)
   let (uiSchemaState, setUiSchemaState) = React.useState(_ => None)
   let (eventsOpt, setEventsOpt) = React.useState(_ => None)
   let (formResult, setFormResult) = React.useState(_ => None)
-  let webAssets = formInfos.getWebAssets(assetsVersion)
 
   React.useEffect1(() => {
     switch (formData, webAssets.initialDataImport) {
@@ -177,7 +179,7 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
           onClick: {
             _ =>
               // TODO: the version should be linked to the version of the french-law
-              currentPath->List.concat(list{`sources`})->Nav.goToPath
+              currentPath->List.concat(list{`sources`})->Nav.goToAbsolutePath
           },
           iconId: "fr-icon-code-s-slash-line",
           priority,
@@ -214,7 +216,7 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
                         creator: `${Constants.host} avec catala-web-assets@v${assetsVersion} et french-law@v${frenchLaw.version}`,
                         keysToIgnore: webAssets.keysToIgnore,
                         selectedOutput: webAssets.selectedOutput,
-                        sourcesURL: `${Constants.host}/${formInfos.url}/sources/${assetsVersion}`,
+                        sourcesURL: `${Constants.host}/${formInfos.url}/${version["name"]}/sources/`,
                       },
                     )
 

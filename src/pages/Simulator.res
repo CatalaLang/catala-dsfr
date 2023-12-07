@@ -55,8 +55,7 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
     />
     <h1 className="fr-h1"> {React.string(`Calcul des ${formInfos.name}`)} </h1>
     {switch frenchLaw {
-    | Some(frenchLaw) =>
-      <Form assetsVersion={version["catala-web-assets"]} frenchLaw formInfos={formInfos} />
+    | Some(frenchLaw) => <Form version frenchLaw formInfos={formInfos} />
     | None => Spinners.loader
     }}
   </div>
