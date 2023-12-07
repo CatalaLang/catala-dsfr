@@ -11,24 +11,28 @@ let make = () => {
   | list{route} if route == AL.infos.url => <Simulator formInfos={AL.infos} />
   | list{route, versionName} if route == AL.infos.url && Versions.isAvailable(versionName) =>
     <Simulator formInfos={AL.infos} version={Versions.getUnsafe(versionName)} />
-  | list{route, "sources"} if route == AF.infos.url =>
-    <SourceCode
-      version={WebAssets.Versions.latest}
-      htmlImport={WebAssets.getAllocationsFamilialesSourceCode(WebAssets.Versions.latest)}
-      simulatorUrl={AF.infos.url}
-    />
-  | list{route, "sources", version}
-    if route == AF.infos.url && WebAssets.Versions.available->Array.includes(version) =>
-    <SourceCode
-      version
-      htmlImport={WebAssets.getAllocationsFamilialesSourceCode(version)}
-      simulatorUrl={AF.infos.url}
-    />
-  | list{route, "sources", version}
-    if route == AL.infos.url && WebAssets.Versions.available->Array.includes(version) =>
-    <SourceCode
-      version htmlImport={WebAssets.getAidesLogementSourceCode(version)} simulatorUrl={AL.infos.url}
-    />
+  | list{route, "sources"} if route == AF.infos.url => {
+      let version = Versions.latest["catala-web-assets"]
+      <SourceCode
+        htmlImport={WebAssets.getAllocationsFamilialesSourceCode(version)}
+        simulatorUrl={AF.infos.url}
+      />
+    }
+  | list{route, versionName, "sources"}
+    if route == AF.infos.url && Versions.isAvailable(versionName) => {
+      let version = Versions.getUnsafe(versionName)["catala-web-assets"]
+      <SourceCode
+        htmlImport={WebAssets.getAllocationsFamilialesSourceCode(version)}
+        simulatorUrl={AF.infos.url}
+      />
+    }
+  | list{route, versionName, "sources"}
+    if route == AL.infos.url && Versions.isAvailable(versionName) => {
+      let version = Versions.getUnsafe(versionName)["catala-web-assets"]
+      <SourceCode
+        htmlImport={WebAssets.getAidesLogementSourceCode(version)} simulatorUrl={AL.infos.url}
+      />
+    }
   | _ => <Page404 />
   }
 }

@@ -1,10 +1,10 @@
 @react.component
 let make = () => {
-  <>
+  <div className="min-h-100 flex flex-col">
     <Header />
-    <main role="main" className="fr-h-10w fr-p-2w">
+    <div className="flex-1 m-auto max-w-1000 py-8">
       <Router />
-    </main>
+    </div>
     <Footer />
-  </>
+  </div>
 }

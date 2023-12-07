@@ -13,8 +13,8 @@ module HtmlSourceCodeLazy = {
 }
 
 @react.component
-let make = (~version: string, ~htmlImport: Vite.getPromise<string>, ~simulatorUrl: string) => {
-  let {hash, path: currentPath} = Nav.getCurrentURL()
+let make = (~htmlImport: Vite.getPromise<string>, ~simulatorUrl: string) => {
+  let {hash} = Nav.getCurrentURL()
   let (htmlState, setHtmlState) = React.useState(_ => None)
 
   React.useEffect1(() => {
@@ -26,37 +26,7 @@ let make = (~version: string, ~htmlImport: Vite.getPromise<string>, ~simulatorUr
     None
   }, [htmlImport])
 
-  let versionedAssetsButtons = WebAssets.Versions.available->Array.map(v => {
-    Dsfr.Button.children: {React.string(v)},
-    onClick: {
-      _ => {
-        switch currentPath {
-        | list{page, "sources"}
-        | list{page, "sources", _} =>
-          if v != version {
-            Nav.goToAbsolutePath(list{page, "sources", v})
-          }
-        | _ =>
-          Js.Exn.raiseError("Unexpected path: " ++ currentPath->List.toArray->Array.joinWith("/"))
-        }
-      }
-    },
-    priority: "secondary",
-    size: "small",
-    iconId: if v == version {
-      "fr-icon-success-fill"
-    } else {
-      ""
-    },
-  })
-
   <div className="fr-container">
-    <Dsfr.ButtonsGroup
-      inlineLayoutWhen="always"
-      buttonsEquisized=true
-      buttonsSize="small"
-      buttons={versionedAssetsButtons}
-    />
     <Button.RightAlign
       props={
         iconId: "fr-icon-equalizer-line",
@@ -69,8 +39,6 @@ let make = (~version: string, ~htmlImport: Vite.getPromise<string>, ~simulatorUr
     />
     {switch htmlState {
     | Some(html) =>
-      Console.log2("hash", hash)
-
       <React.Suspense fallback={Spinners.loader}>
         <HtmlSourceCodeLazy html hash />
       </React.Suspense>

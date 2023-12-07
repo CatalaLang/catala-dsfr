@@ -49,5 +49,5 @@ export default defineConfig({
   // optimizeDeps: {
   //   exclude: ["@catala-lang/catala-explain"],
   // },
-  assetsInclude: ["./assets/**/*.html"],
+  assetsInclude: ["./catala-web-assets/**/*.html"],
 });

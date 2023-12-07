@@ -3,8 +3,8 @@ let make = (~href: string, ~children) => {
   <a
     href={href}
     onClick={evt => {
-      evt->ReactEvent.Mouse.preventDefault
-      href->Nav.goTo
+      ReactEvent.Mouse.preventDefault(evt)
+      Nav.goTo(href)
     }}>
     children
   </a>

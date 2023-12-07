@@ -1,8 +1,8 @@
 type t = {
-  webAssets: WebAssets.t,
+  getWebAssets: string => WebAssets.t,
   name: string,
   resultLabel: string,
   url: string,
   formDataPostProcessing?: JSON.t => JSON.t,
-  computeAndPrintResult: JSON.t => promise<React.element>,
+  computeAndPrintResult: (FrenchLaw.t, JSON.t) => React.element,
 }

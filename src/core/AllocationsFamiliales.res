@@ -1,5 +1,5 @@
 let infos: FormInfos.t = {
-  webAssets: WebAssets.allocationsFamilialesAssets,
+  getWebAssets: WebAssets.getAllocationsFamiliales,
   name: `allocations familiales`,
   resultLabel: `Montant mensuel des allocations`,
   url: "allocations-familiales",
@@ -15,11 +15,8 @@ let infos: FormInfos.t = {
 		  return data;
 	  }
   `),
-  computeAndPrintResult: async input => {
-    let res =
-      (await FrenchLaw.get(FrenchLaw.Versions.latest)()).computeAllocationsFamiliales(
-        input,
-      )->Float.toString
+  computeAndPrintResult: (frenchLaw, input) => {
+    let res = input->frenchLaw.computeAllocationsFamiliales->Float.toString
     <>
       <span className="font-mono font-bold text-[var(--text-active-blue-france)]">
         {React.string(res)}

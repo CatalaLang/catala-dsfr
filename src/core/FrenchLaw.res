@@ -26,8 +26,12 @@ type t = {
 }
 
 let resetLog = fl => fl["eventsManager"]["resetLog"]()
-let retrieveRawEventsSerialized = fl => fl["eventsManager"]["retrieveRawEvents"]()
-let retrieveEventsSerialized = fl => fl["eventsManager"]["retrieveEvents"]()
+let retrieveRawEventsSerialized = fl => {
+  fl["eventsManager"]["retrieveRawEvents"]()
+}
+let retrieveEventsSerialized = fl => {
+  fl["eventsManager"]["retrieveEvents"]()
+}
 
 let computeAllocationsFamiliales = (fl, input) => {
   resetLog(fl)

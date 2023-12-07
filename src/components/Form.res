@@ -64,39 +64,40 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
   let (uiSchemaState, setUiSchemaState) = React.useState(_ => None)
   let (eventsOpt, setEventsOpt) = React.useState(_ => None)
   let (formResult, setFormResult) = React.useState(_ => None)
+  let webAssets = formInfos.getWebAssets(assetsVersion)
 
   React.useEffect1(() => {
-    switch formInfos.webAssets.initialDataImport {
-    | Some(init) =>
+    switch (formData, webAssets.initialDataImport) {
+    | (None, Some(init)) =>
       init()
       ->Promise.thenResolve(data => {
         setInitialData(_ => Some(data))
         setFormData(_ => Some(data))
       })
       ->Promise.done
-    | None => ()
+    | _ => ()
     }
     None
-  }, [formInfos.webAssets.initialDataImport])
+  }, [webAssets.initialDataImport])
 
   React.useEffect2(() => {
-    formInfos.webAssets.schemaImport()
+    webAssets.schemaImport()
     // TODO: factorize
     ->Promise.thenResolve(schema => {
       setSchemaState(_ => Some(schema))
       None
     })
     ->Promise.done
-    formInfos.webAssets.uiSchemaImport()
+    webAssets.uiSchemaImport()
     ->Promise.thenResolve(uiSchema => {
       setUiSchemaState(_ => Some(uiSchema))
       None
     })
     ->Promise.done
     None
-  }, (formInfos.webAssets.schemaImport, formInfos.webAssets.uiSchemaImport))
+  }, (webAssets.schemaImport, webAssets.uiSchemaImport))
 
-  React.useEffect2(() => {
+  React.useEffect3(() => {
     setEventsOpt(_ => {
       let events = {
         try {frenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
@@ -106,20 +107,15 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
       0 == events->Belt.Array.size ? None : Some(events)
     })
     None
-  }, (formResult, setEventsOpt))
+  }, (formResult, setEventsOpt, frenchLaw))
 
-  React.useEffect1(() => {
+  React.useEffect2(() => {
     switch formData {
-    | Some(data) =>
-      formInfos.computeAndPrintResult(data)
-      ->Promise.thenResolve(res => {
-        setFormResult(_ => Some(res))
-      })
-      ->Promise.done
+    | Some(data) => setFormResult(_ => Some(formInfos.computeAndPrintResult(frenchLaw, data)))
     | None => setFormResult(_ => None)
     }
     None
-  }, [formData])
+  }, (formData, frenchLaw))
 
   let (uploadedFile, setUploadedFile) = React.useState(_ => {
     Js.Json.object_(Js.Dict.empty())
@@ -135,7 +131,7 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
     }
   }
 
-  let form_footer = {
+  let formFooter = {
     let priority = "tertiary"
     <Dsfr.ButtonsGroup
       inlineLayoutWhen="always"
@@ -181,7 +177,7 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
           onClick: {
             _ =>
               // TODO: the version should be linked to the version of the french-law
-              currentPath->List.concat(list{`sources`, assetsVersion})->Nav.goToPath
+              currentPath->List.concat(list{`sources`})->Nav.goToPath
           },
           iconId: "fr-icon-code-s-slash-line",
           priority,
@@ -190,7 +186,7 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
     />
   }
 
-  let form_result =
+  let formResult =
     <Dsfr.CallOut>
       {switch (formData, formResult) {
       | (Some(formData), Some(formResult)) =>
@@ -203,12 +199,12 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
             </div>
             <Dsfr.Button
               onClick={_ => {
-                switch schemaState {
-                | Some(schema) => {
+                switch (schemaState, eventsOpt) {
+                | (Some(schema), Some(events)) => {
                     let doc = CatalaExplain.generate(
                       // NOTE(@EmileRolley): we assume that the events exist,
                       // because we have a result.
-                      ~events=eventsOpt->Option.getExn,
+                      ~events,
                       ~userInputs=formData,
                       ~schema,
                       ~opts={
@@ -216,8 +212,8 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
                         // Contains an explicatory text about the computation and the catala program etc...
                         description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${formInfos.name} pour votre demande`,
                         creator: `${Constants.host} avec catala-web-assets@v${assetsVersion} et french-law@v${frenchLaw.version}`,
-                        keysToIgnore: formInfos.webAssets.keysToIgnore,
-                        selectedOutput: formInfos.webAssets.selectedOutput,
+                        keysToIgnore: webAssets.keysToIgnore,
+                        selectedOutput: webAssets.selectedOutput,
                         sourcesURL: `${Constants.host}/${formInfos.url}/sources/${assetsVersion}`,
                       },
                     )
@@ -235,12 +231,16 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
                     })
                     ->ignore
                   }
-                | None => Console.error("Missing schema to generate the doc")
+                | (None, _) =>
+                  Console.error("Missing schema to generate the document with catala-explain")
+                | (_, None) =>
+                  Console.error("Missing log events to generate the document with catala-explain")
                 }
               }}
               iconPosition="left"
               iconId="fr-icon-newspaper-line"
-              priority="secondary">
+              priority="secondary"
+              disabled={Option.isNone(eventsOpt)}>
               {`Télécharger une explication du calcul`->React.string}
             </Dsfr.Button>
           </div>
@@ -297,9 +297,9 @@ let make = (~assetsVersion: string, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInf
         <div
           className="w-full fr-m-1w border-2 border-solid rounded-full border-[var(--border-default-grey)]"
         />
-        <div className="fr-col"> form_result </div>
+        <div className="fr-col"> formResult </div>
       </div>
-      form_footer
+      formFooter
     </div>
   </>
 }

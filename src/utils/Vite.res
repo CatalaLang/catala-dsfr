@@ -1,3 +1,4 @@
+// TODO: remove this, it's more explicit to use the full signature
 type getPromise<'a> = unit => promise<'a>
 
 module Import = {

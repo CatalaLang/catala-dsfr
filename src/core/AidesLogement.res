@@ -1,5 +1,5 @@
 let infos: FormInfos.t = {
-  webAssets: WebAssets.aidesLogementAssets,
+  getWebAssets: WebAssets.getAidesLogement,
   name: "aides au logement",
   resultLabel: `Montant mensuel brut des aides au logement`,
   url: "aides-au-logement",
@@ -15,11 +15,8 @@ let infos: FormInfos.t = {
 	  return data;
 	}
   `),
-  computeAndPrintResult: async input => {
-    let res =
-      (await FrenchLaw.get(FrenchLaw.Versions.latest)()).computeAidesAuLogement(
-        input,
-      )->Float.toString
+  computeAndPrintResult: (frenchLaw, input) => {
+    let res = input->frenchLaw.computeAidesAuLogement->Float.toString
     <>
       <span className="font-mono font-bold text-[var(--text-active-blue-france)]">
         {React.string(res)}

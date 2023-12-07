@@ -103,6 +103,11 @@ module Header = {
     ~serviceTagline: string,
     ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": string}=?,
     ~serviceTitle: React.element,
+    ~navigation: array<{
+      "linkProps": {"href": string, "target": string},
+      "isActive": bool,
+      "text": string,
+    }>=?,
   ) => React.element = "default"
 }
 
