@@ -1,21 +1,15 @@
 {
   "name": "catala-dsfr",
-  "sources": [
-    {
-      "dir": "src",
-      "subdirs": true,
-      "generators": [
-        {
-          "name": "gen-tailwind",
-          "edge": ["css/tailwind.css", ":", "css/index.css"]
-        }
-      ]
-    },
-    {
-      "dir": "french-law",
-      "subdirs": true
-    }
-  ],
+  "sources": {
+    "dir": "src",
+    "subdirs": true,
+    "generators": [
+      {
+        "name": "gen-tailwind",
+        "edge": ["css/tailwind.css", ":", "css/index.css"]
+      }
+    ]
+  },
   "generators": [
     {
       "name": "gen-tailwind",
