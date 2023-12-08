@@ -64,6 +64,9 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
   let (eventsOpt, setEventsOpt) = React.useState(_ => None)
   let (formResult, setFormResult) = React.useState(_ => None)
 
+  Hooks.useImport(webAssets.schemaImport, setSchemaState)
+  Hooks.useImport(webAssets.uiSchemaImport, setUiSchemaState)
+
   React.useEffect1(() => {
     switch (formData, webAssets.initialDataImport) {
     | (None, Some(init)) =>
@@ -77,23 +80,6 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
     }
     None
   }, [webAssets.initialDataImport])
-
-  React.useEffect2(() => {
-    webAssets.schemaImport()
-    // TODO: factorize
-    ->Promise.thenResolve(schema => {
-      setSchemaState(_ => Some(schema))
-      None
-    })
-    ->Promise.done
-    webAssets.uiSchemaImport()
-    ->Promise.thenResolve(uiSchema => {
-      setUiSchemaState(_ => Some(uiSchema))
-      None
-    })
-    ->Promise.done
-    None
-  }, (webAssets.schemaImport, webAssets.uiSchemaImport))
 
   React.useEffect3(() => {
     setEventsOpt(_ => {

@@ -17,14 +17,7 @@ let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
   let {hash} = Nav.getCurrentURL()
   let (htmlState, setHtmlState) = React.useState(_ => None)
 
-  React.useEffect1(() => {
-    htmlImport()
-    ->Promise.thenResolve(html => {
-      setHtmlState(_ => Some(html))
-    })
-    ->Promise.done
-    None
-  }, [htmlImport])
+  Hooks.useImport(htmlImport, setHtmlState)
 
   <div className="fr-container">
     <Button.RightAlign

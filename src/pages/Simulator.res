@@ -3,15 +3,7 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
   let {path: currentPath} = Nav.getCurrentURL()
   let (frenchLaw, setFrenchLaw) = React.useState(_ => None)
 
-  React.useEffect2(() => {
-    FrenchLaw.get(version["french-law"])()
-    ->Promise.thenResolve(frenchLaw => {
-      setFrenchLaw(_ => Some(frenchLaw))
-      None
-    })
-    ->Promise.done
-    None
-  }, (version["french-law"], setFrenchLaw))
+  Hooks.useImport(FrenchLaw.get(version["french-law"]), setFrenchLaw)
 
   React.useEffect1(() => {
     // Reset the log when the page is loaded.
