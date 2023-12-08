@@ -1,20 +1,11 @@
 open Vite
 
-module Versions = {
-  let frenchLawImports = Import.Meta.globWithOpts(
-    "../../french-law/**/french_law.js",
-    {
-      import: "default",
-    },
-  )
-  let available =
-    frenchLawImports
-    ->Dict.keysToArray
-    ->Array.map(key => key->String.split("/")->Array.getUnsafe(3))
-    ->SemVer.sort
-
-  let latest = available->Array.getUnsafe(0)
-}
+let frenchLawImports = Import.Meta.globWithOpts(
+  "../../french-law/**/french_law.js",
+  {
+    import: "default",
+  },
+)
 
 type t = {
   version: string,
@@ -44,7 +35,7 @@ let computeAidesAuLogement = (fl, input) => {
 }
 
 let get = version => {
-  switch Versions.frenchLawImports->Dict.get(`../../french-law/${version}/french_law.js`) {
+  switch frenchLawImports->Dict.get(`../../french-law/${version}/french_law.js`) {
   | Some(frenchLawImport) =>
     async () => {
       let frenchLaw = await frenchLawImport()

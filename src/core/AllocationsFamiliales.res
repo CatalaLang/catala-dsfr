@@ -1,5 +1,5 @@
 let infos: FormInfos.t = {
-  getWebAssets: WebAssets.getAllocationsFamiliales,
+  getWebAssets: CatalaWebAssets.getAllocationsFamiliales,
   name: `allocations familiales`,
   resultLabel: `Montant mensuel des allocations`,
   url: "allocations-familiales",

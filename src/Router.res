@@ -14,21 +14,21 @@ let make = () => {
   | list{route, "sources"} if route == AF.infos.url => {
       let version = Versions.latest["catala-web-assets"]
       <SourceCode
-        htmlImport={WebAssets.getAllocationsFamilialesSourceCode(version)}
+        htmlImport={CatalaWebAssets.getAllocationsFamilialesSourceCode(version)}
         simulatorUrl={AF.infos.url}
       />
     }
   | list{route, "sources"} if route == AL.infos.url => {
       let version = Versions.latest["catala-web-assets"]
       <SourceCode
-        htmlImport={WebAssets.getAidesLogementSourceCode(version)} simulatorUrl={AF.infos.url}
+        htmlImport={CatalaWebAssets.getAidesLogementSourceCode(version)} simulatorUrl={AF.infos.url}
       />
     }
   | list{route, versionName, "sources"}
     if route == AF.infos.url && Versions.isAvailable(versionName) => {
       let version = Versions.getUnsafe(versionName)["catala-web-assets"]
       <SourceCode
-        htmlImport={WebAssets.getAllocationsFamilialesSourceCode(version)}
+        htmlImport={CatalaWebAssets.getAllocationsFamilialesSourceCode(version)}
         simulatorUrl={AF.infos.url}
       />
     }
@@ -36,7 +36,7 @@ let make = () => {
     if route == AL.infos.url && Versions.isAvailable(versionName) => {
       let version = Versions.getUnsafe(versionName)["catala-web-assets"]
       <SourceCode
-        htmlImport={WebAssets.getAidesLogementSourceCode(version)} simulatorUrl={AL.infos.url}
+        htmlImport={CatalaWebAssets.getAidesLogementSourceCode(version)} simulatorUrl={AL.infos.url}
       />
     }
   | _ => <Page404 />

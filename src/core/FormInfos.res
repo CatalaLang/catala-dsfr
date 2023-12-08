@@ -1,5 +1,5 @@
 type t = {
-  getWebAssets: string => WebAssets.t,
+  getWebAssets: string => CatalaWebAssets.t,
   name: string,
   resultLabel: string,
   url: string,

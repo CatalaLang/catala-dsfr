@@ -1,5 +1,5 @@
 let infos: FormInfos.t = {
-  getWebAssets: WebAssets.getAidesLogement,
+  getWebAssets: CatalaWebAssets.getAidesLogement,
   name: "aides au logement",
   resultLabel: `Montant mensuel brut des aides au logement`,
   url: "aides-au-logement",

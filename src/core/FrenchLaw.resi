@@ -1,7 +1,3 @@
-module Versions: {
-  let latest: string
-}
-
 type t = {
   version: string,
   computeAllocationsFamiliales: Js.Json.t => float,
