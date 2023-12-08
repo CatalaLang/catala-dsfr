@@ -17,39 +17,35 @@ module RjsfFormDsfrLazy = {
 }
 
 // Function to download or import a JSON object
-@val external downloadJSONstring: string => unit = "downloadJSONstring"
-%%raw(`
-const downloadJSONstring = (data) => {
-  const blob = new Blob([data],{type:'application/json'});
-  const href = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = href;
-  link.download = "data.json";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
+let downloadJSONstring: string => unit = %raw(`function(data) {
+    const blob = new Blob([data],{type:'application/json'});
+    const href = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = "data.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 `)
 
 // Function to read a file and get its contents as string
-@val external readFileAsJSON: (Js.Json.t, Js.Json.t => 'a) => unit = "readFileAsJSON"
-%%raw(`
-const readFileAsJSON = (file, callback) => {
-  var reader = new FileReader();
-  var contents = ""
-  reader.onload = function(evt) {
-    contents = evt.target.result;
-    var json;
-    try {
-      json = JSON.parse(contents)
-    } catch (error) {
-      console.log(error)
-      json = null;
-    }
-    callback(json);
-  };
-  reader.readAsText(file);
-};
+let readFileAsJSON: (Js.Json.t, Js.Json.t => 'a) => unit = %raw(`function(file, callback) {
+    var reader = new FileReader();
+    var contents = ""
+    reader.onload = function(evt) {
+	contents = evt.target.result;
+	var json;
+	try {
+	    json = JSON.parse(contents)
+	} catch (error) {
+	    console.log(error)
+	    json = null;
+	}
+	callback(json);
+    };
+    reader.readAsText(file);
+}
 `)
 
 /*
@@ -188,6 +184,9 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
     />
   }
 
+  eventsOpt->Option.forEach(events => {
+    Console.log2("events", events)
+  })
   let formResult =
     <Dsfr.CallOut>
       {switch (formData, formResult) {

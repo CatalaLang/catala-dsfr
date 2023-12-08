@@ -17,9 +17,9 @@ module Versions = {
 }
 
 type t = {
-  schemaImport: getPromise<JSON.t>,
-  uiSchemaImport: getPromise<JSON.t>,
-  initialDataImport?: getPromise<JSON.t>,
+  schemaImport: unit => promise<JSON.t>,
+  uiSchemaImport: unit => promise<JSON.t>,
+  initialDataImport?: unit => promise<JSON.t>,
   selectedOutput: CatalaRuntime.information,
   keysToIgnore: array<string>,
 }
@@ -51,7 +51,7 @@ let getAllocationsFamiliales = version => {
 }
 
 let allocationsFamilialesAssets: t = getAllocationsFamiliales(Versions.latest)
-let getAllocationsFamilialesSourceCode = (version): getPromise<string> =>
+let getAllocationsFamilialesSourceCode = (version): (unit => promise<string>) =>
   switch Versions.sourceCodesImports->Dict.get(
     `../../catala-web-assets/${version}/allocations_familiales.html`,
   ) {
@@ -97,7 +97,7 @@ let getAidesLogement = version => {
 
 let aidesLogementAssets: t = getAidesLogement(Versions.latest)
 
-let getAidesLogementSourceCode = (version): getPromise<string> =>
+let getAidesLogementSourceCode = (version): (unit => promise<string>) =>
   switch Versions.sourceCodesImports->Dict.get(
     `../../catala-web-assets/${version}/aides_logement.html`,
   ) {

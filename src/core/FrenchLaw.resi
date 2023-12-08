@@ -11,4 +11,4 @@ type t = {
   retrieveEventsSerialized: unit => array<CatalaRuntime.eventSerialized>,
 }
 
-let get: string => Vite.getPromise<t>
+let get: (string, unit) => promise<t>

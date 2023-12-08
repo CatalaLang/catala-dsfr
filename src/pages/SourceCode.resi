@@ -1,2 +1,2 @@
 @react.component
-let make: (~htmlImport: Vite.getPromise<string>, ~simulatorUrl: string) => React.element
+let make: (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => React.element

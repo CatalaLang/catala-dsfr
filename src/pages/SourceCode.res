@@ -13,7 +13,7 @@ module HtmlSourceCodeLazy = {
 }
 
 @react.component
-let make = (~htmlImport: Vite.getPromise<string>, ~simulatorUrl: string) => {
+let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
   let {hash} = Nav.getCurrentURL()
   let (htmlState, setHtmlState) = React.useState(_ => None)
 
