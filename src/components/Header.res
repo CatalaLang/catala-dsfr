@@ -2,16 +2,16 @@
 let make = () => {
   <Dsfr.Header
     brandTop={<>
-      {`République`->React.string}
+      {React.string("République")}
       <br />
-      {`Française`->React.string}
+      {React.string("Française")}
     </>}
     homeLinkProps={{"href": "/", "title": "Catala Explorer"}}
     /* operatorLogo={{"alt": "Catala logo", "imgUrl": "../assets/logo.png", "orientation": "vertical"}} */
     serviceTitle={<>
-      {"Explicabilité des algorithmes publics"->React.string}
+      {React.string("Explicabilité des algorithmes publics")}
       <Dsfr.Badge noIcon=true severity={#success} as_=#span small=false>
-        {"beta"->React.string}
+        {React.string("beta")}
       </Dsfr.Badge>
     </>}
     serviceTagline="Prototypes de simulateurs de prestations sociales avec explications invidualisées, détaillées et intelligibles"

@@ -61,7 +61,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
   let (initialData, setInitialData) = React.useState(_ => None)
   let (schemaState, setSchemaState) = React.useState(_ => None)
   let (uiSchemaState, setUISchemaState) = React.useState(_ => None)
-  let (eventsOpt, setEventsOpt) = React.useState(_ => None)
+  let (eventsState, setEventsState) = React.useState(_ => None)
   let (formResult, setFormResult) = React.useState(_ => None)
 
   React.useEffect1(() => {
@@ -90,7 +90,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
   }, (webAssets.initialDataImport, formData))
 
   React.useEffect3(() => {
-    setEventsOpt(_ => {
+    setEventsState(_ => {
       let events = {
         try {frenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
         | _ => []
@@ -99,11 +99,14 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
       0 == events->Belt.Array.size ? None : Some(events)
     })
     None
-  }, (formResult, setEventsOpt, frenchLaw))
+  }, (formResult, setEventsState, frenchLaw))
 
   React.useEffect2(() => {
     switch formData {
-    | Some(data) => setFormResult(_ => Some(formInfos.computeAndPrintResult(frenchLaw, data)))
+    | Some(data) =>
+      setFormResult(_ => {
+        Some(formInfos.computeAndPrintResult(frenchLaw, data))
+      })
     | None => setFormResult(_ => None)
     }
     None
@@ -119,7 +122,9 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
 
   let retrieveFileContents = _ => {
     if %raw(`uploadedFile instanceof File`) {
-      readFileAsJSON(uploadedFile, form_data => setFormData(_ => Some(form_data)))
+      readFileAsJSON(uploadedFile, form_data => {
+        setFormData(_ => Some(form_data))
+      })
     }
   }
 
@@ -133,7 +138,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
       alignment="center"
       buttons=[
         {
-          children: `Réinitialiser le formulaire`->React.string,
+          children: React.string("Réinitialiser le formulaire"),
           onClick: _ => {
             Console.debug("Resetting form data")
             setFormData(_ => initialData)
@@ -142,7 +147,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
           priority,
         },
         {
-          children: `Exporter les données au format JSON`->React.string,
+          children: React.string("Exporter les données au format JSON"),
           onClick: _ => {
             let data_str = Js.Json.stringify(formData->Belt.Option.getWithDefault(Js.Json.null))
             downloadJSONstring(data_str)
@@ -156,7 +161,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
               className="hidden w-100" id="file-upload" type_="file" onChange={fileChangeHandler}
             />
             <label htmlFor="file-upload" className="cursor-pointer">
-              {`Importer les données au format JSON `->React.string}
+              {React.string("Importer les données au format JSON")}
             </label>
             <p />
           </>,
@@ -165,11 +170,9 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
           priority,
         },
         {
-          children: {"Code source du programme"->React.string},
+          children: {React.string("Code source du programme")},
           onClick: {
-            _ =>
-              // TODO: the version should be linked to the version of the french-law
-              currentPath->List.concat(list{`sources`})->Nav.goToAbsolutePath
+            _ => currentPath->List.concat(list{`sources`})->Nav.goToAbsolutePath
           },
           iconId: "fr-icon-code-s-slash-line",
           priority,
@@ -178,9 +181,6 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
     />
   }
 
-  eventsOpt->Option.forEach(events => {
-    Console.log2("events", events)
-  })
   let formResult =
     <Dsfr.CallOut>
       {switch (formData, formResult) {
@@ -188,17 +188,15 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
         try {
           <div className="flex flex-col">
             <div>
-              {formInfos.resultLabel->React.string}
-              {" = "->React.string}
+              {React.string(formInfos.resultLabel)}
+              {React.string(" = ")}
               {formResult}
             </div>
             <Dsfr.Button
               onClick={_ => {
-                switch (schemaState, eventsOpt) {
+                switch (schemaState, eventsState) {
                 | (Some(schema), Some(events)) => {
                     let doc = CatalaExplain.generate(
-                      // NOTE(@EmileRolley): we assume that the events exist,
-                      // because we have a result.
                       ~events,
                       ~userInputs=formData,
                       ~schema,
@@ -235,14 +233,14 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
               iconPosition="left"
               iconId="fr-icon-newspaper-line"
               priority="secondary"
-              disabled={Option.isNone(eventsOpt)}>
-              {`Télécharger une explication du calcul`->React.string}
+              disabled={Option.isNone(eventsState)}>
+              {React.string("Télécharger une explication du calcul")}
             </Dsfr.Button>
           </div>
         } catch {
         | err =>
           <>
-            <Lang.String english="Computation error: " french={`Erreur de calcul : `} />
+            {React.string("Erreur de calcul : ")}
             {err
             ->Js.Exn.asJsExn
             ->Belt.Option.map(Js.Exn.message)
@@ -251,7 +249,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
             ->React.string}
           </>
         }
-      | _ => `En attente de la confirmation du formulaire...`->React.string
+      | _ => React.string("En attente de la confirmation du formulaire...")
       }}
     </Dsfr.CallOut>
 

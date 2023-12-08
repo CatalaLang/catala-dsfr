@@ -1,5 +1,5 @@
-module Import = {
-  module Meta = {
+module Import: {
+  module Meta: {
     type opts = {@as("as") as_?: string, import?: string}
 
     @scope("import.meta")

@@ -1,12 +1,6 @@
 %%raw(`import  "../css/catala-code.css"`)
 %%raw(`import  "../css/syntax-highlighting.css"`)
 
-/*
-[scrollToAndHighlightLineNum(parentElem, ids)] scrolls into the corresponding
-Catala code line of [ids] inside the [parentElem] DOM element and highlight the
-line numbers.
-*/
-
 module HtmlSourceCodeLazy = {
   @react.component @module("../components/HtmlSourceCodeLazy.tsx")
   external make: (~html: string, ~hash: string) => React.element = "default"
@@ -27,16 +21,16 @@ let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
   }, (htmlImport, setHtmlState))
 
   <div className="fr-container">
-    <Button.RightAlign
-      props={
-        iconId: "fr-icon-equalizer-line",
-        iconPosition: "left",
-        priority: "tertiary",
-        size: "medium",
-        onClick: {_ => Nav.goTo(`/${simulatorUrl}`)},
-        children: {React.string("Accéder au simulateur")},
-      }
-    />
+    <div className="inline-flex w-full justify-end">
+      <Dsfr.Button
+        iconId="fr-icon-equalizer-line"
+        iconPosition="left"
+        priority="tertiary"
+        size="medium"
+        onClick={_ => Nav.goTo(`/${simulatorUrl}`)}>
+        {React.string("Accéder au simulateur")}
+      </Dsfr.Button>
+    </div>
     {switch htmlState {
     | Some(html) =>
       <React.Suspense fallback={Spinners.loader}>

@@ -16,7 +16,10 @@ type t = {
   retrieveEventsSerialized: unit => array<CatalaRuntime.eventSerialized>,
 }
 
-let resetLog = fl => fl["eventsManager"]["resetLog"]()
+let resetLog = fl => {
+  fl["eventsManager"]["resetLog"]()
+}
+
 let retrieveRawEventsSerialized = fl => {
   fl["eventsManager"]["retrieveRawEvents"]()
 }
