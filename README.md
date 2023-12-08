@@ -58,9 +58,7 @@ yarn link
 # In this project
 yarn link @catala-lang/<library-name>
 ```
-
 > [!IMPORTANT]
->
 > But then some shenanigans will appear. First, there might be duplicate
 > dependencies between `catala-dsfr` and the linked dependencies. These duplicates
 > will show as error messages so you know which they are. To remove the dependency
@@ -116,12 +114,39 @@ yarn add @catala-lang/french-law-<latest-version>@npm:@catala-lang/french-law@<l
 >   "available": [
 > +   {
 > +    "name": "<date>",
-> +    "catala-web-assets": "<latest-version>",
 > +    "french-law": "<latest-version>"
+> +    "catala-web-assets": "<latest-version>",
 > +  },
 >   ]
 > }
 > ```
+
+### Using local packages
+
+If you want to use `@catala-lang/french-law` (resp.
+`@catala-lang/catala-web-assets`) from your local machine instead of the
+published version, you can use `yarn link` to link them to this project.
+
+> [!IMPORTANT]
+> See the [Using local packages](#using-local-packages) section for more
+> information about how to link local packages.
+
+Then, run `yarn assets` to add the local packages in `./french-law/local`
+(resp. `./catala-web-assets/local`). 
+
+Finally, add the new version in `assets-versions.json` with the `local` version.
+
+```diff
+{
+  "available": [
++   {
++     "name": "local",
++     "french-law": "local"
++     "catala-web-assets": "<latest-version>",
++   },
+  ]
+}
+```
 
 ## Build for production and deploy
 

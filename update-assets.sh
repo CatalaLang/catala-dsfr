@@ -1,38 +1,51 @@
 #!/bin/bash
 
 check_latest_version () {
-    local latest_version=$(curl "https://registry.npmjs.org/@catala-lang/$1/latest" -s | grep -oP '"version":"\K[0-9]+\.[0-9]+(\.[0-9]+)?(-[a-zA-Z]+(\.[0-9]+)?)?')
+    local latest_version
+
+    latest_version=$(curl "https://registry.npmjs.org/@catala-lang/$1/latest" -s | grep -oP '"version":"\K[0-9]+\.[0-9]+(\.[0-9]+)?(-[a-zA-Z]+(\.[0-9]+)?)?')
 
     echo "[info]    Latest version: $latest_version"
     if [ -d "node_modules/@catala-lang/$1-$latest_version" ]; then
 	echo "[info]    Already up to date"
     else
 	echo "[info]    Adding latest version $latest_version"
-	yarn add @catala-lang/$1-$latest_version@npm:@catala-lang/$1@$latest_version
+	yarn add "@catala-lang/$1-$latest_version@npm:@catala-lang/$1@$latest_version"
 	echo "[info]    Done"
     fi
 }
 
 copy_files () {
-    echo "[info] Updating $1..."
+    local package_name
+    local files_to_copy
+    local version_number
 
-    local package_name="$1"
+    echo "[info] Updating $1"
+
+    package_name="$1"
     shift 1
 
-    echo "[info] Checking latest version for @catala-lang/$package_name.."
+    echo "[info] Checking latest version for @catala-lang/$package_name"
     check_latest_version "$package_name"
 
-    local files_to_copy="$@"
+    files_to_copy=("$@")
 
-    for folder in node_modules/@catala-lang/$package_name-*; do
-	if [ -d "$folder" ]; then
-	    local version_number=$(echo "$folder" | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?(-[a-zA-Z]+(\.[0-9]+)?)?')
+    for folder in node_modules/@catala-lang/$package_name*; do
+	version_number=""
+	if [ -L "$folder" ]; then 
+	    # found a symlink created by yarn link
+	    version_number=$(echo "local")
+	elif [ -d "$folder" ]; then
+	    version_number=$(echo "$folder" | grep -oE '[0-9]+\.[0-9]+(\.[0-9]+)?(-[a-zA-Z]+(\.[0-9]+)?)?')
+	fi
+
+	if [ -n "$version_number" ]; then
 	    local dest="$package_name/$version_number"
 
 	    mkdir -p "$dest"
 
-	    for file in $files_to_copy; do
-		cp $folder/$file $dest
+	    for file in "${files_to_copy[@]}"; do
+		cp "$folder/$file" "$dest"
 	    done
 
 	    echo "[info] Created $dest"
