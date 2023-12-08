@@ -60,14 +60,22 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
   let (formData, setFormData) = React.useState(_ => None)
   let (initialData, setInitialData) = React.useState(_ => None)
   let (schemaState, setSchemaState) = React.useState(_ => None)
-  let (uiSchemaState, setUiSchemaState) = React.useState(_ => None)
+  let (uiSchemaState, setUISchemaState) = React.useState(_ => None)
   let (eventsOpt, setEventsOpt) = React.useState(_ => None)
   let (formResult, setFormResult) = React.useState(_ => None)
 
-  Hooks.useImport(webAssets.schemaImport, setSchemaState)
-  Hooks.useImport(webAssets.uiSchemaImport, setUiSchemaState)
-
   React.useEffect1(() => {
+    (webAssets.schemaImport(), webAssets.uiSchemaImport())
+    ->Promise.all2
+    ->Promise.thenResolve(((schema, uiSchema)) => {
+      setSchemaState(_ => Some(schema))
+      setUISchemaState(_ => Some(uiSchema))
+    })
+    ->Promise.done
+    None
+  }, [webAssets])
+
+  React.useEffect2(() => {
     switch (formData, webAssets.initialDataImport) {
     | (None, Some(init)) =>
       init()
@@ -79,7 +87,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
     | _ => ()
     }
     None
-  }, [webAssets.initialDataImport])
+  }, (webAssets.initialDataImport, formData))
 
   React.useEffect3(() => {
     setEventsOpt(_ => {

@@ -17,7 +17,14 @@ let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
   let {hash} = Nav.getCurrentURL()
   let (htmlState, setHtmlState) = React.useState(_ => None)
 
-  Hooks.useImport(htmlImport, setHtmlState)
+  React.useEffect2(() => {
+    htmlImport()
+    ->Promise.thenResolve(html => {
+      setHtmlState(_ => Some(html))
+    })
+    ->Promise.done
+    None
+  }, (htmlImport, setHtmlState))
 
   <div className="fr-container">
     <Button.RightAlign
@@ -26,8 +33,8 @@ let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
         iconPosition: "left",
         priority: "tertiary",
         size: "medium",
-        onClick: {_ => `/${simulatorUrl}`->Nav.goTo},
-        children: {"Accéder au simulateur"->React.string},
+        onClick: {_ => Nav.goTo(`/${simulatorUrl}`)},
+        children: {React.string("Accéder au simulateur")},
       }
     />
     {switch htmlState {
