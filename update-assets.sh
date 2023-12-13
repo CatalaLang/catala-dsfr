@@ -11,7 +11,7 @@ check_latest_version () {
     else
 	echo "[info]    Adding latest version $latest_version"
 	yarn add "@catala-lang/$1-$latest_version@npm:@catala-lang/$1@$latest_version"
-	echo "[info]    Done"
+	echo "[done]    Added latest version $latest_version"
     fi
 }
 
@@ -19,8 +19,6 @@ copy_files () {
     local package_name
     local files_to_copy
     local version_number
-
-    echo "[info] Updating $1"
 
     package_name="$1"
     shift 1
@@ -48,7 +46,7 @@ copy_files () {
 		cp "$folder/$file" "$dest"
 	    done
 
-	    echo "[info] Created $dest"
+	    echo "[done] Created $dest"
 	fi
     done
 }
