@@ -231,9 +231,9 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
                   Console.error("Missing log events to generate the document with catala-explain")
                 }
               }}
-              iconPosition="left"
+              iconPosition=#left
               iconId="fr-icon-newspaper-line"
-              priority="secondary"
+              priority=#secondary
               disabled={Option.isNone(eventsState)}>
               {React.string("Télécharger une explication du calcul")}
             </DSFR.Button>

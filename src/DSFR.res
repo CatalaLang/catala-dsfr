@@ -56,10 +56,10 @@ module Button = {
     ~children: React.element,
     ~disabled: bool=?,
     ~iconId: string=?,
-    ~iconPosition: string=?,
+    ~iconPosition: [#left | #right]=?,
     ~onClick: ReactEvent.Mouse.t => 'a,
-    ~priority: string=?,
-    ~size: string=?,
+    ~priority: [#primary | #secondary | #tertiary | #"tertiary no outline"]=?,
+    ~size: [#small | #medium | #large]=?,
     ~className: string=?,
   ) => React.element = "default"
 }

@@ -24,9 +24,9 @@ let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
     <div className="inline-flex w-full justify-end">
       <DSFR.Button
         iconId="fr-icon-equalizer-line"
-        iconPosition="left"
-        priority="tertiary"
-        size="medium"
+        iconPosition=#left
+        priority=#tertiary
+        size=#medium
         onClick={_ => Nav.goTo(`/${simulatorUrl}`)}>
         {React.string("Accéder au simulateur")}
       </DSFR.Button>
