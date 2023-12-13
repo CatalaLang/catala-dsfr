@@ -3,36 +3,36 @@ let make = () => {
   <DSFR.Footer
     accessibility="partially compliant"
     brandTop={<>
-      {`République`->React.string}
+      {React.string("République")}
       <br />
-      {`Française`->React.string}
+      {React.string("Française")}
     </>}
     contentDescription={<>
-      {`Ce site est développé dans le cadre de la `->React.string}
+      {React.string("Ce site est développé dans le cadre de la ")}
       <a href="https://code.gouv.fr/" target="_blank">
-        {`mission logiciels libres et communs numériques`->React.string}
+        {React.string("mission logiciels libres et communs numériques")}
       </a>
-      {` de la `->React.string}
+      {React.string(" de la ")}
       <a href="https://www.numerique.gouv.fr/" target="_blank">
-        {`direction interministérielle du numérique`->React.string}
+        {React.string("direction interministérielle du numérique")}
       </a>
-      {` en collaboration avec le projet `->React.string}
-      <a href="https://catala-lang.org/" target="_blank"> {`Catala`->React.string} </a>
-      {`, avec l'objectif de tester des solutions techniques de conformité à l'`->React.string}
+      {React.string(" en collaboration avec le projet ")}
+      <a href="https://catala-lang.org/" target="_blank"> {React.string("Catala")} </a>
+      {React.string(", avec l'objectif de tester des solutions techniques de conformité à l'")}
       <a href="https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037823131" target="_blank">
-        {`article 47-2 de la loi informatique et libertés`->React.string}
+        {React.string("article 47-2 de la loi informatique et libertés")}
       </a>
     </>}
     homeLinkProps={"href": "https://www.code.gouv.fr", "title": "Code du travail numérique"}
     license={<>
-      {`Sauf mention contraire, tout le contenu de ce site est sous licence `->React.string}
+      {React.string("Sauf mention contraire, tout le contenu de ce site est sous licence ")}
       <a href="https://github.com/CatalaLang/catala-explorer/blob/main/LICENSE">
-        {`Apache 2.0`->React.string}
+        {React.string("Apache 2.0")}
       </a>
     </>}
     bottomItems=[
       {
-        "text": {`Code source du site`->React.string},
+        "text": {React.string("Code source du site")},
         "linkProps": {"href": "https://github.com/catalalang/catala-dsfr"},
       },
       DSFR.Display.headerFooterDisplayItem,
