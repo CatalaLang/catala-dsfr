@@ -4,15 +4,15 @@
   "repository": "https://github.com/CatalaLang/catala-dsfr",
   "scripts": {
     "clean": "rescript clean -with-deps",
-    "build": "yarn run pre && yarn run assets && vite build",
-    "deploy": "yarn run build --base=/demos/catala/ && rsync -rv --delete-before dist/*",
-    "serve": "vite preview",
     "dev": "yarn run pre && vite",
+    "build": "yarn run pre && vite build",
+    "serve": "vite preview",
+    "deploy": "yarn run build --base=/demos/catala/ && rsync -rv --delete-before dist/*",
+    "assets": "./update-assets.sh",
     "re:build": "rescript build -with-deps",
     "re:watch": "yarn run pre && rescript build -w -with-deps",
-    "assets": "./update-assets.sh",
     "postinstall": "copy-dsfr-to-public",
-    "pre": "yarn run re:build && only-include-used-icons"
+    "pre": "yarn run re:build && only-include-used-icons && yarn run assets"
   },
   "keywords": [
     "rescript"

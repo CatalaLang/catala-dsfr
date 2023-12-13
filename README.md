@@ -8,7 +8,9 @@
    <a href="https://code.gouv.fr/fr/explicabilite/catala/">Website</a>
   </p>
 
-Source code for web demonstration about the explainability of Catala programs.
+Source code for the web demo about automated generation of individual
+explanations of [Catala](https://catala-lang.org) programs hosted at
+[https://code.gouv.fr/demos/catala](https://code.gouv.fr/demos/catala/).
 
 </div>
 
@@ -44,6 +46,10 @@ yarn dev
 > ReScript file must export only one React component. You can hide internal
 > code by providing an interface file that only exports the component you want
 > to use.
+>
+> Generally, you should always have an inteface file (`.resi`) for each
+> implementation file (`.res`) to [speed up incremental
+> build](https://rescript-lang.org/docs/manual/latest/build-performance#speed-up-incremental-build).
 
 ### Using local packages
 
@@ -103,7 +109,9 @@ yarn add @catala-lang/french-law-<latest-version>@npm:@catala-lang/french-law@<l
 > [!TIP]
 > The latest version of the `@catala-lang/catala-web-assets` package and the
 > `@catala-lang/french-law` package are automatically updated with the
-> `./update-assets.sh` script run in `postinstall` in `package.json`.
+> `./update-assets.sh` (`yarn assets`) script run before `yarn build` and `yarn
+> dev`. Consequently, you don't need to manually update the version of the
+> packages in the `package.json` file.
 
 > [!IMPORTANT]
 > For now, if a new version of one of the packages is added, you need to **manually** update
@@ -121,7 +129,7 @@ yarn add @catala-lang/french-law-<latest-version>@npm:@catala-lang/french-law@<l
 > }
 > ```
 
-### Using local packages
+### Using local assets
 
 If you want to use `@catala-lang/french-law` (resp.
 `@catala-lang/catala-web-assets`) from your local machine instead of the
@@ -131,18 +139,15 @@ published version, you can use `yarn link` to link them to this project.
 > See the [Using local packages](#using-local-packages) section for more
 > information about how to link local packages.
 
-Then, run `yarn assets` to add the local packages in `./french-law/local`
-(resp. `./catala-web-assets/local`). 
-
-Finally, add the new version in `assets-versions.json` with the `local` version.
+Then, add the new version in `assets-versions.json` with the `local` version.
 
 ```diff
 {
   "available": [
 +   {
-+     "name": "local",
++     "name": "local", # or whatever name you want to give to the version
 +     "french-law": "local"
-+     "catala-web-assets": "<latest-version>",
++     "catala-web-assets": "<latest-version>", 
 +   },
   ]
 }
