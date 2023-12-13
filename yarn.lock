@@ -227,10 +227,10 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@catala-lang/catala-explain@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@catala-lang/catala-explain/-/catala-explain-0.2.4.tgz#92584b1ca7292b785d202ff9c9627a04792b8138"
-  integrity sha512-feCWeqfitZXW2gHlUJ/N+xNGFS7ohkC2T/EXFaOOWcr9YR+iTcd96eZyjTzQJazo8UxsAMYdKqjvwU+3Nwd/8g==
+"@catala-lang/catala-explain@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-explain/-/catala-explain-0.2.5.tgz#fc545402a773d2af850a7ab965ed3c95c36b0901"
+  integrity sha512-djlNiGtnowDflXeUq76/tgHXibhEIl8BcsS/43bAjT2Y63vRsy9fc6rSzIs7gVnKcBZMOB71YJD8DNDLk0XbQQ==
   dependencies:
     "@catala-lang/rescript-catala" "^0.8.1-b.0"
     "@rescript/core" "^0.6.0"
