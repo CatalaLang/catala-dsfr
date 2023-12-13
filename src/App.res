@@ -1,28 +1,10 @@
-%%raw(`import "./css/index.css";`)
-
-Dsfr.Spa.startReactDsfr({
-  defaultColorScheme: #system,
-  link: Router.Link.make,
-  useLang: () => #fr,
-})
-
-module App = {
-  @react.component
-  let make = () => {
-    <>
-      <Header />
-      <main role="main" className="fr-h-10w fr-p-2w">
-        <Router />
-      </main>
-      <Footer />
-    </>
-  }
+@react.component
+let make = () => {
+  <div className="min-h-100 flex flex-col">
+    <Header />
+    <div className="flex-1 m-auto max-w-1000 py-8">
+      <Router />
+    </div>
+    <Footer />
+  </div>
 }
-
-ReactDOM.Client.createRoot(
-  ReactDOM.querySelector("#app-root")->Belt.Option.getExn,
-)->ReactDOM.Client.Root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)

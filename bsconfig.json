@@ -24,7 +24,6 @@
   "jsx": { "version": 4, "mode": "classic" },
   "bs-dependencies": [
     "@catala-lang/catala-explain",
-    "@catala-lang/french-law",
     "@catala-lang/rescript-catala",
     "@rescript/core",
     "@rescript/react",

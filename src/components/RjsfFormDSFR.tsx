@@ -48,22 +48,26 @@ function SelectWidgetDsfr(props: WidgetProps) {
     (event) => {
       const newValue = getValue(event, props.multiple);
       return props.onChange(
-        enumOptionsValueForIndex<RJSFSchema>(newValue, enumOptions, optEmptyVal)
+        enumOptionsValueForIndex<RJSFSchema>(
+          newValue,
+          enumOptions,
+          optEmptyVal,
+        ),
       );
     },
-    [props.onChange, props.schema, props.multiple, props.options]
+    [props.onChange, props.schema, props.multiple, props.options],
   );
 
   const selectedIndexes = enumOptionsIndexForValue<RJSFSchema>(
     props.value,
     props.options.enumOptions,
-    props.multiple
+    props.multiple,
   );
 
   const defaultIndex = enumOptionsIndexForValue<RJSFSchema>(
     props.schema.default,
     props.options.enumOptions,
-    props.multiple
+    props.multiple,
   );
 
   const value =

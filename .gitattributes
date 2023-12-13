@@ -1,0 +1,6 @@
+*.resi linguist-language=ReScript
+
+assets/**/* linguist-vendored
+french-law/**/* linguist-vendored
+
+yarn.lock linguist-generated

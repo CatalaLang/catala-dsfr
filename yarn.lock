@@ -227,21 +227,50 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@catala-lang/catala-explain@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@catala-lang/catala-explain/-/catala-explain-0.2.2.tgz#0e28c7fbf0a2f542828e5369077bc6d49d61f2af"
-  integrity sha512-z2NP1nrpPtkDxPJkQsF2C8v2qXx+pHdiKQc/Ltbny5dFxMjAzfrargLZzG6CWWIMHM9uuawugUww/wlYPeMRCw==
+"@catala-lang/catala-explain@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-explain/-/catala-explain-0.2.5.tgz#fc545402a773d2af850a7ab965ed3c95c36b0901"
+  integrity sha512-djlNiGtnowDflXeUq76/tgHXibhEIl8BcsS/43bAjT2Y63vRsy9fc6rSzIs7gVnKcBZMOB71YJD8DNDLk0XbQQ==
   dependencies:
     "@catala-lang/rescript-catala" "^0.8.1-b.0"
-    "@rescript/core" "^0.5.0"
+    "@rescript/core" "^0.6.0"
     rescript-docx "^0.1.5"
 
-"@catala-lang/catala-web-assets@^0.8.9":
+"@catala-lang/catala-web-assets-0.8.10@npm:@catala-lang/catala-web-assets@0.8.10":
+  version "0.8.10"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.10.tgz#14ced662842ec1d563b3808de8ae00144e145e9d"
+  integrity sha512-M0lDiB3Rk6bSWCQoneMocYtx4zVY6eFZgEuIGPgeCoQsBfdkm7coYhcYimX2oFW1VnL3nlQlCHjWwuwCUCC4ww==
+
+"@catala-lang/catala-web-assets-0.8.11@npm:@catala-lang/catala-web-assets@0.8.11":
+  version "0.8.11"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.11.tgz#032190528e5e5317337f4f9bcc4d85f5689316f2"
+  integrity sha512-cipn7Di0+gKYuMhE6khKEnZrIz8gbubnByXYBmOG/aEKdJJ4NW20GTzfH+KsUiLFiT9AvkvNtCInlvBBmk/uyw==
+
+"@catala-lang/catala-web-assets-0.8.8@npm:@catala-lang/catala-web-assets@0.8.8":
+  version "0.8.8"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.8.tgz#19ba83eded6bc4a51c609526aee29dc03546a2c6"
+  integrity sha512-5GTu89HFjEaHi9249RihDzhbmV8gaDb1yt2FacjX1vIVlKwCFFqi4wGTOCiW9Q4n/9koaeFyGuvN6JEZj7RKXQ==
+
+"@catala-lang/catala-web-assets-0.8.9@npm:@catala-lang/catala-web-assets@0.8.9":
   version "0.8.9"
   resolved "https://registry.yarnpkg.com/@catala-lang/catala-web-assets/-/catala-web-assets-0.8.9.tgz#77b6278369f003656a91ae8f01c710b0c13716a4"
   integrity sha512-Tpi5LCwPiLAuYlPccSYn7bpd1mrmihgabkvhXL7PE0KOB3hc+rNoZBkVF42UaagXh7UqX8dnaKhoeI3muGfCrQ==
 
-"@catala-lang/french-law@^0.8.3-b.3":
+"@catala-lang/french-law-0.8.10@npm:@catala-lang/french-law@0.8.10":
+  version "0.8.10"
+  resolved "https://registry.yarnpkg.com/@catala-lang/french-law/-/french-law-0.8.10.tgz#570cfaa0f4003a7fbe28646ea103f25445e93d5b"
+  integrity sha512-/cBU+6CyrIUwyT1Y2Ngk42Og70McLSiKFwlYNrKb1gZA4iZPunVDsVexDQLCUw2FGAJS8PpdWll06Sk8kN3rmw==
+  dependencies:
+    benchmark "^2.1.4"
+    lodash "^4.17.21"
+    platform "^1.3.6"
+
+"@catala-lang/french-law-0.8.11@npm:@catala-lang/french-law@0.8.11":
+  version "0.8.11"
+  resolved "https://registry.yarnpkg.com/@catala-lang/french-law/-/french-law-0.8.11.tgz#54d38969bf4a555eee368116b0c9a4d96c99074a"
+  integrity sha512-+yoWnYZ/os+Nmt7fz9mLNfxzK5P74El/vV3rNHYH8ZibiLEG62YJE9wHKEsz6M8YS2vAoF6ckYcZSshVyDoowQ==
+
+"@catala-lang/french-law-0.8.3-b.3@npm:@catala-lang/french-law@0.8.3-b.3":
   version "0.8.3-b.3"
   resolved "https://registry.yarnpkg.com/@catala-lang/french-law/-/french-law-0.8.3-b.3.tgz#18627d4e434e56a7f77f4448a0a8f20715c60367"
   integrity sha512-bCvwvD3ZI0C6gILVQjrnuYRlR5u4Sy6Li7dTx+Sqwr05yHX5IXJEy6rY6Bko/fJERPJ7R28xxAyyE70l7XCjww==
@@ -258,10 +287,10 @@
     decco "^1.6.0"
     rescript "^10.1.4"
 
-"@codegouvfr/react-dsfr@^0.78.2":
-  version "0.78.6"
-  resolved "https://registry.yarnpkg.com/@codegouvfr/react-dsfr/-/react-dsfr-0.78.6.tgz#295ce99d2e3ebf03371b62199fb66777e53909c9"
-  integrity sha512-EAtQkkKSzW8BDPO38AzWRRIoDy/Bl6ZvTdduF+zmCsk/dga7MA2NhuhHu0bG2oGKs1B8cUSW/riUiI+iyef4sw==
+"@codegouvfr/react-dsfr@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@codegouvfr/react-dsfr/-/react-dsfr-1.0.1.tgz#75c6539211aa223c1f2b322cc80478a81001f3ab"
+  integrity sha512-TjiO/mAd0t6Qo53kfC5TUnd5FKDzlAr0bRPYW1kIhnUbsnFUTTtoVlWZnxlb7sn3QP3EyDDe+UGtUnUnK8rMkQ==
   dependencies:
     tsafe "^1.6.3"
 
@@ -471,10 +500,10 @@
   dependencies:
     esbuild "^0.14.14"
 
-"@rescript/core@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@rescript/core/-/core-0.5.0.tgz#3e83e75aaa60f42f4279e0d184358f2db5d40955"
-  integrity sha512-Keqnpi+8VqyhCk/3aMwar8hJbNy2IsINAAfIFeQC65IIegCR0QXFDBpQxfVcmbbtoHq6HnW4B3RLm/9GCUJQhQ==
+"@rescript/core@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@rescript/core/-/core-0.6.0.tgz#d2aae335c2a91dd68acce0ec11716861e08500d5"
+  integrity sha512-D4ykxSpbmxbQa99kCg6/DztwCNt1tV3t11BLSOvJPHNLSIuQxfAU3ddgRruaH9LQSKOrMUjxQS9z6RdG5iFPoA==
 
 "@rescript/react@^0.11.0":
   version "0.11.0"

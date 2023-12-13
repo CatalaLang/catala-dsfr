@@ -1,31 +1,44 @@
+module AL = AidesLogement
+module AF = AllocationsFamiliales
+
 @react.component
 let make = () => {
   switch Nav.getCurrentURL().path {
-  | list{route} if route == AllocationsFamiliales.FormInfos.url => <AllocationsFamiliales />
-  | list{route} if route == AidesLogement.FormInfos.url => <AidesLogement />
-  | list{route, "sources"} if route == AllocationsFamiliales.FormInfos.url =>
-    <SourceCode
-      html={WebAssets.allocationsFamilialesAssets.html}
-      simulatorUrl={AllocationsFamiliales.FormInfos.url}
-    />
-  | list{route, "sources"} if route == AidesLogement.FormInfos.url =>
-    <SourceCode
-      html={WebAssets.aidesLogementAssets.html} simulatorUrl={AidesLogement.FormInfos.url}
-    />
-  | _ => <Home />
-  }
-}
-
-module Link = {
-  @react.component
-  let make = (~href: string, ~children) => {
-    <a
-      href={href}
-      onClick={evt => {
-        evt->ReactEvent.Mouse.preventDefault
-        href->Nav.goTo
-      }}>
-      children
-    </a>
+  | list{} => <Home />
+  | list{route} if route == AF.infos.url => <Simulator formInfos={AF.infos} />
+  | list{route, versionName} if route == AF.infos.url && Versions.isAvailable(versionName) =>
+    <Simulator formInfos={AF.infos} version={Versions.getUnsafe(versionName)} />
+  | list{route} if route == AL.infos.url => <Simulator formInfos={AL.infos} />
+  | list{route, versionName} if route == AL.infos.url && Versions.isAvailable(versionName) =>
+    <Simulator formInfos={AL.infos} version={Versions.getUnsafe(versionName)} />
+  | list{route, "sources"} if route == AF.infos.url => {
+      let version = Versions.latest["catala-web-assets"]
+      <SourceCode
+        htmlImport={CatalaWebAssets.getAllocationsFamilialesSourceCode(version)}
+        simulatorUrl={AF.infos.url}
+      />
+    }
+  | list{route, "sources"} if route == AL.infos.url => {
+      let version = Versions.latest["catala-web-assets"]
+      <SourceCode
+        htmlImport={CatalaWebAssets.getAidesLogementSourceCode(version)} simulatorUrl={AF.infos.url}
+      />
+    }
+  | list{route, versionName, "sources"}
+    if route == AF.infos.url && Versions.isAvailable(versionName) => {
+      let version = Versions.getUnsafe(versionName)["catala-web-assets"]
+      <SourceCode
+        htmlImport={CatalaWebAssets.getAllocationsFamilialesSourceCode(version)}
+        simulatorUrl={AF.infos.url}
+      />
+    }
+  | list{route, versionName, "sources"}
+    if route == AL.infos.url && Versions.isAvailable(versionName) => {
+      let version = Versions.getUnsafe(versionName)["catala-web-assets"]
+      <SourceCode
+        htmlImport={CatalaWebAssets.getAidesLogementSourceCode(version)} simulatorUrl={AL.infos.url}
+      />
+    }
+  | _ => <Page404 />
   }
 }

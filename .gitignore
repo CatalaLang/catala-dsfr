@@ -2,9 +2,12 @@
 /node_modules/
 /lib/
 dist/
+catala-web-assets/
+french-law/
 
 .*
 !.gitignore
+!.gitattributes
 
 yarn-error.log
 
@@ -13,5 +16,3 @@ yarn-error.log
 *.bs.js
 
 src/css/tailwind.css
-
-assets/

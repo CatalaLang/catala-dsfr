@@ -13,19 +13,6 @@ module Oval = {
   ) => React.element = "Oval"
 }
 
-module ThreeDots = {
-  @react.component @module("react-loader-spinner")
-  external make: (
-    ~height: int=?,
-    ~width: int=?,
-    ~color: string=?,
-    ~secondaryColor: string=?,
-    ~visible: bool=?,
-    ~radius: int=?,
-    ~wrapperClassName: string=?,
-  ) => React.element = "ThreeDots"
-}
-
 let loader =
   <Oval
     height=25

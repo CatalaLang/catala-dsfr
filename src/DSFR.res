@@ -1,3 +1,5 @@
+// TODO: clean the dsfr bindings + publish as a standalone package
+
 type linkProps = {"href": string, "title": string}
 
 module Spa = {
@@ -10,6 +12,16 @@ module Spa = {
 
   @module("@codegouvfr/react-dsfr/spa")
   external startReactDsfr: startReactDsfrParams<'props> => unit = "startReactDsfr"
+}
+
+module Accordion = {
+  @react.component @module("@codegouvfr/react-dsfr/Accordion")
+  external make: (
+    ~label: string,
+    ~children: React.element,
+    ~defaultExpanded: bool=?,
+    ~onChange: bool => unit=?,
+  ) => React.element = "default"
 }
 
 module Badge = {
@@ -39,37 +51,39 @@ module Breadcrumb = {
 }
 
 module Button = {
-  type options = {
-    disabled?: bool,
-    iconId?: string,
-    iconPosition?: string,
-    onClick: JsxEvent.Mouse.t => unit,
-    priority?: string,
-    size?: string,
-    children: React.element,
-  }
-
   @react.component @module("@codegouvfr/react-dsfr/Button")
   external make: (
     ~children: React.element,
     ~disabled: bool=?,
     ~iconId: string=?,
     ~iconPosition: string=?,
-    ~onClick: JsxEvent.Mouse.t => unit,
+    ~onClick: ReactEvent.Mouse.t => 'a,
     ~priority: string=?,
     ~size: string=?,
+    ~className: string=?,
   ) => React.element = "default"
 }
 
 module ButtonsGroup = {
   @react.component @module("@codegouvfr/react-dsfr/ButtonsGroup")
   external make: (
-    ~alignment: string=?,
-    ~buttonsSize: string=?,
-    ~buttonsIconPosition: string=?,
+    ~alignment: [#left | #center | #right | #between]=?,
+    ~buttonsSize: [#small | #medium | #large]=?,
+    ~buttonsIconPosition: [#left | #right]=?,
     ~buttonsEquisized: bool=?,
-    ~buttons: array<Button.options>,
-    ~inlineLayoutWhen: string=?,
+    ~buttons: array<
+      Button.props<
+        React.element,
+        bool,
+        string,
+        string,
+        ReactEvent.Mouse.t => 'a,
+        string,
+        string,
+        string,
+      >,
+    >,
+    ~inlineLayoutWhen: [#always | #"sm and up" | #"md and up" | #"lg and up"]=?,
     ~className: string=?,
   ) => React.element = "default"
 }
@@ -97,8 +111,13 @@ module Header = {
     ~brandTop: React.element=?,
     ~homeLinkProps: linkProps,
     ~serviceTagline: string,
-    ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": string}=?,
+    ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": [#horizontal | #vertical]}=?,
     ~serviceTitle: React.element,
+    ~navigation: array<{
+      "linkProps": {"href": string, "target": string},
+      "isActive": bool,
+      "text": string,
+    }>=?,
   ) => React.element = "default"
 }
 
@@ -111,6 +130,18 @@ module Footer = {
     ~homeLinkProps: linkProps=?,
     ~bottomItems: array<'button>=?,
     ~license: React.element=?,
+  ) => React.element = "default"
+}
+module Select = {
+  type selectOption<'a> = {value: 'a, label: string}
+  type nativeSelectProps<'a, 'b> = {id?: string, name?: string, value: 'a, onChange: 'b}
+
+  @react.component @module("@codegouvfr/react-dsfr/Select")
+  external make: (
+    ~label: string,
+    ~options: array<selectOption<'a>>,
+    ~placeholder: string=?,
+    ~nativeSelectProps: nativeSelectProps<'a, 'b>=?,
   ) => React.element = "default"
 }
 
