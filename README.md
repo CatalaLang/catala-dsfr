@@ -34,7 +34,7 @@ yarn
 yarn dev
 ```
 
-> [!CAUTION]
+> [!WARNING]
 > When adding modifications to the Rescript files, if you start seeing errors
 > like that in your `yarn dev` output:
 >
@@ -116,18 +116,18 @@ yarn add @catala-lang/french-law-<latest-version>@npm:@catala-lang/french-law@<l
 > [!IMPORTANT]
 > For now, if a new version of one of the packages is added, you need to **manually** update
 > the `assets-versions.json` file with the new version.
->
-> ```diff
-> {
->   "available": [
-> +   {
-> +    "name": "<date>",
-> +    "french-law": "<latest-version>"
-> +    "catala-web-assets": "<latest-version>",
-> +  },
->   ]
-> }
-> ```
+
+ ```diff
+ {
+   "available": [
+ +   {
+ +    "name": "<date>",
+ +    "french-law": "<latest-version>"
+ +    "catala-web-assets": "<latest-version>",
+ +  },
+   ]
+ }
+ ```
 
 ### Using local assets
 
