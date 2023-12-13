@@ -22,7 +22,7 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
   }, [frenchLaw])
 
   let versionedAssetsButtons = Versions.available->Array.map(v => {
-    Dsfr.Button.children: {React.string(v["name"])},
+    DSFR.Button.children: {React.string(v["name"])},
     onClick: {
       _ => {
         switch currentPath {
@@ -46,13 +46,16 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
   })
 
   <div className="fr-container">
-    <Dsfr.ButtonsGroup
-      inlineLayoutWhen="always"
-      buttonsEquisized=true
-      buttonsSize="small"
-      buttons={versionedAssetsButtons}
-    />
-    <h1 className="fr-h1"> {React.string(`Calcul des ${formInfos.name}`)} </h1>
+    <DSFR.Accordion label="Versions disponibles">
+      <DSFR.ButtonsGroup
+        className="pt-4 pb-0"
+        inlineLayoutWhen=#always
+        buttonsEquisized=true
+        buttonsSize=#medium
+        buttons={versionedAssetsButtons}
+      />
+    </DSFR.Accordion>
+    <h1 className="fr-h1 pt-6"> {React.string(`Calcul des ${formInfos.name}`)} </h1>
     {switch frenchLaw {
     | Some(frenchLaw) => <Form version frenchLaw formInfos={formInfos} />
     | None => Spinners.loader
