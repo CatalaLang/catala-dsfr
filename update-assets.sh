@@ -10,7 +10,7 @@ check_latest_version () {
 	echo "[info]    Already up to date"
     else
 	echo "[info]    Adding latest version $latest_version"
-	yarn add "@catala-lang/$1-$latest_version@npm:@catala-lang/$1@$latest_version"
+	yarn add -D "@catala-lang/$1-$latest_version@npm:@catala-lang/$1@$latest_version"
 	echo "[done]    Added latest version $latest_version"
     fi
 }

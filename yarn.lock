@@ -227,13 +227,13 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@catala-lang/catala-explain@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@catala-lang/catala-explain/-/catala-explain-0.2.2.tgz#0e28c7fbf0a2f542828e5369077bc6d49d61f2af"
-  integrity sha512-z2NP1nrpPtkDxPJkQsF2C8v2qXx+pHdiKQc/Ltbny5dFxMjAzfrargLZzG6CWWIMHM9uuawugUww/wlYPeMRCw==
+"@catala-lang/catala-explain@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@catala-lang/catala-explain/-/catala-explain-0.2.4.tgz#92584b1ca7292b785d202ff9c9627a04792b8138"
+  integrity sha512-feCWeqfitZXW2gHlUJ/N+xNGFS7ohkC2T/EXFaOOWcr9YR+iTcd96eZyjTzQJazo8UxsAMYdKqjvwU+3Nwd/8g==
   dependencies:
     "@catala-lang/rescript-catala" "^0.8.1-b.0"
-    "@rescript/core" "^0.5.0"
+    "@rescript/core" "^0.6.0"
     rescript-docx "^0.1.5"
 
 "@catala-lang/catala-web-assets-0.8.10@npm:@catala-lang/catala-web-assets@0.8.10":
@@ -499,11 +499,6 @@
   integrity sha512-KuEXeGPptM2lyxdIEJ4R11+5ztipHoE7hy8ClZt3PYaOVQ/pyngd2alaSrPnwyFeOW1UagRBaQ752aA1dTMdOQ==
   dependencies:
     esbuild "^0.14.14"
-
-"@rescript/core@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@rescript/core/-/core-0.5.0.tgz#3e83e75aaa60f42f4279e0d184358f2db5d40955"
-  integrity sha512-Keqnpi+8VqyhCk/3aMwar8hJbNy2IsINAAfIFeQC65IIegCR0QXFDBpQxfVcmbbtoHq6HnW4B3RLm/9GCUJQhQ==
 
 "@rescript/core@^0.6.0":
   version "0.6.0"
