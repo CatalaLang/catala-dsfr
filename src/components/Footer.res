@@ -1,6 +1,6 @@
 @react.component
 let make = () => {
-  <Dsfr.Footer
+  <DSFR.Footer
     accessibility="partially compliant"
     brandTop={<>
       {`République`->React.string}
@@ -35,7 +35,7 @@ let make = () => {
         "text": {`Code source du site`->React.string},
         "linkProps": {"href": "https://github.com/catalalang/catala-dsfr"},
       },
-      Dsfr.Display.headerFooterDisplayItem,
+      DSFR.Display.headerFooterDisplayItem,
     ]
   />
 }

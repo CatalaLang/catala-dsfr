@@ -14,6 +14,16 @@ module Spa = {
   external startReactDsfr: startReactDsfrParams<'props> => unit = "startReactDsfr"
 }
 
+module Accordion = {
+  @react.component @module("@codegouvfr/react-dsfr/Accordion")
+  external make: (
+    ~label: string,
+    ~children: React.element,
+    ~defaultExpanded: bool=?,
+    ~onChange: bool => unit=?,
+  ) => React.element = "default"
+}
+
 module Badge = {
   type severity = [#success | #info | #warning | #error]
   type tag = [#span | #div | #p]
@@ -57,9 +67,9 @@ module Button = {
 module ButtonsGroup = {
   @react.component @module("@codegouvfr/react-dsfr/ButtonsGroup")
   external make: (
-    ~alignment: string=?,
-    ~buttonsSize: string=?,
-    ~buttonsIconPosition: string=?,
+    ~alignment: [#left | #center | #right | #between]=?,
+    ~buttonsSize: [#small | #medium | #large]=?,
+    ~buttonsIconPosition: [#left | #right]=?,
     ~buttonsEquisized: bool=?,
     ~buttons: array<
       Button.props<
@@ -73,7 +83,7 @@ module ButtonsGroup = {
         string,
       >,
     >,
-    ~inlineLayoutWhen: string=?,
+    ~inlineLayoutWhen: [#always | #"sm and up" | #"md and up" | #"lg and up"]=?,
     ~className: string=?,
   ) => React.element = "default"
 }

@@ -4,8 +4,8 @@
 
   The component is capable of building HTML forms out of a JSON schema.
 */
-module RjsfFormDsfrLazy = {
-  @react.component @module("./RjsfFormDsfrLazy.tsx")
+module RjsfFormDSFRLazy = {
+  @react.component @module("./RjsfFormDSFRLazy.tsx")
   external make: (
     ~onChange: Js.Dict.t<Js.Json.t> => unit=?,
     ~onSubmit: Js.Dict.t<Js.Json.t> => unit=?,
@@ -130,12 +130,12 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
 
   let formFooter = {
     let priority = "tertiary"
-    <Dsfr.ButtonsGroup
-      inlineLayoutWhen="always"
+    <DSFR.ButtonsGroup
+      inlineLayoutWhen=#always
       className="text-left"
       buttonsEquisized=true
-      buttonsSize="medium"
-      alignment="center"
+      buttonsSize=#medium
+      alignment=#center
       buttons=[
         {
           children: React.string("Réinitialiser le formulaire"),
@@ -182,7 +182,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
   }
 
   let formResult =
-    <Dsfr.CallOut>
+    <DSFR.CallOut>
       {switch (formData, formResult) {
       | (Some(formData), Some(formResult)) =>
         try {
@@ -192,7 +192,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
               {React.string(" = ")}
               {formResult}
             </div>
-            <Dsfr.Button
+            <DSFR.Button
               onClick={_ => {
                 switch (schemaState, eventsState) {
                 | (Some(schema), Some(events)) => {
@@ -235,7 +235,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
               priority="secondary"
               disabled={Option.isNone(eventsState)}>
               {React.string("Télécharger une explication du calcul")}
-            </Dsfr.Button>
+            </DSFR.Button>
           </div>
         } catch {
         | err =>
@@ -251,12 +251,12 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
         }
       | _ => React.string("En attente de la confirmation du formulaire...")
       }}
-    </Dsfr.CallOut>
+    </DSFR.CallOut>
 
   <>
     <div className="fr-container--fluid">
       <div className="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
-        <Dsfr.Notice
+        <DSFR.Notice
           title={`Les données collectées par ce formulaire ne sont envoyées nulle part, et sont gérées uniquement par votre navigateur internet. \
             Les données sont traitées localement par un programme Javascript qui a été transmis avec le reste de ce site Internet. \
             Ainsi, ce site ne collecte aucune donnée de ses utilisateurs.`}
@@ -266,7 +266,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
           {switch (schemaState, uiSchemaState) {
           | (Some(schema), Some(uiSchema)) =>
             <React.Suspense fallback={Spinners.loader}>
-              <RjsfFormDsfrLazy
+              <RjsfFormDSFRLazy
                 schema
                 uiSchema
                 formData={formData->Belt.Option.getWithDefault(Js.Json.null)}

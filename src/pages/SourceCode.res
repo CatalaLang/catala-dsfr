@@ -22,14 +22,14 @@ let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
 
   <div className="fr-container">
     <div className="inline-flex w-full justify-end">
-      <Dsfr.Button
+      <DSFR.Button
         iconId="fr-icon-equalizer-line"
         iconPosition="left"
         priority="tertiary"
         size="medium"
         onClick={_ => Nav.goTo(`/${simulatorUrl}`)}>
         {React.string("Accéder au simulateur")}
-      </Dsfr.Button>
+      </DSFR.Button>
     </div>
     {switch htmlState {
     | Some(html) =>

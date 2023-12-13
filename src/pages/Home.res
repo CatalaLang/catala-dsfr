@@ -3,7 +3,7 @@ let make = () => {
   <div className="fr-container">
     <div className="fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-grid-row--middle">
       <div className="fr-col fr-col-lg-8">
-        <Dsfr.Card
+        <DSFR.Card
           title="Allocations Familiales"
           desc="Simulateur du calcul des allocations familiales"
           linkProps={
@@ -13,7 +13,7 @@ let make = () => {
           enlargeLink=true
           size="large"
         />
-        <Dsfr.Card
+        <DSFR.Card
           title="Aides aux Logements"
           desc="Simulateur du calcul des aides aux logements"
           linkProps={
