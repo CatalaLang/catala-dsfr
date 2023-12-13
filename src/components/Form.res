@@ -196,6 +196,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
               onClick={_ => {
                 switch (schemaState, eventsState) {
                 | (Some(schema), Some(events)) => {
+                    let fullURL = Constants.host ++ "/" ++ formInfos.url ++ "/" ++ version["name"]
                     let doc = CatalaExplain.generate(
                       ~events,
                       ~userInputs=formData,
@@ -204,10 +205,10 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
                         title: `Calcul des ${formInfos.name}`,
                         // Contains an explicatory text about the computation and the catala program etc...
                         description: `Explication du détail des étapes de calcul établissant l'éligibilité et le montant des ${formInfos.name} pour votre demande`,
-                        creator: `${Constants.host} avec catala-web-assets@v${assetsVersion} et french-law@v${frenchLaw.version}`,
+                        creator: `${fullURL} avec catala-web-assets@v${assetsVersion} et french-law@v${frenchLaw.version}`,
                         keysToIgnore: webAssets.keysToIgnore,
                         selectedOutput: webAssets.selectedOutput,
-                        sourcesURL: `${Constants.host}/${formInfos.url}/${version["name"]}/sources/`,
+                        sourcesURL: `${fullURL}/sources/`,
                       },
                     )
 
