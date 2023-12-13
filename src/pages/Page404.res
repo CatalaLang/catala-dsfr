@@ -20,7 +20,7 @@ let make = () => {
     </p>
     <ul className="fr-btns-group fr-btns-group--inline-md">
       <li>
-        <a className="fr-btn" href="/"> {React.string("Page d'accueil")} </a>
+        <a className="fr-btn" href=Constants.baseURL> {React.string("Page d'accueil")} </a>
       </li>
     </ul>
   </div>
