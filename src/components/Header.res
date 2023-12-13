@@ -1,3 +1,7 @@
+%%raw(`import logoURL from "../images/logo.png"`)
+
+external logo: string = "logoURL"
+
 @react.component
 let make = () => {
   <DSFR.Header
@@ -6,8 +10,12 @@ let make = () => {
       <br />
       {React.string("Française")}
     </>}
+    operatorLogo={{
+      "alt": "Catala logo",
+      "imgUrl": logo,
+      "orientation": #vertical,
+    }}
     homeLinkProps={{"href": "/", "title": "Catala Explorer"}}
-    /* operatorLogo={{"alt": "Catala logo", "imgUrl": "../assets/logo.png", "orientation": "vertical"}} */
     serviceTitle={<>
       {React.string("Explicabilité des algorithmes publics")}
       <DSFR.Badge noIcon=true severity={#success} as_=#span small=false>

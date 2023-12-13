@@ -111,7 +111,7 @@ module Header = {
     ~brandTop: React.element=?,
     ~homeLinkProps: linkProps,
     ~serviceTagline: string,
-    ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": string}=?,
+    ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": [#horizontal | #vertical]}=?,
     ~serviceTitle: React.element,
     ~navigation: array<{
       "linkProps": {"href": string, "target": string},
