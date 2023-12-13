@@ -23,6 +23,9 @@ copy_files () {
     package_name="$1"
     shift 1
 
+    echo "[info] Removing directory $package_name"
+    rm -r "$package_name"
+
     echo "[info] Checking latest version for @catala-lang/$package_name"
     check_latest_version "$package_name"
 
