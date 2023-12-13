@@ -22,27 +22,27 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
   }, [frenchLaw])
 
   let versionedAssetsButtons = Versions.available->Array.map(v => {
-    DSFR.Button.children: {React.string(v["name"])},
-    onClick: {
-      _ => {
-        switch currentPath {
-        | list{page}
-        | list{page, _} =>
-          if v["name"] != version["name"] {
-            Nav.goToAbsolutePath(list{page, v["name"]})
+    let isCurrentVersion = v["name"] == version["name"]
+    {
+      DSFR.Button.children: {React.string(v["name"])},
+      onClick: {
+        _ => {
+          switch currentPath {
+          | list{page}
+          | list{page, _} =>
+            if !isCurrentVersion {
+              Nav.goToAbsolutePath(list{page, v["name"]})
+            }
+          | _ =>
+            Js.Exn.raiseError("Unexpected path: " ++ currentPath->List.toArray->Array.joinWith("/"))
           }
-        | _ =>
-          Js.Exn.raiseError("Unexpected path: " ++ currentPath->List.toArray->Array.joinWith("/"))
         }
-      }
-    },
-    priority: "secondary",
-    size: "small",
-    iconId: if v["name"] == version["name"] {
-      "fr-icon-success-fill"
-    } else {
-      ""
-    },
+      },
+      priority: isCurrentVersion ? #secondary : #tertiary,
+      size: #small,
+      // FIXME: this icon can't be correctly rendered in production, I really don't know why...
+      // iconId: isCurrentVersion ? "fr-icon-success-fill" : "",
+    }
   })
 
   <div className="fr-container">

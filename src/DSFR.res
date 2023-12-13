@@ -72,14 +72,20 @@ module ButtonsGroup = {
     ~buttonsIconPosition: [#left | #right]=?,
     ~buttonsEquisized: bool=?,
     ~buttons: array<
+      // FIXME: can we find a way to avoid this duplication Button?
       Button.props<
         React.element,
         bool,
         string,
-        string,
+        [#left | #right],
         ReactEvent.Mouse.t => 'a,
-        string,
-        string,
+        [
+          | #primary
+          | #secondary
+          | #tertiary
+          | #"tertiary no outline"
+        ],
+        [#large | #medium | #small],
         string,
       >,
     >,

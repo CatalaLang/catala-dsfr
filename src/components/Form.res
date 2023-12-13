@@ -129,7 +129,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
   }
 
   let formFooter = {
-    let priority = "tertiary"
+    let priority = #tertiary
     <DSFR.ButtonsGroup
       inlineLayoutWhen=#always
       className="text-left"
