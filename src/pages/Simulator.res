@@ -3,7 +3,7 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
   let {path: currentPath} = Nav.getCurrentURL()
   let (frenchLaw, setFrenchLaw) = React.useState(_ => None)
 
-  React.useEffect2(() => {
+  React.useEffect(() => {
     FrenchLaw.get(version["french-law"])()
     ->Promise.thenResolve(frenchLaw => {
       setFrenchLaw(_ => Some(frenchLaw))
@@ -12,7 +12,7 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
     None
   }, (version["french-law"], setFrenchLaw))
 
-  React.useEffect1(() => {
+  React.useEffect(() => {
     // Reset the log when the page is loaded.
     switch frenchLaw {
     | Some({resetLog}) => resetLog()

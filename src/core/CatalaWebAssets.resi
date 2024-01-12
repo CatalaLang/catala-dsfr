@@ -6,6 +6,6 @@ type t = {
   keysToIgnore: array<string>,
 }
 let getAllocationsFamiliales: string => t
-let getAllocationsFamilialesSourceCode: (string, unit) => promise<string>
+let getAllocationsFamilialesSourceCode: string => unit => promise<string>
 let getAidesLogement: string => t
-let getAidesLogementSourceCode: (string, unit) => promise<string>
+let getAidesLogementSourceCode: string => unit => promise<string>

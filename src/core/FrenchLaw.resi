@@ -7,4 +7,4 @@ type t = {
   retrieveEventsSerialized: unit => array<CatalaRuntime.eventSerialized>,
 }
 
-let get: (string, unit) => promise<t>
+let get: string => unit => promise<t>

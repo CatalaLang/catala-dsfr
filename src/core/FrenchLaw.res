@@ -44,11 +44,11 @@ let get = version => {
       let frenchLaw = await frenchLawImport()
       {
         version,
-        computeAllocationsFamiliales: computeAllocationsFamiliales(frenchLaw),
-        computeAidesAuLogement: computeAidesAuLogement(frenchLaw),
-        resetLog: () => resetLog(frenchLaw),
-        retrieveRawEventsSerialized: () => retrieveRawEventsSerialized(frenchLaw),
-        retrieveEventsSerialized: () => retrieveEventsSerialized(frenchLaw),
+        computeAllocationsFamiliales: computeAllocationsFamiliales(frenchLaw, ...),
+        computeAidesAuLogement: computeAidesAuLogement(frenchLaw, ...),
+        resetLog: () => resetLog(frenchLaw, ...),
+        retrieveRawEventsSerialized: () => retrieveRawEventsSerialized(frenchLaw, ...),
+        retrieveEventsSerialized: () => retrieveEventsSerialized(frenchLaw, ...),
       }
     }
   | _ => Js.Exn.raiseError(`Version ${version} not found in ${Versions.available->Array.toString}`)

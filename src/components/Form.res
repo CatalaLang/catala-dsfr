@@ -64,7 +64,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
   let (eventsState, setEventsState) = React.useState(_ => None)
   let (formResult, setFormResult) = React.useState(_ => None)
 
-  React.useEffect1(() => {
+  React.useEffect(() => {
     (webAssets.schemaImport(), webAssets.uiSchemaImport())
     ->Promise.all2
     ->Promise.thenResolve(((schema, uiSchema)) => {
@@ -75,7 +75,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
     None
   }, [webAssets])
 
-  React.useEffect2(() => {
+  React.useEffect(() => {
     switch (formData, webAssets.initialDataImport) {
     | (None, Some(init)) =>
       init()
@@ -89,7 +89,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
     None
   }, (webAssets.initialDataImport, formData))
 
-  React.useEffect3(() => {
+  React.useEffect(() => {
     setEventsState(_ => {
       let events = {
         try {frenchLaw.retrieveEventsSerialized()->CatalaRuntime.deserializedEvents} catch {
@@ -101,7 +101,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
     None
   }, (formResult, setEventsState, frenchLaw))
 
-  React.useEffect2(() => {
+  React.useEffect(() => {
     switch formData {
     | Some(data) =>
       setFormResult(_ => {
