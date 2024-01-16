@@ -124,12 +124,18 @@ module Header = {
       "isActive": bool,
       "text": string,
     }>=?,
+    ~quickAccessItems: array<{
+      "buttonProps": {"onClick": ReactEvent.Mouse.t => unit},
+      "text": string,
+      "iconId": string,
+    }>=?,
   ) => React.element = "default"
 }
 
 module Footer = {
   @react.component @module("@codegouvfr/react-dsfr/Footer")
   external make: (
+    ~className: string=?,
     ~accessibility: string,
     ~brandTop: React.element=?,
     ~contentDescription: React.element=?,
@@ -158,5 +164,5 @@ module Display = {
 
 module Notice = {
   @react.component @module("@codegouvfr/react-dsfr/Notice")
-  external make: (~title: string, ~isClosable: bool=?) => React.element = "default"
+  external make: (~title: React.element, ~isClosable: bool=?) => React.element = "default"
 }

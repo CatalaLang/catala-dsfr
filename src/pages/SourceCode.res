@@ -20,7 +20,7 @@ let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
     None
   }, (htmlImport, setHtmlState))
 
-  <div className="fr-container">
+  <div className="fr-container pt-6">
     <div className="inline-flex w-full justify-end">
       <DSFR.Button
         iconId="fr-icon-equalizer-line"

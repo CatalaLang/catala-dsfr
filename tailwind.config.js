@@ -28,7 +28,7 @@ module.exports = {
       button_bg: "#a8ecb1",
       button_fg_hover: "#376c2eb5",
       button_bg_hover: "#b5ffbe",
-      background: "#24211C",
+      background: "var(--background-alt-grey)",
       green: "#376c2e",
       orange: "#FF732C",
       orange_50: "#FFD6C2",
