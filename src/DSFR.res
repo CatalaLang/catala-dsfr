@@ -142,6 +142,7 @@ module Footer = {
     ~homeLinkProps: linkProps=?,
     ~bottomItems: array<'button>=?,
     ~license: React.element=?,
+    ~operatorLogo: {"alt": string, "imgUrl": string, "orientation": [#horizontal | #vertical]}=?,
   ) => React.element = "default"
 }
 module Select = {

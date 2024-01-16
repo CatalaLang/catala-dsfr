@@ -72,7 +72,6 @@ let make = () => {
         </div>
       </div>
     </div>
-    // <Separator />
     <div className="fr-container pt-16 pb-10">
       <h2 className="fr-h2"> {React.string("Simulateurs disponibles")} </h2>
       <div className="fr-grid-row fr-grid-row--gutters">
@@ -102,6 +101,5 @@ let make = () => {
         </div>
       </div>
     </div>
-    // <Separator />
   </>
 }

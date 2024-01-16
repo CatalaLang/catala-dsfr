@@ -18,8 +18,8 @@ let make = () => {
     homeLinkProps={{"href": "/", "title": "Catala Explorer"}}
     serviceTitle={<>
       {React.string("Explicabilité des algorithmes publics")}
-      <DSFR.Badge noIcon=true severity={#success} as_=#span small=false>
-        {React.string("beta")}
+      <DSFR.Badge noIcon=true severity={#info} as_=#span small=false>
+        {React.string("prototype")}
       </DSFR.Badge>
     </>}
     serviceTagline="Prototypes de simulateurs de prestations sociales avec explications invidualisées, détaillées et intelligibles"

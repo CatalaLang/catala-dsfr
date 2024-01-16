@@ -257,12 +257,6 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
   <>
     <div className="fr-container--fluid">
       <div className="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
-        <DSFR.Notice
-          title={React.string(`Les données collectées par ce formulaire ne sont envoyées nulle part, et sont gérées uniquement par votre navigateur internet. \
-            Les données sont traitées localement par un programme Javascript qui a été transmis avec le reste de ce site Internet. \
-            Ainsi, ce site ne collecte aucune donnée de ses utilisateurs.`)}
-          isClosable=true
-        />
         <div className="fr-col">
           {switch (schemaState, uiSchemaState) {
           | (Some(schema), Some(uiSchema)) =>

@@ -1,3 +1,7 @@
+%%raw(`import logoURL from "../images/inr_logo_rouge.png"`)
+
+external logo: string = "logoURL"
+
 @react.component
 let make = () => {
   <DSFR.Footer
@@ -7,6 +11,11 @@ let make = () => {
       <br />
       {React.string("Française")}
     </>}
+    operatorLogo={{
+      "alt": "Inria logo",
+      "imgUrl": logo,
+      "orientation": #horizontal,
+    }}
     contentDescription={<>
       {React.string("Ce site est développé dans le cadre de la ")}
       <a href="https://code.gouv.fr/" target="_blank">
@@ -31,7 +40,7 @@ let make = () => {
     homeLinkProps={"href": "https://www.code.gouv.fr", "title": "Code du travail numérique"}
     license={<>
       {React.string("Sauf mention contraire, tout le contenu de ce site est sous licence ")}
-      <a href="https://github.com/CatalaLang/catala-explorer/blob/main/LICENSE">
+      <a href="https://github.com/CatalaLang/catala-explorer/blob/main/LICENSE" target="_blank">
         {React.string("Apache 2.0")}
       </a>
     </>}
