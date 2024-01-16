@@ -22,6 +22,11 @@ let make = () => {
       <a href="https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037823131" target="_blank">
         {React.string("article 47-2 de la loi informatique et libertés")}
       </a>
+      {React.string(". Plus d'informations dans le ")}
+      <a href="https://inria.hal.science/hal-04391612" target="_blank">
+        {React.string("rapport")}
+      </a>
+      {React.string(" dédié.")}
     </>}
     homeLinkProps={"href": "https://www.code.gouv.fr", "title": "Code du travail numérique"}
     license={<>
