@@ -10,18 +10,18 @@ let make = () => {
       <br />
       {React.string("Française")}
     </>}
-    operatorLogo={{
-      "alt": "Catala logo",
-      "imgUrl": logo,
-      "orientation": #vertical,
-    }}
-    homeLinkProps={{"href": "/", "title": "Catala Explorer"}}
+    operatorLogo={
+      alt: "Catala logo",
+      imgUrl: logo,
+      orientation: #vertical,
+    }
+    homeLinkProps={{href: "/", title: React.string("Catala Explorer")}}
     serviceTitle={<>
       {React.string("Explicabilité des algorithmes publics")}
-      <DSFR.Badge noIcon=true severity={#info} as_=#span small=false>
-        {React.string("prototype")}
-      </DSFR.Badge>
+      <DSFR.Badge noIcon=true severity={#info} as_=#span> {React.string("prototype")} </DSFR.Badge>
     </>}
-    serviceTagline="Prototypes de simulateurs de prestations sociales avec explications invidualisées, détaillées et intelligibles"
+    serviceTagline={React.string(
+      "Prototypes de simulateurs de prestations sociales avec explications invidualisées, détaillées et intelligibles",
+    )}
   />
 }

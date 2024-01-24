@@ -23,7 +23,7 @@ let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
   <div className="fr-container pt-6">
     <div className="inline-flex w-full justify-end">
       <DSFR.Button
-        iconId="fr-icon-equalizer-line"
+        iconId=#"fr-icon-equalizer-line"
         iconPosition=#left
         priority=#tertiary
         size=#medium
