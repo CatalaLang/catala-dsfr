@@ -1,3 +1,7 @@
+%%raw(`import heroPNGPath from "../images/hero.png"`)
+
+external heroPNG: string = "heroPNGPath"
+
 @react.component
 let make = () => {
   <>
@@ -65,7 +69,7 @@ let make = () => {
           <div className="fr-col-12 fr-col-lg-4 fr-pl-0 fr-pl-md-4w fr-pb-0 sm:block hidden">
             <figure id="content-media__homepage-banner" role="group" className="fr-content-media">
               <div className="fr-content-media__img ">
-                <img src={%raw(`require("../images/hero.png")`)} className="" />
+                <img src={heroPNG} className="" />
               </div>
             </figure>
           </div>
