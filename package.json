@@ -24,7 +24,7 @@
     "@catala-lang/catala-explain": "^0.2.5",
     "@catala-lang/rescript-catala": "^0.8.1-b.0",
     "@codegouvfr/react-dsfr": "^1.1.1",
-    "@codegouvfr/rescript-react-dsfr": "file:../rescript-react-dsfr",
+    "@codegouvfr/rescript-react-dsfr": "^0.1.2",
     "@rescript/core": "^0.6.0",
     "@rescript/react": "^0.11.0",
     "@rjsf/core": "^5.1.0",

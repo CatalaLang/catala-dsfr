@@ -287,13 +287,6 @@
     decco "^1.6.0"
     rescript "^10.1.4"
 
-"@codegouvfr/react-dsfr@^1.0.4":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@codegouvfr/react-dsfr/-/react-dsfr-1.2.1.tgz#19b705163719de9b3d8ef94882a6e0aae8eb442c"
-  integrity sha512-8TIQc9IObRGe/qfD0cPqHZM2vmLmIw0AVvIbEY9P+16vZijLxshXWNZlNlyupMxNlIs5MRrfsJVaRiGru+r20A==
-  dependencies:
-    tsafe "^1.6.3"
-
 "@codegouvfr/react-dsfr@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@codegouvfr/react-dsfr/-/react-dsfr-1.1.1.tgz#322e197749c394b57b7861eea4d975ba472a8d2e"
@@ -301,10 +294,19 @@
   dependencies:
     tsafe "^1.6.3"
 
-"@codegouvfr/rescript-react-dsfr@file:../rescript-react-dsfr":
-  version "0.1.0"
+"@codegouvfr/react-dsfr@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@codegouvfr/react-dsfr/-/react-dsfr-1.2.1.tgz#19b705163719de9b3d8ef94882a6e0aae8eb442c"
+  integrity sha512-8TIQc9IObRGe/qfD0cPqHZM2vmLmIw0AVvIbEY9P+16vZijLxshXWNZlNlyupMxNlIs5MRrfsJVaRiGru+r20A==
   dependencies:
-    "@codegouvfr/react-dsfr" "^1.0.4"
+    tsafe "^1.6.3"
+
+"@codegouvfr/rescript-react-dsfr@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@codegouvfr/rescript-react-dsfr/-/rescript-react-dsfr-0.1.2.tgz#46eacb44788d27560afaeb1f26960128f5c25f48"
+  integrity sha512-rNkAaL2lRGw5RseA8qx1GneBbr3sm8Bgdbj0JnwpDxuTgPGUsxQw7g7wMoB/1ICFENiraU2IqEv8ymYb7nTsgw==
+  dependencies:
+    "@codegouvfr/react-dsfr" "^1.2.1"
     "@rescript/react" "^0.11.0"
     react "^18.2.0"
 

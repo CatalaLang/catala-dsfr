@@ -22,7 +22,8 @@ This project is built on top of the following libraries:
 - [`@catala-lang/rescript-catala`](https://github.com/CatalaLang/catala/tree/master/runtimes/rescript)
 - [`@catala-lang/catala-explain`](https://github.com/CatalaLang/catala-explain)
 - [`@catala-lang/catala-web-assets`](https://github.com/CatalaLang/catala-web-assets)
-- [`@codegouvfr/react-dsfr`](https://github.com/codegouvfr/react-dsfr/)
+- [`@codegouvfr/rescript-react-dsfr`](https://github.com/codegouvfr/rescript-react-dsfr)
+- [`@codegouvfr/react-dsfr`](https://github.com/codegouvfr/react-dsfr)
 
 ## Local dev
 
