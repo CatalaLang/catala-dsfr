@@ -46,7 +46,7 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
   })
 
   <div className="fr-container pt-6">
-    <DSFR.Accordion label="Versions disponibles">
+    <DSFR.Accordion label={React.string("Versions disponibles")}>
       <DSFR.ButtonsGroup
         className="pt-4 pb-0"
         inlineLayoutWhen=#always

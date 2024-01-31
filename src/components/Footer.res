@@ -5,16 +5,16 @@ external logo: string = "logoURL"
 @react.component
 let make = () => {
   <DSFR.Footer
-    accessibility="partially compliant"
+    accessibility=#"partially compliant"
     brandTop={<>
       {React.string("République")}
       <br />
       {React.string("Française")}
     </>}
     operatorLogo={{
-      "alt": "Inria logo",
-      "imgUrl": logo,
-      "orientation": #horizontal,
+      alt: "Inria logo",
+      imgUrl: logo,
+      orientation: #horizontal,
     }}
     contentDescription={<>
       {React.string("Ce site est développé dans le cadre de la ")}
@@ -37,7 +37,10 @@ let make = () => {
       </a>
       {React.string(" dédié.")}
     </>}
-    homeLinkProps={"href": "https://www.code.gouv.fr", "title": "Code du travail numérique"}
+    homeLinkProps={
+      href: "https://www.code.gouv.fr",
+      title: React.string("Code du travail numérique"),
+    }
     license={<>
       {React.string("Sauf mention contraire, tout le contenu de ce site est sous licence ")}
       <a href="https://github.com/CatalaLang/catala-explorer/blob/main/LICENSE" target="_blank">
@@ -46,8 +49,8 @@ let make = () => {
     </>}
     bottomItems=[
       {
-        "text": {React.string("Code source du site")},
-        "linkProps": {"href": "https://github.com/catalalang/catala-dsfr"},
+        text: {React.string("Code source du site")},
+        linkProps: {href: "https://github.com/catalalang/catala-dsfr"},
       },
       DSFR.Display.headerFooterDisplayItem,
     ]

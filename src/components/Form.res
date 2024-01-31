@@ -143,7 +143,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
             Console.debug("Resetting form data")
             setFormData(_ => initialData)
           },
-          iconId: "fr-icon-refresh-line",
+          iconId: #"fr-icon-refresh-line",
           priority,
         },
         {
@@ -152,7 +152,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
             let data_str = Js.Json.stringify(formData->Belt.Option.getWithDefault(Js.Json.null))
             downloadJSONstring(data_str)
           },
-          iconId: "fr-icon-upload-line",
+          iconId: #"fr-icon-upload-line",
           priority,
         },
         {
@@ -166,7 +166,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
             <p />
           </>,
           onClick: retrieveFileContents,
-          iconId: "fr-icon-download-line",
+          iconId: #"fr-icon-download-line",
           priority,
         },
         {
@@ -174,7 +174,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
           onClick: {
             _ => currentPath->List.concat(list{`sources`})->Nav.goToAbsolutePath
           },
-          iconId: "fr-icon-code-s-slash-line",
+          iconId: #"fr-icon-code-s-slash-line",
           priority,
         },
       ]
@@ -232,7 +232,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
                 }
               }}
               iconPosition=#left
-              iconId="fr-icon-newspaper-line"
+              iconId=#"fr-icon-newspaper-line"
               priority=#secondary
               disabled={Option.isNone(eventsState)}>
               {React.string("Télécharger une explication du calcul")}

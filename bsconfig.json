@@ -25,6 +25,7 @@
   "bs-dependencies": [
     "@catala-lang/catala-explain",
     "@catala-lang/rescript-catala",
+    "@codegouvfr/rescript-react-dsfr",
     "@rescript/core",
     "@rescript/react",
     "rescript-docx"

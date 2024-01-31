@@ -1,3 +1,7 @@
+%%raw(`import heroPNGPath from "../images/hero.png"`)
+
+external heroPNG: string = "heroPNGPath"
+
 @react.component
 let make = () => {
   <>
@@ -65,7 +69,7 @@ let make = () => {
           <div className="fr-col-12 fr-col-lg-4 fr-pl-0 fr-pl-md-4w fr-pb-0 sm:block hidden">
             <figure id="content-media__homepage-banner" role="group" className="fr-content-media">
               <div className="fr-content-media__img ">
-                <img src={%raw(`require("../images/hero.png")`)} className="" />
+                <img src={heroPNG} className="" />
               </div>
             </figure>
           </div>
@@ -77,26 +81,26 @@ let make = () => {
       <div className="fr-grid-row fr-grid-row--gutters">
         <div className="fr-col-sm-12 fr-col-lg-6">
           <DSFR.Card
-            title="Allocations Familiales"
-            desc="Simulateur du calcul des allocations familiales"
+            title={React.string("Allocations Familiales")}
+            desc={React.string("Simulateur du calcul des allocations familiales")}
             linkProps={
-              "href": "/" ++ AllocationsFamiliales.infos.url,
-              "title": "Allocations Familiales",
+              href: "/" ++ AllocationsFamiliales.infos.url,
+              title: React.string("Allocations Familiales"),
             }
             enlargeLink=true
-            size="large"
+            size=#large
           />
         </div>
         <div className="fr-col-sm-12 fr-col-lg-6">
           <DSFR.Card
-            title="Aides aux Logements"
-            desc="Simulateur du calcul des aides aux logements"
+            title={React.string("Aides aux Logements")}
+            desc={React.string("Simulateur du calcul des aides aux logements")}
             linkProps={
-              "href": "/" ++ AidesLogement.infos.url,
-              "title": "Aides Logements",
+              href: "/" ++ AidesLogement.infos.url,
+              title: React.string("Aides Logements"),
             }
             enlargeLink=true
-            size="large"
+            size=#large
           />
         </div>
       </div>
