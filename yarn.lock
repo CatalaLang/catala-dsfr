@@ -301,10 +301,10 @@
   dependencies:
     tsafe "^1.6.3"
 
-"@codegouvfr/rescript-react-dsfr@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@codegouvfr/rescript-react-dsfr/-/rescript-react-dsfr-0.1.2.tgz#46eacb44788d27560afaeb1f26960128f5c25f48"
-  integrity sha512-rNkAaL2lRGw5RseA8qx1GneBbr3sm8Bgdbj0JnwpDxuTgPGUsxQw7g7wMoB/1ICFENiraU2IqEv8ymYb7nTsgw==
+"@codegouvfr/rescript-react-dsfr@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@codegouvfr/rescript-react-dsfr/-/rescript-react-dsfr-0.2.1.tgz#d49bbec0f69c7cfb540bf817476bdc820c51ac21"
+  integrity sha512-h5qmHttMOSjWkLtBxu86poob3/y+m02sDi9QraL8kQsWba+izeOny7y7k02wGjMpLfjTaXY9uwjmzDhvakaaeA==
   dependencies:
     "@codegouvfr/react-dsfr" "^1.2.1"
     "@rescript/react" "^0.11.0"

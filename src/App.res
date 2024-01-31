@@ -2,7 +2,7 @@
 let make = () => {
   <>
     <Header />
-    <div className="pb-8">
+    <div className={DSFR.Fr.cx([#"fr-pb-8v"])}>
       <Router />
     </div>
     <Footer />

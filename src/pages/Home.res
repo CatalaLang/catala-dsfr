@@ -2,10 +2,12 @@
 
 external heroPNG: string = "heroPNGPath"
 
+open DSFR
+
 @react.component
 let make = () => {
   <>
-    <DSFR.Notice
+    <Notice
       title={<>
         {React.string("Les simulateurs présentés sur ce site Internet ne prétendent pas à remplacer les simulateurs
     officiels des administrations et opérateurs de l'État compétents. Aussi, les résultats
@@ -18,16 +20,16 @@ let make = () => {
         {React.string(".")}
       </>}
     />
-    <div className="fr-container-fluid bg-background">
-      <div className="fr-container">
-        <div className="fr-grid-row fr-grid-row--gutters">
-          <div className="fr-col-lg-6 fr-col-offset-lg-1">
-            <h1 className="fr-h1 fr-mt-3w fr-mt-md-5w fr-mb-5w">
+    <div className={Fr.cx([#"fr-container--fluid"]) ++ " bg-background"}>
+      <div className={Fr.cx([#"fr-container"])}>
+        <div className={Fr.cx([#"fr-grid-row", #"fr-grid-row--gutters"])}>
+          <div className={Fr.cx([#"fr-col-lg-6", #"fr-col-offset-lg-1"])}>
+            <h1 className={Fr.cx([#"fr-h1", #"fr-mt-3w", #"fr-mt-md-5w", #"fr-mb-5w"])}>
               {React.string(
                 "Calculer et fournir une explication détaillée de façon automatique",
               )}
             </h1>
-            <div className="fr-mb-3w">
+            <div className={Fr.cx([#"fr-mb-3w"])}>
               <p>
                 {React.string("Ce site présente un prototype développé dans le cadre de la ")}
                 <a href="https://code.gouv.fr/" target="_blank">
@@ -57,30 +59,40 @@ let make = () => {
                 )}
               </p>
             </div>
-            <p className="fr-mb-5w">
+            <p className={Fr.cx([#"fr-mb-5w"])}>
               <a
-                className="fr-btn fr-btn--secondary"
+                className={Fr.cx([#"fr-btn", #"fr-btn--secondary"])}
                 href="https://inria.hal.science/hal-04391612"
                 target="_blank">
                 {React.string("Consulter le rapport de recherche")}
               </a>
             </p>
           </div>
-          <div className="fr-col-12 fr-col-lg-4 fr-pl-0 fr-pl-md-4w fr-pb-0 sm:block hidden">
-            <figure id="content-media__homepage-banner" role="group" className="fr-content-media">
-              <div className="fr-content-media__img ">
-                <img src={heroPNG} className="" />
+          <div
+            className={Fr.cx([
+              #"fr-col-12",
+              #"fr-col-lg-4",
+              #"fr-pl-0",
+              #"fr-pl-md-4w",
+              #"fr-pb-0",
+            ]) ++ " sm:block hidden"}>
+            <figure
+              id="content-media__homepage-banner"
+              role="group"
+              className={Fr.cx([#"fr-content-media"])}>
+              <div className={Fr.cx([#"fr-content-media__img"])}>
+                <img src={heroPNG} />
               </div>
             </figure>
           </div>
         </div>
       </div>
     </div>
-    <div className="fr-container pt-16 pb-10">
-      <h2 className="fr-h2"> {React.string("Simulateurs disponibles")} </h2>
-      <div className="fr-grid-row fr-grid-row--gutters">
-        <div className="fr-col-sm-12 fr-col-lg-6">
-          <DSFR.Card
+    <div className={Fr.cx([#"fr-container", #"fr-pt-16v", #"fr-pb-10v"])}>
+      <h2 className={Fr.cx([#"fr-h2"])}> {React.string("Simulateurs disponibles")} </h2>
+      <div className={Fr.cx([#"fr-grid-row", #"fr-grid-row--gutters"])}>
+        <div className={Fr.cx([#"fr-col-sm-12", #"fr-col-lg-6"])}>
+          <Card
             title={React.string("Allocations Familiales")}
             desc={React.string("Simulateur du calcul des allocations familiales")}
             linkProps={
@@ -91,8 +103,8 @@ let make = () => {
             size=#large
           />
         </div>
-        <div className="fr-col-sm-12 fr-col-lg-6">
-          <DSFR.Card
+        <div className={Fr.cx([#"fr-col-sm-12", #"fr-col-lg-6"])}>
+          <Card
             title={React.string("Aides aux Logements")}
             desc={React.string("Simulateur du calcul des aides aux logements")}
             linkProps={

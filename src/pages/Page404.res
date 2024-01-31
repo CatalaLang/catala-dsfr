@@ -1,13 +1,15 @@
+open DSFR
+
 @react.component
 let make = () => {
-  <div className="fr-container">
-    <h1 className="fr-h1"> {React.string("Page non trouvée")} </h1>
-    <p className="fr-text--sm fr-mb-3w"> {React.string("Erreur 404")} </p>
-    <p className="fr-text--lead fr-mb-3w">
+  <div className={Fr.cx([#"fr-container"])}>
+    <h1 className={Fr.cx([#"fr-h1"])}> {React.string("Page non trouvée")} </h1>
+    <p className={Fr.cx([#"fr-text--sm", #"fr-mb-3w"])}> {React.string("Erreur 404")} </p>
+    <p className={Fr.cx([#"fr-text--lead", #"fr-mb-3w"])}>
       {React.string("La page que vous cherchez est introuvable. Excusez-nous pour la gène
             occasionnée.")}
     </p>
-    <p className="fr-text--sm fr-mb-5w">
+    <p className={Fr.cx([#"fr-text--sm", #"fr-mb-5w"])}>
       {React.string("Si vous avez tapé l'adresse web dans le navigateur, vérifiez qu'elle
             est correcte. La page n’est peut-être plus disponible.")}
       <br />
@@ -18,9 +20,11 @@ let make = () => {
       {React.string("Sinon contactez-nous pour que l’on puisse vous rediriger vers la
             bonne information.")}
     </p>
-    <ul className="fr-btns-group fr-btns-group--inline-md">
+    <ul className={Fr.cx([#"fr-btns-group", #"fr-btns-group--inline-md"])}>
       <li>
-        <a className="fr-btn" href=Constants.baseURL> {React.string("Page d'accueil")} </a>
+        <a className={Fr.cx([#"fr-btn"])} href=Constants.baseURL>
+          {React.string("Page d'accueil")}
+        </a>
       </li>
     </ul>
   </div>

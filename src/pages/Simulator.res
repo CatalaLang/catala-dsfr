@@ -1,3 +1,5 @@
+open DSFR
+
 @react.component
 let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
   let {path: currentPath} = Nav.getCurrentURL()
@@ -24,7 +26,7 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
   let versionedAssetsButtons = Versions.available->Array.map(v => {
     let isCurrentVersion = v["name"] == version["name"]
     {
-      DSFR.Button.children: {React.string(v["name"])},
+      Button.children: {React.string(v["name"])},
       onClick: {
         _ => {
           switch currentPath {
@@ -45,17 +47,19 @@ let make = (~formInfos: FormInfos.t, ~version=Versions.latest) => {
     }
   })
 
-  <div className="fr-container pt-6">
-    <DSFR.Accordion label={React.string("Versions disponibles")}>
-      <DSFR.ButtonsGroup
-        className="pt-4 pb-0"
+  <div className={Fr.cx([#"fr-container", #"fr-pt-6v"])}>
+    <Accordion label={React.string("Versions disponibles")}>
+      <ButtonsGroup
+        className={Fr.cx([#"fr-pt-4v", #"fr-pb-0"])}
         inlineLayoutWhen=#always
         buttonsEquisized=true
         buttonsSize=#medium
         buttons={versionedAssetsButtons}
       />
-    </DSFR.Accordion>
-    <h1 className="fr-h1 pt-6"> {React.string(`Calcul des ${formInfos.name}`)} </h1>
+    </Accordion>
+    <h1 className={Fr.cx([#"fr-h1", #"fr-pt-6v"])}>
+      {React.string(`Calcul des ${formInfos.name}`)}
+    </h1>
     {switch frenchLaw {
     | Some(frenchLaw) => <Form version frenchLaw formInfos={formInfos} />
     | None => Spinners.loader

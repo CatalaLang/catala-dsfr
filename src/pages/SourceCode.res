@@ -1,3 +1,5 @@
+open DSFR
+
 %%raw(`import  "../css/catala-code.css"`)
 %%raw(`import  "../css/syntax-highlighting.css"`)
 
@@ -20,16 +22,16 @@ let make = (~htmlImport: unit => promise<string>, ~simulatorUrl: string) => {
     None
   }, (htmlImport, setHtmlState))
 
-  <div className="fr-container pt-6">
+  <div className={Fr.cx([#"fr-container", #"fr-pt-6v"])}>
     <div className="inline-flex w-full justify-end">
-      <DSFR.Button
+      <Button
         iconId=#"fr-icon-equalizer-line"
         iconPosition=#left
         priority=#tertiary
         size=#medium
         onClick={_ => Nav.goTo(`/${simulatorUrl}`)}>
         {React.string("Accéder au simulateur")}
-      </DSFR.Button>
+      </Button>
     </div>
     {switch htmlState {
     | Some(html) =>

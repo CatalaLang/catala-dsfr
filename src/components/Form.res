@@ -1,3 +1,5 @@
+open DSFR
+
 /*
   Binding for the React component [JSONSchemaForm.default] of the package
   [react-jsonschema-form].
@@ -255,9 +257,9 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
     </DSFR.CallOut>
 
   <>
-    <div className="fr-container--fluid">
-      <div className="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
-        <div className="fr-col">
+    <div className={Fr.cx([#"fr-container--fluid"])}>
+      <div className={Fr.cx([#"fr-grid-row", #"fr-grid-row--gutters", #"fr-grid-row--center"])}>
+        <div className={Fr.cx([#"fr-col"])}>
           {switch (schemaState, uiSchemaState) {
           | (Some(schema), Some(uiSchema)) =>
             <React.Suspense fallback={Spinners.loader}>
@@ -285,7 +287,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
         <div
           className="w-full fr-m-1w border-2 border-solid rounded-full border-[var(--border-default-grey)]"
         />
-        <div className="fr-col"> formResult </div>
+        <div className={Fr.cx([#"fr-col"])}> formResult </div>
       </div>
       formFooter
     </div>
