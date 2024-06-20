@@ -6,8 +6,8 @@ open DSFR
 
   The component is capable of building HTML forms out of a JSON schema.
 */
-module RjsfFormDSFRLazy = {
-  @react.component @module("./RjsfFormDSFRLazy.tsx")
+module RJSFForm = {
+  @react.component @module("./RJSFForm.tsx")
   external make: (
     ~onChange: Js.Dict.t<Js.Json.t> => unit=?,
     ~onSubmit: Js.Dict.t<Js.Json.t> => unit=?,
@@ -274,7 +274,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
           {switch (schemaState, uiSchemaState) {
           | (Some(schema), Some(uiSchema)) =>
             <React.Suspense fallback={Spinners.loader}>
-              <RjsfFormDSFRLazy
+              <RJSFForm
                 schema
                 uiSchema
                 formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
