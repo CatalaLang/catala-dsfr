@@ -6,8 +6,8 @@ open DSFR
 
   The component is capable of building HTML forms out of a JSON schema.
 */
-module RjsfFormDSFRLazy = {
-  @react.component @module("./RjsfFormDSFRLazy.tsx")
+module RJSFForm = {
+  @react.component @module("./RJSFForm.tsx")
   external make: (
     ~onChange: Js.Dict.t<Js.Json.t> => unit=?,
     ~onSubmit: Js.Dict.t<Js.Json.t> => unit=?,
@@ -106,8 +106,19 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
   React.useEffect2(() => {
     switch formData {
     | Some(data) =>
+      let result = try {formInfos.computeAndPrintResult(frenchLaw, data)} catch {
+      // TODO: better error handling
+      | Exn.Error(e) =>
+        let _ =
+          e
+          ->Exn.message
+          ->Option.map((msg: string) => {
+            Console.error("Error while computing the result: " ++ msg)
+          })
+        React.string("une erreur est survenue lors du calcul du résultat.")
+      }
       setFormResult(_ => {
-        Some(formInfos.computeAndPrintResult(frenchLaw, data))
+        Some(result)
       })
     | None => setFormResult(_ => None)
     }
@@ -263,7 +274,7 @@ let make = (~version: Versions.t, ~frenchLaw: FrenchLaw.t, ~formInfos: FormInfos
           {switch (schemaState, uiSchemaState) {
           | (Some(schema), Some(uiSchema)) =>
             <React.Suspense fallback={Spinners.loader}>
-              <RjsfFormDSFRLazy
+              <RJSFForm
                 schema
                 uiSchema
                 formData={formData->Belt.Option.getWithDefault(Js.Json.null)}
